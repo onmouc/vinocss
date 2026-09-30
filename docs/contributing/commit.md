@@ -46,7 +46,8 @@ A message is due by default once a review passes, so generate it without being a
 5. Describe intent and reasoning not recoverable from the files.
 6. Infer the reason for edits the user made by hand.
 7. Open with a short brief under the title and list, with no subtitle.
-8. Give a `##` subtitle that briefly states the section, not a bare category like Build.
+8. Give a `##` subtitle a phrase that carries the section's meaning,
+   such as `Bootstrap the tool with its own source`; a bare category is too thin.
 9. Skip trivial editor changes, such as a new spelling word, unless they change shared behavior.
 
 ## Example

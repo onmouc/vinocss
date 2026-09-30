@@ -27,8 +27,8 @@
     }
   },
   "scripts": {
-    "build": "node --import @oxc-node/core/register src/main.ts --lib package,workspace",
-    "build:self": "node --import @oxc-node/core/register src/main.ts --self --lib package,workspace",
+    "build": "node --import @oxc-node/core/register src/main.ts -l package,workspace",
+    "build:self": "node --import @oxc-node/core/register src/main.ts --self -l package,workspace",
     "test": "vitest run",
     "typecheck": "tsc -b"
   },

@@ -7,11 +7,13 @@ Read when writing a bin entry or wiring the log it prints.
 
 1. A bin entry owns the console, so the log lives there and nowhere else.
 2. Keep the library silent: return a value, or take a `reporter` and call it, but never print.
-3. Give the bin one reporter, and let a caller invoke the callback it needs, such as `step`, `skip`, or `warn`.
+3. Give the bin one reporter, and let a caller invoke the callback it needs,
+   such as `step`, `skip`, or `warn`.
 4. Keep the reporter a plain object, so a caller can swap in a test double and assert the calls.
 5. Add `chalk` as a package dependency when the log needs color, and import it in the bin only.
 6. Color the prefix, not the whole line, so the message stays readable in a plain terminal.
-7. Forward a dependency's own log through the reporter, such as a bundler's `onLog`, rather than let it print.
+7. Forward a dependency's own log through the reporter, such as a bundler's `onLog`,
+   rather than let it print.
 
 A library that prints cannot be reused or tested without capturing the console,
 so the print waits for the bin and the reporter carries it down.

@@ -9,8 +9,8 @@ It is published for anyone to use, so any project can follow the same recipe.
 
 1. By default it builds `src/index.ts` as a library entry, and `src/main.ts` as a binary entry.
 2. A missing entry is skipped, so a package can ship only one of the two.
-3. `--lib foo,bar` adds `src/foo.ts` and `src/bar.ts` as more library entries.
-4. `--bin foo,bar` adds `src/foo.ts` and `src/bar.ts` as more binary entries.
+3. `-l, --lib foo,bar` adds `src/foo.ts` and `src/bar.ts` as more library entries.
+4. `-b, --bin foo,bar` adds `src/foo.ts` and `src/bar.ts` as more binary entries.
 5. The flags add to the defaults; they do not replace them.
 
 A library entry emits esm, cjs, and bundled declarations, each with a source map.
@@ -30,7 +30,8 @@ Both are minified, and a package points its `exports` and `bin` at the output fi
 
 ## Cache
 
-1. Before a build it reads every source file and output file, and hashes their paths and modified times.
+1. Before a build it reads every source file and output file,
+   and hashes their paths and modified times.
 2. The sources are `src`, `bin`, `package.json`, and any root `tsconfig*.json`.
 3. The output files are everything already in the output directory.
 4. Test files are skipped in the source, since a test cannot change a build.
@@ -39,7 +40,8 @@ Both are minified, and a package points its `exports` and `bin` at the output fi
 7. `--force` ignores a fresh checksum, and a forced workspace build clears each record.
 
 The checksum keys on the file set, so an added or removed file counts as a change.
-Because the output files are in the key, a build file changed or deleted by hand triggers a rebuild that restores it.
+Because the output files are in the key,
+a build file changed or deleted by hand triggers a rebuild that restores it.
 A change to a dependency does not invalidate a dependent,
 since the build leaves dependencies external and the dependent output does not move.
 
@@ -56,7 +58,8 @@ since the build leaves dependencies external and the dependent output does not m
 2. `step` and `skip` cover a built and a skipped package, so the log shows both and the reason.
 3. `log` carries rolldown's own messages, which the build reads through its `onLog` option.
 4. `warn` carries a problem the build found, such as a missing entry or workspace.
-5. The `vinocss-build` command supplies a chalk reporter, so the log is colored and lives in the bin.
+5. The `vinocss-build` command supplies a chalk reporter,
+   so the log is colored and lives in the bin.
 6. Pass a reporter to capture the messages, or leave it out for a silent build.
 
 ## Alias

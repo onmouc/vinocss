@@ -56,7 +56,8 @@ export function readSources(dir: string): Record<string, number> {
  * Collect the files already in a package output directory.
  *
  * A missing output directory yields an empty set, so a first build has nothing to compare.
- * Every file counts here, including one a test pattern would skip in the source, since a build writes it.
+ * Every file counts here, including one a test pattern would skip in the source,
+ * since a build writes it.
  */
 export function readOutputs(dir: string, outDir?: string): Record<string, number> {
   if (!outDir || !existsSync(outDir)) return {}

@@ -1,0 +1,37 @@
+{
+  "name": "@vinocss/devtools-line-width",
+  "version": "0.0.0",
+  "bin": {
+    "vinocss-line-width": "./bin/vinocss-line-width.js"
+  },
+  "files": [
+    "bin",
+    "out"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./out/index.d.ts",
+      "import": "./out/index.js",
+      "require": "./out/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "vinocss-build",
+    "build:self": "vinocss-build --self",
+    "test": "vitest run",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "chalk": "catalog:dep",
+    "commander": "catalog:dep"
+  },
+  "devDependencies": {
+    "@oxc-node/core": "catalog:dev",
+    "@types/node": "catalog:dev",
+    "@vinocss/devtools-build": "workspace:*",
+    "@vinocss/devtools-tsconfig": "workspace:*",
+    "vite": "catalog:dev",
+    "vitest": "catalog:dev"
+  }
+}

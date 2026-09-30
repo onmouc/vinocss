@@ -4,7 +4,8 @@ import { resolve } from "node:path"
 /**
  * The fields of a node package manifest that matter to the build.
  *
- * A manifest can carry anything else, so an unknown field stays readable through the index signature.
+ * A manifest can carry anything else,
+ * so an unknown field stays readable through the index signature.
  */
 export type Manifest = {
   name?: string

@@ -7,13 +7,16 @@
     "build": "vinocss-build --workspace",
     "typecheck": "pnpm -r typecheck",
     "lint": "oxlint --deny-warnings",
+    "line-width": "vinocss-line-width",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
+    "check": "pnpm fmt:check && pnpm lint && pnpm typecheck",
     "test": "vitest run",
-    "review": "pnpm fmt:check && pnpm lint && pnpm typecheck && pnpm build && pnpm test"
+    "review": "pnpm run check && pnpm build && pnpm line-width && pnpm test"
   },
   "devDependencies": {
     "@vinocss/devtools-build": "workspace:*",
+    "@vinocss/devtools-line-width": "workspace:*",
     "oxfmt": "catalog:dev",
     "oxlint": "catalog:dev",
     "rolldown": "catalog:dev",

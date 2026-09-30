@@ -5,20 +5,25 @@ Read when adding, changing, or running tests.
 
 ## Layout
 
-1. The root `vitest.config.ts` lists the package roots as projects: `packages/*` and `packages-devtools/*`.
+1. The root `vitest.config.ts` lists the package roots as projects:
+   `packages/*` and `packages-devtools/*`.
 2. Vitest treats each matched folder as a project, and reads its `vitest.config.ts` when one exists.
 3. Give a package a `vitest.config.ts` only when it has tests.
-4. Put a test beside its source, in `src/`, named `<source>.test.ts`.
-5. Put a test that spans more than one source file in the package `test/` folder.
-6. Include `test` in `tsconfig.app.json`, so typecheck covers both folders.
+4. Put a unit test beside its source, in `src/`, named `<source>.test.ts`.
+5. Add a `test/` file only when needed; a behavior test covers a case the source cannot,
+   such as several files, git, the filesystem, or a process.
+6. A behavior test usually holds several scenarios,
+   so the folder may keep more than one file, each for one concern.
+7. Include `test` in `tsconfig.app.json` only when the package has a `test` folder.
 
 ## Config
 
 1. Set `resolve.tsconfigPaths: true` to reuse the `@/*` alias from the tsconfig.
 2. Do not repeat the alias in the vitest config; the tsconfig stays the one source.
 3. Keep the config small; the defaults already cover a node environment.
-4. Install `vitest` and `vite` in every package that has tests.
-5. Run `pnpm test` from the root; it runs every project.
+4. The default include already finds a `*.test.ts` file under the package, so leave it out.
+5. Install `vitest` and `vite` in every package that has tests.
+6. Run `pnpm test` from the root; it runs every project.
 
 A package adds vitest only once it has tests, so a package without tests stays lean,
 and the root project glob picks up the package as soon as its config appears.
@@ -26,7 +31,8 @@ and the root project glob picks up the package as soon as its config appears.
 ## Choice
 
 1. Test a piece only when its logic is hard to follow from the source.
-2. Leave a simple function to the reader; a getter, a one-line branch, or a plain read needs no test.
+2. Leave a simple function to the reader;
+   a getter, a one-line branch, or a plain read needs no test.
 3. Reach for a test at a real edge or failure, such as a cycle, a wildcard glob, or a stale cache.
 4. Prefer a few tests that pin a rule over many that restate the code.
 5. Drop a test that only repeats what the source already states.

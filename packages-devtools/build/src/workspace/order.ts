@@ -34,7 +34,8 @@ export function workspaceDependencies(
 /**
  * List the transitive workspace dependencies of a package in build order.
  *
- * The result holds every dependency before the package that needs it, and it leaves the package out.
+ * The result holds every dependency before the package that needs it,
+ * and it leaves the package out.
  * A dependency cycle throws, since a build order cannot exist for it.
  */
 export function dependencyOrder(
@@ -74,7 +75,8 @@ export function buildScript(pkg: WorkspacePackage): string | undefined {
 /**
  * Depth-first sort of the seeded packages and their workspace dependencies.
  *
- * A dependency lands before the package that needs it, and a package that revisits an open node is a cycle.
+ * A dependency lands before the package that needs it,
+ * and a package that revisits an open node is a cycle.
  * The traversal state is shared across seeds, so a package reached twice is emitted once.
  */
 function sortPackages(workspace: Workspace, seeds: WorkspacePackage[]): WorkspacePackage[] {

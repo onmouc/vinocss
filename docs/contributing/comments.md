@@ -27,4 +27,6 @@ Read when adding or editing a comment doc.
 3. A private comment doc speaks to developers who already read the source.
 4. Inline comments can also help developers inside a public API.
 
-Comment docs are a help, not a transcript. A reader and an AI tool both read the code, so a comment earns its place only when it adds what the code cannot.
+Comment docs are a help, not a transcript.
+A reader and an AI tool both read the code,
+so a comment earns its place only when it adds what the code cannot.

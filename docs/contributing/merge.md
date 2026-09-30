@@ -29,7 +29,8 @@ Read when a branch is ready to merge.
 ## Message
 
 1. Follow the commit format in [commit](./commit.md) for the title and paragraphs.
-2. Write the title as a brief intro of the whole branch, in the same `keyword(scope): summary` shape.
+2. Write the title as a brief intro of the whole branch,
+   in the same `keyword(scope): summary` shape.
 3. A merge commit lists every commit title from the branch as an unordered list.
 4. Keep the list unordered: branch commits are a set, not an ordered sequence.
 5. A rebase merge reuses the single commit's message, unchanged.
@@ -50,7 +51,8 @@ feat(vinocss): merge the nested alias work
 The branch ties alias resolution to the app tsconfig and covers it.
 ```
 
-A branch with a single commit keeps that commit's message, and only notes a conflict when one was resolved.
+A branch with a single commit keeps that commit's message,
+and only notes a conflict when one was resolved.
 
 ## Generating (AI tools)
 

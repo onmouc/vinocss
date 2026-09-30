@@ -8,7 +8,8 @@ import type { Context, Entry } from "@/types"
 /**
  * Resolve entry names to the `src` files that exist.
  *
- * It checks `src/<name>.ts` first, then `src/<name>/index.ts`, so an entry can be one file or a folder.
+ * It checks `src/<name>.ts` first, then `src/<name>/index.ts`,
+ * so an entry can be one file or a folder.
  * It checks the fallback name first, then the names a caller asked for,
  * and it returns the matching files in that order.
  * The fallback is the entry a package is expected to have, such as `index` or `main`.

@@ -34,7 +34,8 @@ and reference it as `catalog:dep` for a dependency or `catalog:dev` for a dev de
 6. Every output is minified, carries a source map, and lands in `out`.
 7. Point the package `exports` and `bin` at the `out` files.
 8. The build detects the pnpm workspace and builds a package's workspace dependencies first.
-9. It skips a package whose source and output checksum is unchanged, so a repeated build stays cheap.
+9. It skips a package whose source and output checksum is unchanged,
+   so a repeated build stays cheap.
 
 ## Tsconfig
 

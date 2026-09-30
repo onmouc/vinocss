@@ -13,9 +13,11 @@ const silent: Reporter = {}
 /**
  * Build the library and binary entries of one package into its output directory.
  *
- * A library entry emits esm, cjs, and bundled declarations, each minified and carrying a source map.
+ * A library entry emits esm, cjs, and bundled declarations,
+ * each minified and carrying a source map.
  * A binary entry emits esm only, and it keeps any shebang the source sets.
- * The build reuses the `@/*` alias from the app tsconfig, and it leaves the declared dependencies external.
+ * The build reuses the `@/*` alias from the app tsconfig,
+ * and it leaves the declared dependencies external.
  *
  * By default it takes `src/index.ts` as a library entry and `src/main.ts` as a binary entry,
  * and it skips a default that the package does not have.

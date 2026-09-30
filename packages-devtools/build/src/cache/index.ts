@@ -6,8 +6,10 @@ import { cacheVersion, combine, readOutputs, readSources } from "@/cache/fingerp
  * The record kept in a package's checksum file.
  *
  * 1. `checksum` is the hash of every source and output fingerprint at the last successful build.
- * 2. `files` maps each source and output file, relative to the package root, to its last modified time.
- * 3. `outDir` is the absolute output directory the build wrote, so a cache hit can confirm it exists.
+ * 2. `files` maps each source and output file, relative to the package root,
+ *    to its last modified time.
+ * 3. `outDir` is the absolute output directory the build wrote,
+ *    so a cache hit can confirm it exists.
  */
 export type ChecksumRecord = {
   version: number

@@ -9,3 +9,10 @@ The shared rules in [code](./code.md) still apply alongside these.
 1. Prefer `type` over `interface` when both can express the shape.
 2. Keep `interface` for the cases that need it, such as declaration merging.
 3. Reach for a type alias for unions, tuples, and function types.
+
+## Exports
+
+1. Re-export a whole module with `export *`, so the public surface stays one line.
+2. List a name only when the surface is a deliberate subset of its module.
+3. Use `export type *` for a module that holds only types.
+4. Avoid a name two re-exported modules share, since `export *` collides on it.
