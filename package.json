@@ -9,13 +9,16 @@
     "lint": "oxlint --deny-warnings",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
-    "review": "pnpm fmt:check && pnpm lint && pnpm typecheck && pnpm build"
+    "test": "vitest run",
+    "review": "pnpm fmt:check && pnpm lint && pnpm typecheck && pnpm build && pnpm test"
   },
   "devDependencies": {
     "oxfmt": "catalog:dev",
     "oxlint": "catalog:dev",
     "rolldown": "catalog:dev",
     "rolldown-plugin-dts": "catalog:dev",
-    "typescript": "catalog:dev"
+    "typescript": "catalog:dev",
+    "vite": "catalog:dev",
+    "vitest": "catalog:dev"
   }
 }

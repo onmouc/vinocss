@@ -19,6 +19,11 @@ so the workspace range stays a local convenience and never reaches the registry.
 Share an external version across packages with the workspace catalogs,
 and reference it as `catalog:dep` for a dependency or `catalog:dev` for a dev dependency.
 
+1. Prefer the latest version that stays compatible with the workspace.
+2. Raise a catalog entry when a newer compatible release lands.
+3. Reach for a lower version only for a real incompatibility, and say why in the change.
+4. Keep each external version in the catalog, so every package shares the one entry.
+
 ## Build
 
 1. `@vinocss/devtools-build` drives the build, so a package runs `vinocss-build`.
@@ -32,8 +37,8 @@ and reference it as `catalog:dep` for a dependency or `catalog:dev` for a dev de
 ## Tsconfig
 
 1. `tsconfig.json` is a solution file with `files: []` and references.
-2. `tsconfig.app.json` covers `src` and holds the `@/*` path alias.
-3. `tsconfig.node.json` covers config files, when a package still keeps them.
+2. `tsconfig.app.json` covers `src` and `test`, and holds the `@/*` path alias.
+3. `tsconfig.node.json` covers config files such as `vitest.config.ts`.
 4. The build reads `tsconfig.app.json` and reuses the alias, so no alias plugin is needed.
 5. Send `tsBuildInfoFile` into `node_modules/.tmp`, since `tsc -b` writes build info.
 6. Extend `@vinocss/devtools-tsconfig` for the shared compiler options.
@@ -47,7 +52,8 @@ and [build](../../packages-devtools/build/README.md) for the build command.
 1. Add `build` and `typecheck` scripts that call the root tooling.
 2. `build` runs `vinocss-build`, which `@vinocss/devtools-build` provides.
 3. Typecheck runs `tsc -b`, so the solution tsconfig covers both projects.
-4. Run `pnpm review` from the root; it covers every package.
+4. Add a `test` script that runs `vitest run` when the package has tests.
+5. Run `pnpm review` from the root; it covers every package.
 
 The root keeps the tooling that builds the workspace itself,
 and the workspace leaves node and pnpm versions to the environment,

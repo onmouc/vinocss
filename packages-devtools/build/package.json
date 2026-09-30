@@ -18,6 +18,7 @@
   },
   "scripts": {
     "build": "node --import @oxc-node/core/register src/main.ts",
+    "test": "vitest run",
     "typecheck": "tsc -b"
   },
   "dependencies": {
@@ -29,6 +30,8 @@
   "devDependencies": {
     "@oxc-node/core": "catalog:dev",
     "@types/node": "catalog:dev",
-    "@vinocss/devtools-tsconfig": "workspace:*"
+    "@vinocss/devtools-tsconfig": "workspace:*",
+    "vite": "catalog:dev",
+    "vitest": "catalog:dev"
   }
 }

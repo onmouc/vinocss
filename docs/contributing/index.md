@@ -7,6 +7,7 @@ Read only the guide a task needs.
 - [code](./code.md) - writing or editing code or config.
 - [typescript](./typescript.md) - writing or editing TypeScript.
 - [comments](./comments.md) - writing or editing comment docs.
+- [testing](./testing.md) - adding, changing, or running tests.
 - [review](./review.md) - code changed and the work is ready to check.
 - [commit](./commit.md) - a task is done and a message is due.
 - [package](./package.md) - adding or changing a child package under packages/.

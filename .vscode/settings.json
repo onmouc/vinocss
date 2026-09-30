@@ -14,6 +14,7 @@
   "explorer.fileNesting.patterns": {
     "*": "${capture}.map",
     "*.js": "",
+    "*.ts": "${capture}.test.ts",
     "package.json": "pnpm-lock.yaml"
   },
 
