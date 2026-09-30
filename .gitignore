@@ -1,0 +1,12 @@
+Desktop.ini
+.DS_Store
+
+# Common code editors.
+.vs
+.idea
+*.iml
+*.ipr
+*.iws
+
+# Generated commit message.
+.commit

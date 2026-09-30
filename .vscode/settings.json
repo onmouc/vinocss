@@ -1,0 +1,10 @@
+{
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "editor.tabSize": 2,
+  "editor.rulers": [100],
+
+  // Code spell checker (extensions).
+  "cSpell.ignorePaths": [],
+  "cSpell.words": []
+}
