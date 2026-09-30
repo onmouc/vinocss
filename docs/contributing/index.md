@@ -10,6 +10,7 @@ Read only the guide a task needs.
 - [testing](./testing.md) - adding, changing, or running tests.
 - [review](./review.md) - code changed and the work is ready to check.
 - [commit](./commit.md) - a task is done and a message is due.
+- [merge](./merge.md) - a branch is ready to merge into the current branch.
 - [package](./package.md) - adding or changing a child package under packages/.
 - [editor](./editor.md) - adding or changing shared editor configuration.
 - [question](./question.md) - a request is unclear or improvable.
