@@ -15,5 +15,8 @@
   "scripts": {
     "build": "rolldown -c",
     "typecheck": "tsc -b"
+  },
+  "devDependencies": {
+    "@vinocss/devtools-tsconfig": "workspace:*"
   }
 }

@@ -24,7 +24,13 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/vinocss: {}
+  packages-devtools/tsconfig: {}
+
+  packages/vinocss:
+    devDependencies:
+      '@vinocss/devtools-tsconfig':
+        specifier: workspace:*
+        version: link:../../packages-devtools/tsconfig
 
 packages:
 

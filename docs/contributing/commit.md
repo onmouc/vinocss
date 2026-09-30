@@ -14,6 +14,13 @@ Read when a change is ready to describe.
 6. Write items terse; drop filler words such as add or the.
 7. Write each paragraph on a single line; a commit message is not wrapped like a markdown file.
 
+## Scopes
+
+1. Name a child package with a short name, such as `vinocss` or `devtools/tsconfig`.
+2. That name also covers the readme and guides inside the package.
+3. Use `workspace` for the root README, the rest of `docs/`, and workspace config.
+4. Use `contributing` for `CONTRIBUTING.md`, `AGENTS.md`, and the `docs/contributing/` folder.
+
 ## Keywords
 
 - `setup` - workspace, package, or tooling bootstrap
@@ -38,17 +45,17 @@ Read when a change is ready to describe.
 5. Describe intent and reasoning not recoverable from the files.
 6. Infer the reason for edits the user made by hand.
 7. Open with a short brief under the title and list, with no subtitle.
-8. For more detail, name a `##` subtitle for its exact topic, not a bare category like Build.
+8. Give a `##` subtitle that briefly states the section, not a bare category like Build.
 9. Skip trivial editor changes, such as a new spelling word, unless they change shared behavior.
 
 ## Example
 
 ```text
-fix(pkg): resolve alias on nested imports
+fix(vinocss): resolve alias on nested imports
 
-1. fix(pkg): read paths from the app tsconfig
-2. test(pkg): cover a nested alias import
-3. docs(pkg): note how the alias resolves
+1. fix(vinocss): read paths from the app tsconfig
+2. test(vinocss): cover a nested alias import
+3. docs(vinocss): note how the alias resolves
 
 ... (paragraphs or even sections with subtitles)
 ```

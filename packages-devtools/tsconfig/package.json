@@ -1,0 +1,13 @@
+{
+  "name": "@vinocss/devtools-tsconfig",
+  "version": "0.0.0",
+  "files": [
+    "src"
+  ],
+  "type": "module",
+  "exports": {
+    "./base": "./src/tsconfig.base.json",
+    "./app": "./src/tsconfig.app.json",
+    "./node": "./src/tsconfig.node.json"
+  }
+}
