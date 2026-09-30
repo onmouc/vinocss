@@ -6,6 +6,9 @@ settings:
 
 catalogs:
   dep:
+    chalk:
+      specifier: ^6.0.1
+      version: 6.0.1
     commander:
       specifier: ^15.0.0
       version: 15.0.0
@@ -51,6 +54,9 @@ importers:
 
   .:
     devDependencies:
+      '@vinocss/devtools-build':
+        specifier: workspace:*
+        version: link:packages-devtools/build
       oxfmt:
         specifier: catalog:dev
         version: 0.71.0
@@ -75,6 +81,9 @@ importers:
 
   packages-devtools/build:
     dependencies:
+      chalk:
+        specifier: catalog:dep
+        version: 6.0.1
       commander:
         specifier: catalog:dep
         version: 15.0.0
@@ -730,6 +739,10 @@ packages:
   chai@6.2.2:
     resolution: {integrity: sha512-NUPRluOfOiTKBKvWPtSD4PhFvWCqOi0BGStNWs57X9js7XGTprSmFoz5F0tWhR4WPjNeR9jXqdC7/UpSJTnlRg==}
     engines: {node: '>=18'}
+
+  chalk@6.0.1:
+    resolution: {integrity: sha512-/Ce6KNm3vIbWdMlNna6RVIZ/ICQxnJxCicet5LBKK9ZffBkqzDw0xh9EiKSljdRtiIQ1S1z4YgcscUUGzNCWrA==}
+    engines: {node: '>=22'}
 
   commander@15.0.0:
     resolution: {integrity: sha512-z67u4ZhzCL/Tydu1lJARtEZYWbWaN7oYLHbsuzocr6y4N6WZAagG3RQ4FW61V1/0+jImpj293XfrcYnd1qxtPg==}
@@ -1410,6 +1423,8 @@ snapshots:
   assertion-error@2.0.1: {}
 
   chai@6.2.2: {}
+
+  chalk@6.0.1: {}
 
   commander@15.0.0: {}
 

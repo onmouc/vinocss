@@ -50,6 +50,15 @@ since the build leaves dependencies external and the dependent output does not m
 3. A missing directory is created on write, and a non-directory path is an error.
 4. A shared chunk lands in `chunks` with a content hash, and an asset lands in `assets` with one.
 
+## Report
+
+1. The library prints nothing, so each build takes a `report` with the callbacks it needs.
+2. `step` and `skip` cover a built and a skipped package, so the log shows both and the reason.
+3. `log` carries rolldown's own messages, which the build reads through its `onLog` option.
+4. `warn` carries a problem the build found, such as a missing entry or workspace.
+5. The `vinocss-build` command supplies a chalk reporter, so the log is colored and lives in the bin.
+6. Pass a reporter to capture the messages, or leave it out for a silent build.
+
 ## Alias
 
 The tool reads `tsconfig.app.json` and reuses the `paths` aliases it declares,

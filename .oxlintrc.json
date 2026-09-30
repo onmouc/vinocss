@@ -9,6 +9,15 @@
   },
   "rules": {
     "jsdoc/require-param": "off",
-    "jsdoc/require-returns": "off"
-  }
+    "jsdoc/require-returns": "off",
+    "no-console": "error"
+  },
+  "overrides": [
+    {
+      "files": ["**/src/main.ts"],
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ]
 }

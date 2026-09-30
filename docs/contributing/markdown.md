@@ -2,6 +2,7 @@
 
 Format rules for markdown files, these guides included.
 Read before creating or editing any `.md` file.
+A guide also follows [guidelines](./guidelines.md), which covers the guide system itself.
 
 ## Tone
 

@@ -3,9 +3,11 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { collect, createExternal } from "@/build/resolve"
-import type { Context } from "@/types"
+import type { Context, Reporter } from "@/types"
 
 let cwd: string
+
+const silent: Reporter = {}
 
 function setup(prefix: string): void {
   cwd = mkdtempSync(join(tmpdir(), prefix))
@@ -26,12 +28,13 @@ function folder(name: string): void {
   writeFileSync(join(cwd, "src", name, "index.ts"), "")
 }
 
-function context(): Context {
+function context(report: Reporter = silent): Context {
   return {
     cwd,
     outDir: join(cwd, "out"),
     tsconfig: join(cwd, "tsconfig.app.json"),
     external: () => false,
+    report,
   }
 }
 
@@ -63,11 +66,11 @@ describe("collect", () => {
 
   it("warns and skips a missing requested name", () => {
     source("index")
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {})
-    expect(collect(context(), "index", ["missing"]).map((entry) => entry.name)).toEqual(["index"])
-    expect(warn).toHaveBeenCalledWith(
-      "vinocss-build: no src/missing.ts or src/missing/index.ts, skipped",
-    )
+    const warn = vi.fn()
+    expect(collect(context({ warn }), "index", ["missing"]).map((entry) => entry.name)).toEqual([
+      "index",
+    ])
+    expect(warn).toHaveBeenCalledWith("no src/missing.ts or src/missing/index.ts, skipped")
   })
 })
 

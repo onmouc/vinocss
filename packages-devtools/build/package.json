@@ -33,6 +33,7 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
+    "chalk": "catalog:dep",
     "commander": "catalog:dep",
     "rolldown": "catalog:dep",
     "rolldown-plugin-dts": "catalog:dep",

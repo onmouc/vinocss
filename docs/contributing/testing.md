@@ -37,5 +37,5 @@ and the root project glob picks up the package as soon as its config appears.
 2. Build a fixture in a temp directory, and remove it after the test.
 3. Prefer a behavior test over a test bound to the current implementation.
 4. Cover the edge cases next to the happy path.
-5. Spy on `console.warn` when the code warns, and assert the message.
+5. Pass a test double for a reporter and assert its calls, per [log](./log.md).
 6. Keep the suite fast; a slow test tends to stop being run.

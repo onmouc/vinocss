@@ -45,3 +45,10 @@ It lets a long block read as one unit while still showing where a new concern st
 1. Put the top-level work of a bin entry in a `main` function.
 2. Call `main` at the end.
 3. Keep the shebang and the imports above it.
+
+## Related
+
+1. TypeScript files also follow [typescript](./typescript.md).
+2. Comment docs also follow [comments](./comments.md).
+3. A bin entry and the console output it prints also follow [log](./log.md).
+4. Shared editor configuration also follows [editor](./editor.md).

@@ -1,5 +1,5 @@
 export { build, buildSelf, buildWorkspace } from "@/build/orchestrate"
 export type { ChecksumRecord } from "@/cache"
 export type { Manifest, PackageInfo } from "@/package/manifest"
-export type { BuildOptions, WorkspaceOptions } from "@/types"
+export type { BuildOptions, LogLevel, Reporter, WorkspaceOptions } from "@/types"
 export type { Workspace, WorkspacePackage } from "@/workspace/detect"

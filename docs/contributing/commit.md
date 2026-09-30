@@ -3,6 +3,7 @@
 Commit message rules.
 Contributors need the format; ai tools also follow the generation steps.
 Read when a change is ready to describe.
+A message is due by default once a review passes, so generate it without being asked.
 
 ## Format
 

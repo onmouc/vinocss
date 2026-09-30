@@ -5,8 +5,10 @@ import { buildBin, buildLib, clean } from "@/build/engine"
 import { collect, createExternal } from "@/build/resolve"
 import { runScript, sequence } from "@/build/run"
 import { buildOrder, buildScript, dependencyOrder, detectWorkspace, packageAt } from "@/workspace"
-import type { BuildOptions, Context, WorkspaceOptions } from "@/types"
+import type { BuildOptions, Context, Reporter, WorkspaceOptions } from "@/types"
 import type { WorkspacePackage } from "@/workspace"
+
+const silent: Reporter = {}
 
 /**
  * Build the library and binary entries of one package into its output directory.
@@ -31,6 +33,7 @@ import type { WorkspacePackage } from "@/workspace"
 export async function buildSelf(options: BuildOptions = {}): Promise<boolean> {
   const cwd = resolve(options.cwd ?? process.cwd())
   const outDir = resolve(cwd, options.outDir ?? "out")
+  const report = options.report ?? silent
   const sources = readSources(cwd)
   if (!options.force && isCached(cwd, outDir, sources)) return false
   const context: Context = {
@@ -38,11 +41,12 @@ export async function buildSelf(options: BuildOptions = {}): Promise<boolean> {
     outDir,
     tsconfig: resolve(cwd, options.tsconfig ?? "tsconfig.app.json"),
     external: createExternal(cwd),
+    report,
   }
   const lib = collect(context, "index", options.lib ?? [])
   const bin = collect(context, "main", options.bin ?? [])
   if (lib.length === 0 && bin.length === 0) {
-    console.warn("vinocss-build: no entries found")
+    report.warn?.("no entries found")
     return false
   }
   clearChecksum(cwd)
@@ -74,7 +78,15 @@ export async function build(options: BuildOptions = {}): Promise<void> {
     await buildSelf(options)
     return
   }
-  await sequence(dependencyOrder(workspace, self), (dep) => buildDependency(dep, options.force))
+  const report = options.report ?? silent
+  await sequence(dependencyOrder(workspace, self), (dep) =>
+    buildDependency(dep, options.force, report),
+  )
+  if (!options.force && isCached(self.dir)) {
+    report.skip?.(`skipped ${self.name} (unchanged)`)
+    return
+  }
+  report.step?.(`building ${self.name}`)
   await buildSelf({ ...options, cwd: self.dir })
 }
 
@@ -90,27 +102,43 @@ export async function build(options: BuildOptions = {}): Promise<void> {
  */
 export async function buildWorkspace(options: WorkspaceOptions = {}): Promise<void> {
   const cwd = resolve(options.cwd ?? process.cwd())
+  const report = options.report ?? silent
   const workspace = detectWorkspace(options.dir ? resolve(options.dir) : cwd)
   if (!workspace) {
-    console.warn("vinocss-build: no pnpm workspace found")
+    report.warn?.("no pnpm workspace found")
     return
   }
-  const steps = buildOrder(workspace)
-    .map((pkg) => ({ pkg, script: buildScript(pkg) }))
-    .filter((step): step is { pkg: WorkspacePackage; script: string } => step.script !== undefined)
+  const steps = buildOrder(workspace).map((pkg) => ({ pkg, script: buildScript(pkg) }))
   await sequence(steps, async ({ pkg, script }) => {
-    if (!options.force && isCached(pkg.dir)) return
-    console.log(`vinocss-build: building ${pkg.name}`)
+    if (!script) {
+      report.skip?.(`skipped ${pkg.name} (no build script)`)
+      return
+    }
+    if (!options.force && isCached(pkg.dir)) {
+      report.skip?.(`skipped ${pkg.name} (unchanged)`)
+      return
+    }
+    report.step?.(`building ${pkg.name}`)
     if (options.force) clearChecksum(pkg.dir)
     await runScript(pkg.dir, script)
   })
 }
 
-async function buildDependency(pkg: WorkspacePackage, force?: boolean): Promise<void> {
+async function buildDependency(
+  pkg: WorkspacePackage,
+  force: boolean | undefined,
+  report: Reporter,
+): Promise<void> {
   const script = buildScript(pkg)
-  if (!script) return
-  if (!force && isCached(pkg.dir)) return
-  console.log(`vinocss-build: building ${pkg.name}`)
+  if (!script) {
+    report.skip?.(`skipped ${pkg.name} (no build script)`)
+    return
+  }
+  if (!force && isCached(pkg.dir)) {
+    report.skip?.(`skipped ${pkg.name} (unchanged)`)
+    return
+  }
+  report.step?.(`building ${pkg.name}`)
   if (force) clearChecksum(pkg.dir)
   await runScript(pkg.dir, script)
 }

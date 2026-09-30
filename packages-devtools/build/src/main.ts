@@ -1,8 +1,20 @@
 #!/usr/bin/env node
+import chalk from "chalk"
 import { Command } from "commander"
 import { build, buildSelf, buildWorkspace } from "@/index"
+import type { Reporter } from "@/index"
 
 async function main(): Promise<void> {
+  const report: Reporter = {
+    step: (message) => console.log(chalk.cyan("vinocss-build:"), message),
+    skip: (message) => console.log(chalk.gray("vinocss-build:"), chalk.gray(message)),
+    log: (level, message) => {
+      const paint = level === "warn" ? chalk.yellow : level === "debug" ? chalk.gray : chalk.blue
+      if (level === "warn") console.warn(paint("rolldown:"), message)
+      else console.log(paint("rolldown:"), message)
+    },
+    warn: (message) => console.warn(chalk.yellow("vinocss-build:"), message),
+  }
   const program = new Command()
     .name("vinocss-build")
     .description("build the library and binary entries of a VinoCSS package")
@@ -19,9 +31,10 @@ async function main(): Promise<void> {
         bin: options.bin,
         outDir: options.out,
         force: options.force,
+        report,
       }
       if (options.workspace !== undefined && options.self) {
-        console.warn("vinocss-build: --self and --workspace are mutually exclusive")
+        report.warn?.("--self and --workspace are mutually exclusive")
         process.exitCode = 1
         return
       }
@@ -30,6 +43,7 @@ async function main(): Promise<void> {
           cwd: common.cwd,
           dir: typeof options.workspace === "string" ? options.workspace : undefined,
           force: options.force,
+          report,
         })
       else if (options.self) await buildSelf(common)
       else await build(common)

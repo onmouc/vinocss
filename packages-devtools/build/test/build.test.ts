@@ -46,11 +46,11 @@ describe("build", () => {
   })
 
   it("warns and leaves no output when no entry exists", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {})
+    const warn = vi.fn()
 
-    await build({ cwd })
+    await build({ cwd, report: { warn } })
 
-    expect(warn).toHaveBeenCalledWith("vinocss-build: no entries found")
+    expect(warn).toHaveBeenCalledWith("no entries found")
     expect(existsSync(join(cwd, "out"))).toBe(false)
   })
 })

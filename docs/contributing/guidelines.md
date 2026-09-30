@@ -7,7 +7,7 @@ Read only when adding or reshaping guides, not for ordinary tasks.
 
 1. `AGENTS.md` and `CONTRIBUTING.md` are the entries, one per audience.
 2. `README.md` is for users rather than contributors.
-3. `docs/contributing/index.md` maps the shared guides and their conditions.
+3. `docs/contributing/index.md` maps the guides a task can start from and their conditions.
 4. Guides live in `docs/contributing/`, one topic per file, named with one short word.
 
 `CONTRIBUTING.md` may read more warmly than the other files, since it greets human contributors.
@@ -17,12 +17,15 @@ Read only when adding or reshaping guides, not for ordinary tasks.
 
 1. An entry uses root-relative paths, such as `docs/contributing/commit.md`.
 2. Any other guide uses a markdown link, such as [commit](./commit.md).
-3. A shared route goes in `index.md`; an audience-specific link goes in its entry.
+3. `index.md` routes only the guides a task can start from.
+4. A deeper guide hangs off the guide that reaches it, with its trigger condition.
 
 ## Rules
 
 1. Add a shared rule as its own `docs/contributing/<name>.md`.
 2. Read each file on demand, and keep it to one topic.
 3. Keep meta rules out of files that always load, the entries and `index.md`.
-4. Add a new guide's route to `index.md`, with its trigger condition.
-5. Put an audience-specific link in that audience's entry file only.
+4. Route a new guide from `index.md` when a task can start with it;
+   otherwise link it from the guide that reaches it, with its trigger condition.
+5. Keep `index.md` a short map, and let a guide link the narrower guides it needs.
+6. Put an audience-specific link in that audience's entry file only.

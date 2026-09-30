@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm -r build",
+    "build": "vinocss-build --workspace",
     "typecheck": "pnpm -r typecheck",
     "lint": "oxlint --deny-warnings",
     "fmt": "oxfmt",
@@ -13,6 +13,7 @@
     "review": "pnpm fmt:check && pnpm lint && pnpm typecheck && pnpm build && pnpm test"
   },
   "devDependencies": {
+    "@vinocss/devtools-build": "workspace:*",
     "oxfmt": "catalog:dev",
     "oxlint": "catalog:dev",
     "rolldown": "catalog:dev",

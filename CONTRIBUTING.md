@@ -8,9 +8,9 @@ Think of this file as a doorway: it is short, and it leads to the guidelines.
 ## Guides
 
 The rules live in [the guide index](./docs/contributing/index.md),
-which lists each guide and the moment you would reach for it.
+which names the guides a task can start from and the moment you would reach for each one.
 You do not need to read them all at once;
-the index is built so you open the one a task calls for and skip the rest.
+the index stays short, and each guide links a deeper one when the task reaches it.
 Every guide stands on its own, so nothing is lost by reading only what you need.
 
 ## AI tools

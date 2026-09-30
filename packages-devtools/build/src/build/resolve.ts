@@ -24,7 +24,7 @@ export function collect(context: Context, fallback: string, names: string[]): En
     const file = entryFile(context.cwd, name)
     if (file) entries.set(name, { name, file })
     else if (name !== fallback)
-      console.warn(`vinocss-build: no src/${name}.ts or src/${name}/index.ts, skipped`)
+      context.report.warn?.(`no src/${name}.ts or src/${name}/index.ts, skipped`)
   }
   return [...entries.values()]
 }

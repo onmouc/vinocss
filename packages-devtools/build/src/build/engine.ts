@@ -2,7 +2,7 @@ import { existsSync, readdirSync, rmSync, statSync } from "node:fs"
 import { resolve } from "node:path"
 import { build as rolldown } from "rolldown"
 import { dts } from "rolldown-plugin-dts"
-import type { OutputOptions } from "rolldown"
+import type { InputOptions, OutputOptions } from "rolldown"
 import type { Context, Entry } from "@/types"
 
 /**
@@ -23,18 +23,14 @@ export async function buildLib(context: Context, entries: Entry[]): Promise<void
   const input = Object.fromEntries(entries.map((entry) => [entry.name, entry.file]))
   await Promise.all([
     rolldown({
-      cwd: context.cwd,
+      ...inputOptions(context),
       input,
-      tsconfig: context.tsconfig,
-      external: context.external,
       plugins: [dts({ tsconfig: context.tsconfig, sourcemap: true })],
       output: outputs(context, "esm"),
     }),
     rolldown({
-      cwd: context.cwd,
+      ...inputOptions(context),
       input,
-      tsconfig: context.tsconfig,
-      external: context.external,
       output: outputs(context, "cjs"),
     }),
   ])
@@ -43,13 +39,29 @@ export async function buildLib(context: Context, entries: Entry[]): Promise<void
 export async function buildBin(context: Context, entries: Entry[]): Promise<void> {
   const input = Object.fromEntries(entries.map((entry) => [entry.name, entry.file]))
   await rolldown({
-    cwd: context.cwd,
+    ...inputOptions(context),
     input,
-    tsconfig: context.tsconfig,
-    external: context.external,
     platform: "node",
     output: outputs(context, "esm"),
   })
+}
+
+/**
+ * Share the input options of every entry build, and forward rolldown's own logs.
+ *
+ * Rolldown prints a log to the console unless `onLog` intercepts it,
+ * so the hook hands each one to the reporter and lets the bin decide how to print.
+ * The interception is why the library stays silent even when rolldown has something to say.
+ */
+function inputOptions(context: Context): InputOptions {
+  return {
+    cwd: context.cwd,
+    tsconfig: context.tsconfig,
+    external: context.external,
+    onLog(level, log) {
+      context.report.log?.(level, log.message)
+    },
+  }
 }
 
 function outputs(context: Context, format: "esm" | "cjs"): OutputOptions {
