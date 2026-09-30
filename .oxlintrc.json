@@ -6,5 +6,9 @@
     "suspicious": "warn",
     "pedantic": "warn",
     "perf": "warn"
+  },
+  "rules": {
+    "jsdoc/require-param": "off",
+    "jsdoc/require-returns": "off"
   }
 }

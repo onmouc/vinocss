@@ -1,0 +1,34 @@
+{
+  "name": "@vinocss/devtools-build",
+  "version": "0.0.0",
+  "bin": {
+    "vinocss-build": "./bin/vinocss-build.js"
+  },
+  "files": [
+    "bin",
+    "out"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./out/index.d.ts",
+      "import": "./out/index.js",
+      "require": "./out/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "node --import @oxc-node/core/register src/main.ts",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "commander": "catalog:dep",
+    "rolldown": "catalog:dep",
+    "rolldown-plugin-dts": "catalog:dep",
+    "typescript": "catalog:dep"
+  },
+  "devDependencies": {
+    "@oxc-node/core": "catalog:dev",
+    "@types/node": "catalog:dev",
+    "@vinocss/devtools-tsconfig": "workspace:*"
+  }
+}

@@ -18,3 +18,9 @@ Read when code changed and the work is ready to check.
 5. Format with `pnpm fmt`, then re-run the same gate until it passes.
 
 A passing gate is the default signal that a change is safe to describe. Until it passes, fix the tree instead of writing a message.
+
+## Leftovers
+
+1. A scratch script, a probe, or a sample folder is fine while you work.
+2. Remove each one before the review, so the gate sees only the real change.
+3. Leave build output alone; it is ignored and rebuilt on every build.

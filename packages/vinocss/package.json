@@ -13,10 +13,11 @@
     }
   },
   "scripts": {
-    "build": "rolldown -c",
+    "build": "vinocss-build",
     "typecheck": "tsc -b"
   },
   "devDependencies": {
+    "@vinocss/devtools-build": "workspace:*",
     "@vinocss/devtools-tsconfig": "workspace:*"
   }
 }

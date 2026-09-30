@@ -5,6 +5,8 @@ Read only the guide a task needs.
 
 - [markdown](./markdown.md) - writing or editing any markdown file.
 - [code](./code.md) - writing or editing code or config.
+- [typescript](./typescript.md) - writing or editing TypeScript.
+- [comments](./comments.md) - writing or editing comment docs.
 - [review](./review.md) - code changed and the work is ready to check.
 - [commit](./commit.md) - a task is done and a message is due.
 - [package](./package.md) - adding or changing a child package under packages/.
