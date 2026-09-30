@@ -33,6 +33,8 @@ and reference it as `catalog:dep` for a dependency or `catalog:dev` for a dev de
 5. Libraries emit esm, cjs, and bundled declarations; binaries emit esm only.
 6. Every output is minified, carries a source map, and lands in `out`.
 7. Point the package `exports` and `bin` at the `out` files.
+8. The build detects the pnpm workspace and builds a package's workspace dependencies first.
+9. It skips a package whose source and output checksum is unchanged, so a repeated build stays cheap.
 
 ## Tsconfig
 
@@ -49,11 +51,12 @@ and [build](../../packages-devtools/build/README.md) for the build command.
 
 ## Scripts
 
-1. Add `build` and `typecheck` scripts that call the root tooling.
-2. `build` runs `vinocss-build`, which `@vinocss/devtools-build` provides.
-3. Typecheck runs `tsc -b`, so the solution tsconfig covers both projects.
-4. Add a `test` script that runs `vitest run` when the package has tests.
-5. Run `pnpm review` from the root; it covers every package.
+1. Add `build`, `build:self`, and `typecheck` scripts that call the root tooling.
+2. `build` runs `vinocss-build`, which builds the workspace dependencies then the package.
+3. `build:self` runs `vinocss-build --self`, which builds only the package.
+4. Typecheck runs `tsc -b`, so the solution tsconfig covers both projects.
+5. Add a `test` script that runs `vitest run` when the package has tests.
+6. Run `pnpm review` from the root; it covers every package.
 
 The root keeps the tooling that builds the workspace itself,
 and the workspace leaves node and pnpm versions to the environment,

@@ -23,6 +23,14 @@ Read when adding, changing, or running tests.
 A package adds vitest only once it has tests, so a package without tests stays lean,
 and the root project glob picks up the package as soon as its config appears.
 
+## Choice
+
+1. Test a piece only when its logic is hard to follow from the source.
+2. Leave a simple function to the reader; a getter, a one-line branch, or a plain read needs no test.
+3. Reach for a test at a real edge or failure, such as a cycle, a wildcard glob, or a stale cache.
+4. Prefer a few tests that pin a rule over many that restate the code.
+5. Drop a test that only repeats what the source already states.
+
 ## Rules
 
 1. Import the helpers from `vitest`; do not rely on globals.

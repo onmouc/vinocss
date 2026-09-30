@@ -14,6 +14,7 @@
   },
   "scripts": {
     "build": "vinocss-build",
+    "build:self": "vinocss-build --self",
     "typecheck": "tsc -b"
   },
   "devDependencies": {

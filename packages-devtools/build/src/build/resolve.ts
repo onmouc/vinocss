@@ -1,12 +1,14 @@
-import { existsSync, readFileSync } from "node:fs"
+import { existsSync } from "node:fs"
 import { isBuiltin } from "node:module"
 import { resolve } from "node:path"
+import { readManifest } from "@/package/manifest"
 import type { ExternalOption } from "rolldown"
 import type { Context, Entry } from "@/types"
 
 /**
- * Resolve entry names to the `src/<name>.ts` files that exist.
+ * Resolve entry names to the `src` files that exist.
  *
+ * It checks `src/<name>.ts` first, then `src/<name>/index.ts`, so an entry can be one file or a folder.
  * It checks the fallback name first, then the names a caller asked for,
  * and it returns the matching files in that order.
  * The fallback is the entry a package is expected to have, such as `index` or `main`.
@@ -19,9 +21,10 @@ export function collect(context: Context, fallback: string, names: string[]): En
   const entries = new Map<string, Entry>()
   for (const name of [fallback, ...names]) {
     if (entries.has(name)) continue
-    const file = resolve(context.cwd, "src", `${name}.ts`)
-    if (existsSync(file)) entries.set(name, { name, file })
-    else if (name !== fallback) console.warn(`vinocss-build: no src/${name}.ts, skipped`)
+    const file = entryFile(context.cwd, name)
+    if (file) entries.set(name, { name, file })
+    else if (name !== fallback)
+      console.warn(`vinocss-build: no src/${name}.ts or src/${name}/index.ts, skipped`)
   }
   return [...entries.values()]
 }
@@ -36,6 +39,7 @@ export function collect(context: Context, fallback: string, names: string[]): En
  * A node builtin stays external too, because the runtime provides it.
  *
  * A dependency also covers its subpaths, so `pkg/sub` stays external with `pkg`.
+ * Dev dependencies stay out, since a package does not import them from its source.
  */
 export function createExternal(cwd: string): ExternalOption {
   const names = new Set(dependencies(cwd))
@@ -46,16 +50,17 @@ export function createExternal(cwd: string): ExternalOption {
   }
 }
 
-type Manifest = {
-  dependencies?: Record<string, string>
-  peerDependencies?: Record<string, string>
-  optionalDependencies?: Record<string, string>
+function entryFile(cwd: string, name: string): string | undefined {
+  const file = resolve(cwd, "src", `${name}.ts`)
+  if (existsSync(file)) return file
+  const folder = resolve(cwd, "src", name, "index.ts")
+  if (existsSync(folder)) return folder
+  return undefined
 }
 
 function dependencies(cwd: string): string[] {
-  const file = resolve(cwd, "package.json")
-  if (!existsSync(file)) return []
-  const manifest = JSON.parse(readFileSync(file, "utf8")) as Manifest
+  const manifest = readManifest(cwd)
+  if (!manifest) return []
   return [
     ...Object.keys(manifest.dependencies ?? {}),
     ...Object.keys(manifest.peerDependencies ?? {}),

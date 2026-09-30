@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { Command } from "commander"
-import { build } from "@/index"
+import { build, buildSelf, buildWorkspace } from "@/index"
 
 async function main(): Promise<void> {
   const program = new Command()
@@ -9,11 +9,42 @@ async function main(): Promise<void> {
     .option("--lib <names>", "extra library entries, comma separated", collect, [])
     .option("--bin <names>", "extra binary entries, comma separated", collect, [])
     .option("--out <dir>", "output directory", "out")
-    .action(async (options: { lib: string[]; bin: string[]; out: string }) => {
-      await build({ lib: options.lib, bin: options.bin, outDir: options.out })
+    .option("--self", "build only this package, not its workspace dependencies")
+    .option("--workspace [dir]", "build every package in the workspace in dependency order")
+    .option("--force", "rebuild even when the cached checksum is fresh")
+    .action(async (options: Options) => {
+      const common = {
+        cwd: process.cwd(),
+        lib: options.lib,
+        bin: options.bin,
+        outDir: options.out,
+        force: options.force,
+      }
+      if (options.workspace !== undefined && options.self) {
+        console.warn("vinocss-build: --self and --workspace are mutually exclusive")
+        process.exitCode = 1
+        return
+      }
+      if (options.workspace !== undefined)
+        await buildWorkspace({
+          cwd: common.cwd,
+          dir: typeof options.workspace === "string" ? options.workspace : undefined,
+          force: options.force,
+        })
+      else if (options.self) await buildSelf(common)
+      else await build(common)
     })
 
   await program.parseAsync()
+}
+
+type Options = {
+  lib: string[]
+  bin: string[]
+  out: string
+  self?: boolean
+  workspace?: string | boolean
+  force?: boolean
 }
 
 /**

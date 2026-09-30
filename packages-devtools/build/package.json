@@ -14,10 +14,21 @@
       "types": "./out/index.d.ts",
       "import": "./out/index.js",
       "require": "./out/index.cjs"
+    },
+    "./package": {
+      "types": "./out/package.d.ts",
+      "import": "./out/package.js",
+      "require": "./out/package.cjs"
+    },
+    "./workspace": {
+      "types": "./out/workspace.d.ts",
+      "import": "./out/workspace.js",
+      "require": "./out/workspace.cjs"
     }
   },
   "scripts": {
-    "build": "node --import @oxc-node/core/register src/main.ts",
+    "build": "node --import @oxc-node/core/register src/main.ts --lib package,workspace",
+    "build:self": "node --import @oxc-node/core/register src/main.ts --self --lib package,workspace",
     "test": "vitest run",
     "typecheck": "tsc -b"
   },

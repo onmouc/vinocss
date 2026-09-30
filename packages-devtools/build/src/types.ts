@@ -6,6 +6,13 @@ export type BuildOptions = {
   tsconfig?: string
   lib?: string[]
   bin?: string[]
+  force?: boolean
+}
+
+export type WorkspaceOptions = {
+  cwd?: string
+  dir?: string
+  force?: boolean
 }
 
 export type Context = {

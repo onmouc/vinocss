@@ -53,10 +53,13 @@ export async function buildBin(context: Context, entries: Entry[]): Promise<void
 }
 
 function outputs(context: Context, format: "esm" | "cjs"): OutputOptions {
+  const extension = format === "cjs" ? ".cjs" : ".js"
   return {
     dir: context.outDir,
     format,
-    entryFileNames: format === "cjs" ? "[name].cjs" : "[name].js",
+    entryFileNames: `[name]${extension}`,
+    chunkFileNames: `chunks/[hash]${extension}`,
+    assetFileNames: "assets/[hash].[ext]",
     minify: true,
     sourcemap: true,
   }

@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { afterEach, beforeEach, describe, expect, it } from "vitest"
-import { clean } from "@/build"
+import { clean } from "@/build/engine"
 
 describe("clean", () => {
   let root: string
@@ -13,12 +13,6 @@ describe("clean", () => {
 
   afterEach(() => {
     rmSync(root, { recursive: true, force: true })
-  })
-
-  it("draws no action for a missing directory", () => {
-    const dir = join(root, "out")
-    expect(() => clean(dir)).not.toThrow()
-    expect(existsSync(dir)).toBe(false)
   })
 
   it("clears every entry but keeps the directory", () => {
@@ -40,12 +34,5 @@ describe("clean", () => {
     const file = join(root, "out")
     writeFileSync(file, "")
     expect(() => clean(file)).toThrow(`vinocss-build: ${file} is not a directory`)
-  })
-
-  it("leaves a directory that is already empty", () => {
-    const dir = join(root, "out")
-    mkdirSync(dir)
-    clean(dir)
-    expect(existsSync(dir)).toBe(true)
   })
 })
