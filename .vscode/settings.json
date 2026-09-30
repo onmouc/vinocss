@@ -4,7 +4,26 @@
   "editor.tabSize": 2,
   "editor.rulers": [100],
 
+  // Format on save (extensions).
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+
+  // File nesting.
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "*": "${capture}.map",
+    "*.js": "",
+    "package.json": "pnpm-lock.yaml"
+  },
+
+  // Output bundles visualization.
+  "editor.wordWrapColumn": 100,
+  "[markdown]": { "editor.wordWrap": "wordWrapColumn" },
+  "[json]": { "editor.wordWrap": "wordWrapColumn" },
+  "[javascript]": { "editor.wordWrap": "wordWrapColumn" },
+
   // Code spell checker (extensions).
-  "cSpell.ignorePaths": [],
-  "cSpell.words": []
+  "cSpell.ignorePaths": ["pnpm-lock.yaml"],
+  "cSpell.words": ["lockfiles", "vinocss"]
 }

@@ -1,0 +1,19 @@
+{
+  "name": "vinocss",
+  "version": "0.0.0",
+  "files": [
+    "out"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./out/index.d.ts",
+      "import": "./out/index.js",
+      "require": "./out/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "rolldown -c",
+    "typecheck": "tsc -b"
+  }
+}

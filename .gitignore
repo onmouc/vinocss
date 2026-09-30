@@ -10,3 +10,7 @@ Desktop.ini
 
 # Generated commit message.
 .commit
+
+# Node dependencies and output.
+node_modules
+out
