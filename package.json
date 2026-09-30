@@ -5,14 +5,15 @@
   "type": "module",
   "scripts": {
     "build": "vinocss-build --workspace",
-    "typecheck": "pnpm -r typecheck",
-    "lint": "oxlint --deny-warnings",
-    "line-width": "vinocss-line-width",
+    "check": "pnpm fmt:check && pnpm lint && pnpm typecheck",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
-    "check": "pnpm fmt:check && pnpm lint && pnpm typecheck",
+    "line-width": "vinocss-line-width",
+    "lint": "oxlint --deny-warnings",
+    "prepare": "pnpm --filter @vinocss/devtools-build build && pnpm build",
+    "review": "pnpm run check && pnpm build && pnpm line-width && pnpm test",
     "test": "vitest run",
-    "review": "pnpm run check && pnpm build && pnpm line-width && pnpm test"
+    "typecheck": "pnpm -r typecheck"
   },
   "devDependencies": {
     "@vinocss/devtools-build": "workspace:*",
