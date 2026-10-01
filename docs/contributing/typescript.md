@@ -4,6 +4,13 @@ Style rules for TypeScript files, on top of the general code rules.
 Read when writing or editing TypeScript.
 The shared rules in [code](./code.md) still apply alongside these.
 
+## Imports
+
+1. A child package resolves its own modules through the `@/*` alias, such as `@/types`.
+2. Prefer the alias over a relative path, so a moved file keeps its imports intact.
+3. The alias covers a value import, a `import type`, and a re-export, so one form fits all.
+4. Keep an external module as its package name, such as `csstype` or `@vinocss/runes`.
+
 ## Types
 
 1. Prefer `type` over `interface` when both can express the shape.

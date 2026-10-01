@@ -1,5 +1,5 @@
 {
-  "name": "vinocss",
+  "name": "@vinocss/runes",
   "version": "0.0.0",
   "files": [
     "out"
@@ -10,21 +10,15 @@
       "types": "./out/index.d.ts",
       "import": "./out/index.js",
       "require": "./out/index.cjs"
-    },
-    "./utils": {
-      "types": "./out/utils.d.ts",
-      "import": "./out/utils.js",
-      "require": "./out/utils.cjs"
     }
   },
   "scripts": {
-    "build": "vinocss-build --lib utils",
-    "build:self": "vinocss-build --self --lib utils",
+    "build": "vinocss-build",
+    "build:self": "vinocss-build --self",
     "typecheck": "tsc -b"
   },
   "dependencies": {
-    "@vinocss/runes": "workspace:*",
-    "@vinocss/utils": "workspace:*"
+    "csstype": "catalog:dep"
   },
   "devDependencies": {
     "@vinocss/devtools-build": "workspace:*",

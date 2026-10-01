@@ -403,11 +403,36 @@ importers:
 
   packages-devtools/tsconfig: {}
 
-  packages/vinocss:
+  packages/runes:
     dependencies:
       csstype:
         specifier: catalog:dep
         version: 3.2.3
+    devDependencies:
+      '@vinocss/devtools-build':
+        specifier: workspace:*
+        version: link:../../packages-devtools/build
+      '@vinocss/devtools-tsconfig':
+        specifier: workspace:*
+        version: link:../../packages-devtools/tsconfig
+
+  packages/utils:
+    devDependencies:
+      '@vinocss/devtools-build':
+        specifier: workspace:*
+        version: link:../../packages-devtools/build
+      '@vinocss/devtools-tsconfig':
+        specifier: workspace:*
+        version: link:../../packages-devtools/tsconfig
+
+  packages/vinocss:
+    dependencies:
+      '@vinocss/runes':
+        specifier: workspace:*
+        version: link:../runes
+      '@vinocss/utils':
+        specifier: workspace:*
+        version: link:../utils
     devDependencies:
       '@vinocss/devtools-build':
         specifier: workspace:*

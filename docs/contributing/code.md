@@ -3,24 +3,18 @@
 Style rules for code files, including config.
 Read when writing or editing code.
 
-## Separators
-
-1. Group related lines, and keep each group short.
-2. Break groups with an empty comment, such as `//`.
-3. Prefer it over a blank line when the groups still belong together.
-4. Keep the comment empty, with no label that repeats the code.
-5. Use it where a formatter would otherwise pack the lines tight.
-6. Leave a short block as one group, and break it only once it grows long.
-
-An empty comment marks a soft break without a heading or filler word.
-It lets a long block read as one unit while still showing where a new concern starts.
-
 ## Spacing
 
-1. Avoid an unnecessary empty line, especially around a single line of code.
-2. Do not leave a lone line sitting between two blank lines.
-3. Keep a blank line only at a real boundary, such as after the imports.
-4. Add a blank line inside a function only when the function is long enough to need it.
+1. Group related lines, and keep each group short.
+2. Break groups with one blank line, and keep a short block as one group.
+3. Avoid an unnecessary empty line, especially around a single line of code.
+4. Keep a blank line at a real boundary, such as after the imports.
+5. Do not leave a lone line sitting between two blank lines.
+6. Add a blank line inside a function only when the function is long enough to need it.
+
+A blank line carries the grouping, so related lines read as one block,
+and a break marks a new concern.
+One blank line is enough, since a second adds no meaning.
 
 ## Files
 

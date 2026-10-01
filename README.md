@@ -1,3 +1,3 @@
 # VinoCSS
 
-A variable integrated nano css framework.
+A variable integrated nano CSS framework.

@@ -1,6 +1,6 @@
 # VinoCSS
 
-A variable integrated nano css framework.
+A variable integrated nano CSS framework.
 
 VinoCSS styles an app from the code that uses it.
 You declare css variables with `var$`, build class names with `class$`,
@@ -11,6 +11,16 @@ so the shipped bundle carries no runtime and only the css it needs.
 Today the compiler is not implemented, so every call throws.
 The api below is the contract the compiler will honor,
 and the examples under `examples/` show how each call is written.
+
+## Packages
+
+VinoCSS is the entry an app imports, and it re-exports two small packages.
+`@vinocss/runes` holds `var$`, `class$`, and `style$`,
+and `vinocss` re-exports it as the root entry.
+`@vinocss/utils` holds the value helpers, and `vinocss/utils` re-exports it.
+The split keeps each piece free of the framework,
+so an analyzer or the compiler can depend on one without a dependency loop,
+while an app imports them through `vinocss` and `vinocss/utils`.
 
 ## Usage
 
@@ -111,6 +121,30 @@ style$({
   ":root": { [theme.surface]: "#ffffff", [theme.ink]: "#18181b" },
   body: { margin: "0" },
 })
+```
+
+## Utils
+
+The `vinocss/utils` subpath re-exports `@vinocss/utils`,
+so a value helper reads from the same package as the rest of the api.
+
+A unit helper appends its unit to a number, so `px(12)` is `"12px"` and `rem(2)` is `"2rem"`.
+The units cover the four css families:
+
+1. Absolute: `px`, `cm`, `mm`, `q`, `pt`, `pc`.
+2. Font relative: `em`, `rem`, `ex`, `ch`, `lh`, `rlh`.
+3. Viewport: `vw`, `vh`, `vmin`, `vmax`, `svw`, `svh`, `lvw`, `lvh`, `dvw`, `dvh`.
+4. Container: `cqw`, `cqh`, `cqi`, `cqb`, `cqmin`, `cqmax`.
+
+`v(name)` wraps a custom property name as a reference,
+so `v("--brand")` is `"var(--brand)"`.
+
+```ts
+import { px, rem, v } from "vinocss/utils"
+
+const ink = v("--card-ink")
+const gap = rem(1.5)
+const pad = px(24)
 ```
 
 ## Compile time
