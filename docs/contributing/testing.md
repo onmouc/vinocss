@@ -5,8 +5,8 @@ Read when adding, changing, or running tests.
 
 ## Layout
 
-1. The root `vitest.config.ts` lists the package roots as projects:
-   `packages/*` and `packages-devtools/*`.
+1. The root `vitest.config.ts` lists the package root as projects:
+   `packages/*`.
 2. Vitest treats each matched folder as a project, and reads its `vitest.config.ts` when one exists.
 3. Give a package a `vitest.config.ts` only when it has tests.
 4. Put a unit test beside its source, in `src/`, named `<source>.test.ts`.

@@ -1,8 +1,9 @@
-import vue from "@vitejs/plugin-vue"
 import { defineConfig } from "vite"
+import solid from "vite-plugin-solid"
 
 export default defineConfig({
-  plugins: [vue()],
+  tsconfig: "jsconfig.json",
+  plugins: [solid()],
   resolve: {
     tsconfigPaths: true,
   },

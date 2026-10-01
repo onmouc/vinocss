@@ -1,7 +1,5 @@
 packages:
-  - examples/*
   - packages/*
-  - packages-devtools/*
 
 catalogs:
   dep:

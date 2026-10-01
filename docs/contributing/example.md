@@ -1,11 +1,11 @@
 # Example
 
-How to add or change an example app under `examples/`.
+How to add or change an example app under `packages/example-xxx`.
 Read when creating an example, or editing an existing one.
 
 ## Layout
 
-1. An example lives at `examples/<name>`, one folder per framework and language.
+1. An example lives at `packages/example-<name>`, one folder per framework and language.
 2. Its `package.json` sets the name `@vinocss/example-<name>` and `"private": true`.
 3. It starts at version `0.0.0` and sets `"type": "module"`, like a child package.
 4. The name uses dashes, such as `react-ts` or `svelte-js`.
@@ -13,7 +13,7 @@ Read when creating an example, or editing an existing one.
 6. `root` ends at the repository root, and the app itself lives in `src/`.
 
 An example is a real app rather than a library, so it does not follow the
-build and tsconfig rules for a child package under `packages/`.
+build and tsconfig rules for a library package.
 It still follows the code, markdown, and TypeScript guides.
 
 ## Dependencies
@@ -25,7 +25,7 @@ It still follows the code, markdown, and TypeScript guides.
 5. Use the latest release that stays compatible with Vite 8 and the other examples.
 6. Add a new external version to the catalog first, then reference it from the example.
 
-The workspace globs in `pnpm-workspace.yaml` already cover `examples/*`,
+The workspace glob in `pnpm-workspace.yaml` already covers `packages/*`,
 so a new folder joins the workspace as soon as it holds a `package.json`.
 
 ## Scripts
@@ -48,7 +48,8 @@ Until then it would run the placeholder api, which throws by design.
 4. `tsconfig.node.json` covers `vite.config`, and takes the node types.
 5. Extend `@vinocss/devtools-tsconfig` for the shared compiler options.
 6. Send `tsBuildInfoFile` into `node_modules/.tmp`, since `tsc -b` writes build info.
-7. A JavaScript example keeps one `tsconfig.json` with `allowJs` and the alias.
+7. A JavaScript example keeps one `jsconfig.json` for the alias,
+   since it has no TypeScript project.
 
 A Svelte app extends `@tsconfig/svelte` next to the shared config,
 and it points `svelte-check` at `tsconfig.app.json`.
@@ -62,7 +63,9 @@ and it points `svelte-check` at `tsconfig.app.json`.
 5. Use `@sveltejs/vite-plugin-svelte` for Svelte.
 6. Use `vite-plugin-solid` for Solid.
 7. Set `resolve.tsconfigPaths`, so Vite reads the `@/*` alias from the tsconfig.
-8. Set `build.outDir` to `out`, so an example writes where a child package does.
+8. Point `tsconfig` at `jsconfig.json` in a JavaScript example,
+   since Vite finds the paths config by name.
+9. Set `build.outDir` to `out`, so an example writes where a child package does.
 
 React enables the compiler through the Babel preset,
 so a React example also installs `@rolldown/plugin-babel`,

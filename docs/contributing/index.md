@@ -6,7 +6,7 @@ Read only the guide a task needs, and let a guide route you to a deeper one it n
 - [markdown](./markdown.md) - writing or editing any markdown file.
 - [code](./code.md) - writing or editing code or config.
 - [package](./package.md) - adding or changing a child package under packages/.
-- [example](./example.md) - creating or editing an example app under examples/.
+- [example](./example.md) - creating or editing an example app under packages/example-xxx.
 - [testing](./testing.md) - adding, changing, or running tests.
 - [review](./review.md) - code changed and the work is ready to check.
 - [commit](./commit.md) - a task is done and a message is due.

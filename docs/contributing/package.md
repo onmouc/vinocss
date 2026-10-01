@@ -53,9 +53,9 @@ so a fresh clone can run the root commands without a manual bootstrap.
 5. Send `tsBuildInfoFile` into `node_modules/.tmp`, since `tsc -b` writes build info.
 6. Extend `@vinocss/devtools-tsconfig` for the shared compiler options.
 
-The devtools packages under `packages-devtools/` hold that shared tooling:
-[tsconfig](../../packages-devtools/tsconfig/README.md) for the shared compiler options,
-and [build](../../packages-devtools/build/README.md) for the build command.
+The devtools packages under `packages/` hold that shared tooling:
+[tsconfig](../../packages/devtools-tsconfig/README.md) for the shared compiler options,
+and [build](../../packages/devtools-build/README.md) for the build command.
 
 ## Scripts
 
@@ -72,5 +72,5 @@ so package files carry no version pins.
 
 ## Related
 
-An example app under `examples/` follows [example](./example.md)
+An example app named `@vinocss/example-*` follows [example](./example.md)
 instead of the build and tsconfig rules here.
