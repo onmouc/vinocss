@@ -1,0 +1,22 @@
+{
+  "name": "@vinocss/example-react-js",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "catalog:dep",
+    "react-dom": "catalog:dep",
+    "vinocss": "workspace:*"
+  },
+  "devDependencies": {
+    "@babel/core": "catalog:dev",
+    "@rolldown/plugin-babel": "catalog:dev",
+    "@vitejs/plugin-react": "catalog:dev",
+    "babel-plugin-react-compiler": "catalog:dev",
+    "vite": "catalog:dev"
+  }
+}

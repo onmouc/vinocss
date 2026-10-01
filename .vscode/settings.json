@@ -26,5 +26,17 @@
 
   // Code spell checker (extensions).
   "cSpell.ignorePaths": ["pnpm-lock.yaml"],
-  "cSpell.words": ["lockfiles", "pathspec", "pathspecs", "subpaths", "vinocss"]
+  "cSpell.words": [
+    "csstype",
+    "lockfiles",
+    "pathspec",
+    "pathspecs",
+    "subpaths",
+    "sveltejs",
+    "uncompiled",
+    "vinocss",
+    "vite",
+    "vitejs",
+    "vitest"
+  ]
 }

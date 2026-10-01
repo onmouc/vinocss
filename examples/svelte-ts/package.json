@@ -1,0 +1,24 @@
+{
+  "name": "@vinocss/example-svelte-ts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "preview": "vite preview",
+    "typecheck": "svelte-check --tsconfig ./tsconfig.app.json"
+  },
+  "dependencies": {
+    "svelte": "catalog:dep",
+    "vinocss": "workspace:*"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "catalog:dev",
+    "@tsconfig/svelte": "catalog:dev",
+    "@types/node": "catalog:dev",
+    "@vinocss/devtools-tsconfig": "workspace:*",
+    "svelte-check": "catalog:dev",
+    "typescript": "catalog:dev",
+    "vite": "catalog:dev"
+  }
+}

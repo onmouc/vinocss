@@ -1,0 +1,28 @@
+{
+  "name": "@vinocss/example-react-ts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "preview": "vite preview",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "react": "catalog:dep",
+    "react-dom": "catalog:dep",
+    "vinocss": "workspace:*"
+  },
+  "devDependencies": {
+    "@babel/core": "catalog:dev",
+    "@rolldown/plugin-babel": "catalog:dev",
+    "@types/node": "catalog:dev",
+    "@types/react": "catalog:dev",
+    "@types/react-dom": "catalog:dev",
+    "@vinocss/devtools-tsconfig": "workspace:*",
+    "@vitejs/plugin-react": "catalog:dev",
+    "babel-plugin-react-compiler": "catalog:dev",
+    "typescript": "catalog:dev",
+    "vite": "catalog:dev"
+  }
+}

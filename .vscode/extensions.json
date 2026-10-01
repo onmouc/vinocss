@@ -1,7 +1,9 @@
 {
   "recommendations": [
-    "oxc.oxc-vscode",
+    "svelte.svelte-vscode",
+    "vue.volar",
     "redhat.vscode-yaml",
+    "oxc.oxc-vscode",
     "streetsidesoftware.code-spell-checker"
   ]
 }

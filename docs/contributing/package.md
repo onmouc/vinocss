@@ -69,3 +69,8 @@ and [build](../../packages-devtools/build/README.md) for the build command.
 The root keeps the tooling that builds the workspace itself,
 and the workspace leaves node and pnpm versions to the environment,
 so package files carry no version pins.
+
+## Related
+
+An example app under `examples/` follows [example](./example.md)
+instead of the build and tsconfig rules here.

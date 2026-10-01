@@ -17,6 +17,9 @@
     "build:self": "vinocss-build --self",
     "typecheck": "tsc -b"
   },
+  "dependencies": {
+    "csstype": "catalog:dep"
+  },
   "devDependencies": {
     "@vinocss/devtools-build": "workspace:*",
     "@vinocss/devtools-tsconfig": "workspace:*"
