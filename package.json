@@ -8,6 +8,7 @@
     "check": "pnpm fmt:check && pnpm lint && pnpm typecheck",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
+    "license": "vinocss-license",
     "line-width": "vinocss-line-width",
     "lint": "oxlint --deny-warnings",
     "prepare": "pnpm --filter @vinocss/devtools-build build && pnpm build",
@@ -17,6 +18,7 @@
   },
   "devDependencies": {
     "@vinocss/devtools-build": "workspace:*",
+    "@vinocss/devtools-license": "workspace:*",
     "@vinocss/devtools-line-width": "workspace:*",
     "oxfmt": "catalog:dev",
     "oxlint": "catalog:dev",

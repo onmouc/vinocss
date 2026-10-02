@@ -3,6 +3,12 @@
 How to add or change a child package under `packages/`.
 Read when creating a package or changing its build.
 
+## Reuse
+
+1. Read [workspace](../workspace.md) first, to reuse an existing package before adding one.
+2. Put a shared helper in a `devtools-*` package once a second package needs it.
+3. Extend the package that owns the concern instead of adding a near-duplicate.
+
 ## Layout
 
 1. The root is `vinocss-workspace`, private, and holds only shared tooling.
