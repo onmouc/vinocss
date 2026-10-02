@@ -41,6 +41,12 @@ describe("checkLineWidth", () => {
     expect(violations.map((violation) => violation.file)).toEqual(["src/a.ts"])
   })
 
+  it("skips a tracked file deleted from the worktree", () => {
+    track({ "src/a.ts": `${"y".repeat(20)}\n` })
+    rmSync(join(dir, "src/a.ts"))
+    expect(checkLineWidth({ cwd: dir, max: 10 })).toEqual([])
+  })
+
   it("checks an untracked file git does not ignore", () => {
     writeFileSync(join(dir, "new.ts"), `${"y".repeat(20)}\n`)
     const violations = checkLineWidth({ cwd: dir, max: 10 })

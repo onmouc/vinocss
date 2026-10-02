@@ -32,7 +32,7 @@ while an app imports them through `vinocss` and `vinocss/utils`.
 ```ts
 import { class$, style$, var$ } from "vinocss"
 
-const theme = var$({ surface: "", ink: "" })
+const theme = var$({ surface: null, ink: null })
 
 const card = class$({
   padding: "1.5rem",
@@ -55,11 +55,12 @@ style$({
 
 `var$` declares or references a css custom property.
 
-1. The argument is a name string or a record of name strings.
+1. The argument is a name string, null, or a record of leaves.
 2. The return keeps the same shape, with every leaf resolved to a name.
-3. An empty string mints a unique name and prefixes it with `--`.
+3. A null mints a unique hashed name and prefixes it with `--`.
 4. A non-empty string takes a `--` prefix and is used as written.
-5. An object resolves each leaf on its own and keeps the declared keys.
+5. An empty string is rejected as a compile-time error.
+6. An object resolves each leaf on its own and keeps the declared keys.
 
 Because the compiler rewrites the call, `var$` may only start a `const`.
 Every argument must be a static literal,
@@ -67,7 +68,7 @@ so a reused variable, a computed name, or another call is a compile-time error.
 Before compilation the call throws in its place.
 
 ```ts
-const theme = var$({ surface: "", ink: "" })
+const theme = var$({ surface: null, ink: null })
 const accent = var$("brand-accent")
 ```
 

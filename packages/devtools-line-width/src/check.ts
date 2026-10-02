@@ -15,6 +15,7 @@ export const defaultMax = 100
  * By default it checks every git tracked file and every uncommitted file git does not ignore,
  * except a lockfile, and `patterns` or `ignore` change that set.
  * A binary file is skipped, so a tracked image does not read as one endless line.
+ * A tracked file deleted from the worktree is skipped, so an unstaged delete is harmless.
  * The library is silent: it collects the violations, calls `report` for each,
  * and returns the same list so a caller can act on it.
  */
@@ -36,6 +37,11 @@ export function checkLineWidth(options: LineWidthOptions = {}): Violation[] {
 }
 
 function readText(file: string): string | undefined {
-  const buffer = readFileSync(file)
-  return buffer.includes(0) ? undefined : buffer.toString("utf8")
+  try {
+    const buffer = readFileSync(file)
+    return buffer.includes(0) ? undefined : buffer.toString("utf8")
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error
+    return undefined
+  }
 }

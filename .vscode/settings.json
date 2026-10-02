@@ -42,6 +42,7 @@
     "vitejs",
     "vitest",
     "vmax",
-    "vmin"
+    "vmin",
+    "worktree"
   ]
 }

@@ -1,7 +1,7 @@
 <script setup>
 import { class$, style$, var$ } from "vinocss"
 
-const theme = var$({ surface: "", ink: "" })
+const theme = var$({ surface: null, ink: null })
 
 const card = class$({
   padding: "1.5rem",

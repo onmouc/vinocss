@@ -1,23 +1,28 @@
 import type * as CSS from "csstype"
+import { uncompiled } from "@/runtime"
 
 /**
- * The value `var$` accepts and returns.
+ * Compile a style object into a css class.
  *
- * A leaf is a css variable name, not a css value nor an expression.
- * An empty string asks the compiler to mint a unique name for the variable,
- * and a non-empty string names a variable the author declares.
- * The object form groups several names under one binding,
- * and every leaf resolves on its own, so the shape may nest as far as it needs.
- */
-export type VarInput = string | { readonly [key: string]: VarInput }
-
-/**
- * The result of `var$`: the input shape with every leaf resolved to a string.
+ * The argument is a style object, and the call returns the class name string.
+ * The compiler emits the rule as css, adds an import for that css to the file,
+ * and replaces the call with the generated class name.
+ * The name can sit in a `class` or `className` expression,
+ * or start a `const` that is used later.
  *
- * A leaf is a custom property name at runtime, such as `--brand-accent`
- * or a minted `--a1b2c3`, so the resolved type is a plain string.
+ * The object mixes three kinds of entry, all on the same value rules:
+ *
+ * 1. A css property maps to a literal or a `var$` reference.
+ * 2. A property may hold a fallback list the compiler emits in order.
+ * 3. A nested selector or at-rule, such as `:hover` or `@media`, holds a style object.
+ *
+ * A value must be a static literal or a `var$` reference;
+ * any other expression, such as a plain variable or a call, is a compile-time error.
+ * Before compilation the call throws in its place.
  */
-export type VarResult<T> = T extends string ? string : { readonly [K in keyof T]: VarResult<T[K]> }
+export function class$(styles: Style): string {
+  return uncompiled("class$", styles)
+}
 
 /**
  * A static css value a style object accepts.
@@ -54,12 +59,3 @@ export type Style = {
 } & {
   [key: string]: StyleProperty | Style | undefined
 }
-
-/**
- * A map of selector to style, the parameter of `style$`.
- *
- * Each key is a selector literal, such as `:root` or `body`,
- * and each value is a style object with the same rules as `class$`.
- * A computed or non-literal selector is rejected at compile time.
- */
-export type GlobalStyle = { readonly [selector: string]: Style }
