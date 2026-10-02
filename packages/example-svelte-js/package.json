@@ -8,11 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "svelte": "catalog:dep",
+    "svelte": "catalog:example",
     "vinocss": "workspace:*"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "catalog:dev",
+    "@sveltejs/vite-plugin-svelte": "catalog:example-dev",
     "vite": "catalog:dev"
   }
 }

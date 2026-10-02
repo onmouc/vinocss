@@ -9,15 +9,15 @@
     "typecheck": "svelte-check --tsconfig ./tsconfig.app.json"
   },
   "dependencies": {
-    "svelte": "catalog:dep",
+    "svelte": "catalog:example",
     "vinocss": "workspace:*"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "catalog:dev",
-    "@tsconfig/svelte": "catalog:dev",
+    "@sveltejs/vite-plugin-svelte": "catalog:example-dev",
+    "@tsconfig/svelte": "catalog:example-dev",
     "@types/node": "catalog:dev",
     "@vinocss/devtools-tsconfig": "workspace:*",
-    "svelte-check": "catalog:dev",
+    "svelte-check": "catalog:example-dev",
     "typescript": "catalog:dev",
     "vite": "catalog:dev"
   }

@@ -10,14 +10,14 @@
   },
   "dependencies": {
     "vinocss": "workspace:*",
-    "vue": "catalog:dep"
+    "vue": "catalog:example"
   },
   "devDependencies": {
     "@types/node": "catalog:dev",
     "@vinocss/devtools-tsconfig": "workspace:*",
-    "@vitejs/plugin-vue": "catalog:dev",
+    "@vitejs/plugin-vue": "catalog:example-dev",
     "typescript": "catalog:dev",
     "vite": "catalog:dev",
-    "vue-tsc": "catalog:dev"
+    "vue-tsc": "catalog:example-dev"
   }
 }

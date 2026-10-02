@@ -9,10 +9,10 @@
   },
   "dependencies": {
     "vinocss": "workspace:*",
-    "vue": "catalog:dep"
+    "vue": "catalog:example"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "catalog:dev",
+    "@vitejs/plugin-vue": "catalog:example-dev",
     "vite": "catalog:dev"
   }
 }

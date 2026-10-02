@@ -9,19 +9,19 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
-    "react": "catalog:dep",
-    "react-dom": "catalog:dep",
+    "react": "catalog:example",
+    "react-dom": "catalog:example",
     "vinocss": "workspace:*"
   },
   "devDependencies": {
-    "@babel/core": "catalog:dev",
-    "@rolldown/plugin-babel": "catalog:dev",
+    "@babel/core": "catalog:example-dev",
+    "@rolldown/plugin-babel": "catalog:example-dev",
     "@types/node": "catalog:dev",
-    "@types/react": "catalog:dev",
-    "@types/react-dom": "catalog:dev",
+    "@types/react": "catalog:example-dev",
+    "@types/react-dom": "catalog:example-dev",
     "@vinocss/devtools-tsconfig": "workspace:*",
-    "@vitejs/plugin-react": "catalog:dev",
-    "babel-plugin-react-compiler": "catalog:dev",
+    "@vitejs/plugin-react": "catalog:example-dev",
+    "babel-plugin-react-compiler": "catalog:example-dev",
     "typescript": "catalog:dev",
     "vite": "catalog:dev"
   }

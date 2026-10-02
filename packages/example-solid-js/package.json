@@ -8,11 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "solid-js": "catalog:dep",
+    "solid-js": "catalog:example",
     "vinocss": "workspace:*"
   },
   "devDependencies": {
     "vite": "catalog:dev",
-    "vite-plugin-solid": "catalog:dev"
+    "vite-plugin-solid": "catalog:example-dev"
   }
 }

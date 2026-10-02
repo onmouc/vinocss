@@ -15,37 +15,63 @@ catalogs:
     csstype:
       specifier: ^3.2.3
       version: 3.2.3
-    react:
-      specifier: ^19.3.0
-      version: 19.3.0
-    react-dom:
-      specifier: ^19.3.0
-      version: 19.3.0
     rolldown:
       specifier: ^1.2.11
       version: 1.2.11
     rolldown-plugin-dts:
       specifier: ^0.28.6
       version: 0.28.6
+    typescript:
+      specifier: ^6.0.3
+      version: 6.0.3
+  dev:
+    '@oxc-node/core':
+      specifier: ^0.1.3
+      version: 0.1.3
+    '@types/node':
+      specifier: ^26.6.3
+      version: 26.6.3
+    oxfmt:
+      specifier: ^0.71.0
+      version: 0.71.0
+    oxlint:
+      specifier: ^1.86.0
+      version: 1.86.0
+    rolldown:
+      specifier: ^1.2.11
+      version: 1.2.11
+    rolldown-plugin-dts:
+      specifier: ^0.28.6
+      version: 0.28.6
+    typescript:
+      specifier: ^6.0.3
+      version: 6.0.3
+    vite:
+      specifier: ^8.3.1
+      version: 8.3.1
+    vitest:
+      specifier: ^5.0.3
+      version: 5.0.3
+  example:
+    react:
+      specifier: ^19.3.0
+      version: 19.3.0
+    react-dom:
+      specifier: ^19.3.0
+      version: 19.3.0
     solid-js:
       specifier: ^1.9.15
       version: 1.9.15
     svelte:
       specifier: ^5.57.1
       version: 5.57.1
-    typescript:
-      specifier: ^6.0.3
-      version: 6.0.3
     vue:
       specifier: ^3.5.43
       version: 3.5.43
-  dev:
+  example-dev:
     '@babel/core':
       specifier: ^7.29.7
       version: 7.29.7
-    '@oxc-node/core':
-      specifier: ^0.1.3
-      version: 0.1.3
     '@rolldown/plugin-babel':
       specifier: ^0.2.4
       version: 0.2.4
@@ -55,9 +81,6 @@ catalogs:
     '@tsconfig/svelte':
       specifier: ^5.0.8
       version: 5.0.8
-    '@types/node':
-      specifier: ^26.6.3
-      version: 26.6.3
     '@types/react':
       specifier: ^19.3.0
       version: 19.3.0
@@ -73,33 +96,12 @@ catalogs:
     babel-plugin-react-compiler:
       specifier: ^1.0.0
       version: 1.0.0
-    oxfmt:
-      specifier: ^0.71.0
-      version: 0.71.0
-    oxlint:
-      specifier: ^1.86.0
-      version: 1.86.0
-    rolldown:
-      specifier: ^1.2.11
-      version: 1.2.11
-    rolldown-plugin-dts:
-      specifier: ^0.28.6
-      version: 0.28.6
     svelte-check:
       specifier: ^4.7.6
       version: 4.7.6
-    typescript:
-      specifier: ^6.0.3
-      version: 6.0.3
-    vite:
-      specifier: ^8.3.1
-      version: 8.3.1
     vite-plugin-solid:
       specifier: ^2.11.14
       version: 2.11.14
-    vitest:
-      specifier: ^5.0.3
-      version: 5.0.3
     vue-tsc:
       specifier: ^3.3.11
       version: 3.3.11
@@ -257,26 +259,26 @@ importers:
   packages/example-react-js:
     dependencies:
       react:
-        specifier: catalog:dep
+        specifier: catalog:example
         version: 19.3.0
       react-dom:
-        specifier: catalog:dep
+        specifier: catalog:example
         version: 19.3.0(react@19.3.0)
       vinocss:
         specifier: workspace:*
         version: link:../vinocss
     devDependencies:
       '@babel/core':
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 7.29.7
       '@rolldown/plugin-babel':
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 0.2.4(@babel/core@7.29.7)(rolldown@1.2.11)(vite@8.3.1(@types/node@26.6.3))
       '@vitejs/plugin-react':
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 6.1.1(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(rolldown@1.2.11)(vite@8.3.1(@types/node@26.6.3)))(babel-plugin-react-compiler@1.0.0)(vite@8.3.1(@types/node@26.6.3))
       babel-plugin-react-compiler:
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 1.0.0
       vite:
         specifier: catalog:dev
@@ -285,38 +287,38 @@ importers:
   packages/example-react-ts:
     dependencies:
       react:
-        specifier: catalog:dep
+        specifier: catalog:example
         version: 19.3.0
       react-dom:
-        specifier: catalog:dep
+        specifier: catalog:example
         version: 19.3.0(react@19.3.0)
       vinocss:
         specifier: workspace:*
         version: link:../vinocss
     devDependencies:
       '@babel/core':
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 7.29.7
       '@rolldown/plugin-babel':
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 0.2.4(@babel/core@7.29.7)(rolldown@1.2.11)(vite@8.3.1(@types/node@26.6.3))
       '@types/node':
         specifier: catalog:dev
         version: 26.6.3
       '@types/react':
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 19.3.0
       '@types/react-dom':
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 19.3.0(@types/react@19.3.0)
       '@vinocss/devtools-tsconfig':
         specifier: workspace:*
         version: link:../devtools-tsconfig
       '@vitejs/plugin-react':
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 6.1.1(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(rolldown@1.2.11)(vite@8.3.1(@types/node@26.6.3)))(babel-plugin-react-compiler@1.0.0)(vite@8.3.1(@types/node@26.6.3))
       babel-plugin-react-compiler:
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 1.0.0
       typescript:
         specifier: catalog:dev
@@ -328,7 +330,7 @@ importers:
   packages/example-solid-js:
     dependencies:
       solid-js:
-        specifier: catalog:dep
+        specifier: catalog:example
         version: 1.9.15
       vinocss:
         specifier: workspace:*
@@ -338,13 +340,13 @@ importers:
         specifier: catalog:dev
         version: 8.3.1(@types/node@26.6.3)
       vite-plugin-solid:
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 2.11.14(solid-js@1.9.15)(vite@8.3.1(@types/node@26.6.3))
 
   packages/example-solid-ts:
     dependencies:
       solid-js:
-        specifier: catalog:dep
+        specifier: catalog:example
         version: 1.9.15
       vinocss:
         specifier: workspace:*
@@ -363,20 +365,20 @@ importers:
         specifier: catalog:dev
         version: 8.3.1(@types/node@26.6.3)
       vite-plugin-solid:
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 2.11.14(solid-js@1.9.15)(vite@8.3.1(@types/node@26.6.3))
 
   packages/example-svelte-js:
     dependencies:
       svelte:
-        specifier: catalog:dep
+        specifier: catalog:example
         version: 5.57.1
       vinocss:
         specifier: workspace:*
         version: link:../vinocss
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 7.3.1(svelte@5.57.1)(vite@8.3.1(@types/node@26.6.3))
       vite:
         specifier: catalog:dev
@@ -385,17 +387,17 @@ importers:
   packages/example-svelte-ts:
     dependencies:
       svelte:
-        specifier: catalog:dep
+        specifier: catalog:example
         version: 5.57.1
       vinocss:
         specifier: workspace:*
         version: link:../vinocss
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 7.3.1(svelte@5.57.1)(vite@8.3.1(@types/node@26.6.3))
       '@tsconfig/svelte':
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 5.0.8
       '@types/node':
         specifier: catalog:dev
@@ -404,7 +406,7 @@ importers:
         specifier: workspace:*
         version: link:../devtools-tsconfig
       svelte-check:
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 4.7.6(picomatch@4.0.7)(svelte@5.57.1)(typescript@6.0.3)
       typescript:
         specifier: catalog:dev
@@ -419,11 +421,11 @@ importers:
         specifier: workspace:*
         version: link:../vinocss
       vue:
-        specifier: catalog:dep
+        specifier: catalog:example
         version: 3.5.43(typescript@6.0.3)
     devDependencies:
       '@vitejs/plugin-vue':
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 6.0.9(vite@8.3.1(@types/node@26.6.3))(vue@3.5.43(typescript@6.0.3))
       vite:
         specifier: catalog:dev
@@ -435,7 +437,7 @@ importers:
         specifier: workspace:*
         version: link:../vinocss
       vue:
-        specifier: catalog:dep
+        specifier: catalog:example
         version: 3.5.43(typescript@6.0.3)
     devDependencies:
       '@types/node':
@@ -445,7 +447,7 @@ importers:
         specifier: workspace:*
         version: link:../devtools-tsconfig
       '@vitejs/plugin-vue':
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 6.0.9(vite@8.3.1(@types/node@26.6.3))(vue@3.5.43(typescript@6.0.3))
       typescript:
         specifier: catalog:dev
@@ -454,7 +456,7 @@ importers:
         specifier: catalog:dev
         version: 8.3.1(@types/node@26.6.3)
       vue-tsc:
-        specifier: catalog:dev
+        specifier: catalog:example-dev
         version: 3.3.11(typescript@6.0.3)
 
   packages/runes:
@@ -1744,10 +1746,6 @@ packages:
     peerDependencies:
       solid-js: ^1.3
 
-  source-map-js@1.2.1:
-    resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
-    engines: {node: '>=0.10.0'}
-
   source-map-js@1.2.2:
     resolution: {integrity: sha512-KGj/8Y43x35aZVDtt+J4mK1hoLGHULMYfSkODJNQjNDC3oW1PqPoxMwo0pLUsWM/UEGzON/NxeHywEfNXNP3Vw==}
     engines: {node: '>=0.10.0'}
@@ -2418,7 +2416,7 @@ snapshots:
       '@vue/shared': 3.5.43
       entities: 7.0.1
       estree-walker: 2.0.2
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
 
   '@vue/compiler-dom@3.5.43':
     dependencies:
@@ -2435,7 +2433,7 @@ snapshots:
       estree-walker: 2.0.2
       magic-string: 0.30.21
       postcss: 8.5.28
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
 
   '@vue/compiler-ssr@3.5.43':
     dependencies:
@@ -2898,8 +2896,6 @@ snapshots:
       solid-js: 1.9.15
     transitivePeerDependencies:
       - supports-color
-
-  source-map-js@1.2.1: {}
 
   source-map-js@1.2.2: {}
 

@@ -8,15 +8,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "catalog:dep",
-    "react-dom": "catalog:dep",
+    "react": "catalog:example",
+    "react-dom": "catalog:example",
     "vinocss": "workspace:*"
   },
   "devDependencies": {
-    "@babel/core": "catalog:dev",
-    "@rolldown/plugin-babel": "catalog:dev",
-    "@vitejs/plugin-react": "catalog:dev",
-    "babel-plugin-react-compiler": "catalog:dev",
+    "@babel/core": "catalog:example-dev",
+    "@rolldown/plugin-babel": "catalog:example-dev",
+    "@vitejs/plugin-react": "catalog:example-dev",
+    "babel-plugin-react-compiler": "catalog:example-dev",
     "vite": "catalog:dev"
   }
 }

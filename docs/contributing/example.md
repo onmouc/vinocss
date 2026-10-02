@@ -19,14 +19,17 @@ It still follows the code, markdown, and TypeScript guides.
 ## Dependencies
 
 1. Depend on `vinocss` with the `workspace:*` range.
-2. Take every external version from a workspace catalog, as `catalog:dep` or `catalog:dev`.
-3. Keep a runtime framework in the catalog `dep` group, such as `react` or `solid-js`.
-4. Keep a build plugin, a type package, and a checker in the catalog `dev` group.
+2. Take every external version from a workspace catalog,
+   as `catalog:example` or `catalog:example-dev`.
+3. Keep a runtime framework in the catalog `example` group, such as `react` or `solid-js`.
+4. Keep a build plugin, a type package, and a checker in the catalog `example-dev` group.
 5. Use the latest release that stays compatible with Vite 8 and the other examples.
 6. Add a new external version to the catalog first, then reference it from the example.
 
 The workspace glob in `pnpm-workspace.yaml` already covers `packages/*`,
 so a new folder joins the workspace as soon as it holds a `package.json`.
+The `example` and `example-dev` groups hold a version only an example needs,
+so a version a library or a devtool also uses stays in `dep` or `dev`.
 
 ## Scripts
 
