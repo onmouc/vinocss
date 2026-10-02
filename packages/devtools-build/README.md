@@ -17,17 +17,6 @@ A library entry emits esm, cjs, and bundled declarations, each with a source map
 A binary entry emits esm only, and keeps any shebang the source sets.
 Both are minified, and a package points its `exports` and `bin` at the output files.
 
-## Order
-
-1. By default it builds a package after the workspace packages it depends on.
-2. It reads the workspace from `pnpm-workspace.yaml`, and only the pnpm layout is supported.
-3. It follows every dependency kind, so a build tool kept as a dev dependency is built first.
-4. It builds a dependency by running that package's `build:self` script,
-   which keeps any extra `--lib` or `--bin` entries the dependency declares.
-5. `--self` builds only this package, and it skips the workspace dependencies.
-6. `--workspace [dir]` builds every package in the workspace in dependency order.
-7. A dependency cycle is an error, since no build order exists for it.
-
 ## Cache
 
 1. Before a build it reads every source file and output file,
@@ -70,9 +59,10 @@ so an import such as `@/util` resolves during the build without an extra plugin.
 ## Exports
 
 1. The root export is `build`, the ordered build, plus `buildSelf` and `buildWorkspace`.
-2. `@vinocss/devtools-build/package` reads one node package, such as its manifest and dependencies.
-3. `@vinocss/devtools-build/workspace` detects a pnpm workspace, its packages, and the build order.
-4. The two subpaths keep the node and pnpm layers apart, so a caller can use either alone.
+2. The node package read is re-exported by
+   [@vinocss/devtools-package](../devtools-package/README.md).
+3. The pnpm workspace read is re-exported by
+   [@vinocss/devtools-workspace](../devtools-workspace/README.md).
 
 ## Usage
 

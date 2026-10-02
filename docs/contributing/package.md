@@ -55,7 +55,9 @@ so a fresh clone can run the root commands without a manual bootstrap.
 
 The devtools packages under `packages/` hold that shared tooling:
 [tsconfig](../../packages/devtools-tsconfig/README.md) for the shared compiler options,
-and [build](../../packages/devtools-build/README.md) for the build command.
+[build](../../packages/devtools-build/README.md) for the build command,
+[package](../../packages/devtools-package/README.md) for the node package read,
+and [workspace](../../packages/devtools-workspace/README.md) for the pnpm workspace read.
 
 ## Scripts
 

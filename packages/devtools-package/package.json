@@ -1,0 +1,26 @@
+{
+  "name": "@vinocss/devtools-package",
+  "version": "0.0.0",
+  "files": [
+    "out"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./out/index.d.ts",
+      "import": "./out/index.js",
+      "require": "./out/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "vinocss-build",
+    "build:self": "vinocss-build --self",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "@vinocss/devtools-build": "workspace:*"
+  },
+  "devDependencies": {
+    "@vinocss/devtools-tsconfig": "workspace:*"
+  }
+}

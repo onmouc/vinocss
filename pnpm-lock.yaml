@@ -198,7 +198,27 @@ importers:
         specifier: catalog:dev
         version: 5.0.3(@types/node@26.6.3)(vite@8.3.1(@types/node@26.6.3))
 
+  packages/devtools-package:
+    dependencies:
+      '@vinocss/devtools-build':
+        specifier: workspace:*
+        version: link:../devtools-build
+    devDependencies:
+      '@vinocss/devtools-tsconfig':
+        specifier: workspace:*
+        version: link:../devtools-tsconfig
+
   packages/devtools-tsconfig: {}
+
+  packages/devtools-workspace:
+    dependencies:
+      '@vinocss/devtools-build':
+        specifier: workspace:*
+        version: link:../devtools-build
+    devDependencies:
+      '@vinocss/devtools-tsconfig':
+        specifier: workspace:*
+        version: link:../devtools-tsconfig
 
   packages/example-react-js:
     dependencies:
