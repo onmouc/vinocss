@@ -1,8 +1,5 @@
 import { sep } from "node:path"
 
-const maxGlobLength = 256
-const maxWildcards = 8
-
 /**
  * Turn a workspace glob into a regular expression over a posix relative path.
  *
@@ -10,11 +7,17 @@ const maxWildcards = 8
  * 2. `**` matches across segments, and `**\/` also matches zero segments.
  * 3. Every other character is matched literally.
  *
- * A glob is a small pattern, so a glob that is too long or too wildcard-dense throws.
- * Adjacent wildcard quantifiers let a regex backtrack badly on a long path,
- * and a real workspace glob never needs more than a few.
+ * ## Throws
+ *
+ * A glob is a small pattern, so a wildcard-heavy one can make the regex
+ * backtrack badly on a long path. Two shapes are refused:
+ *
+ * - A glob longer than 256 characters.
+ * - A glob that holds more than 8 wildcards.
  */
 export function globToRegExp(glob: string): RegExp {
+  const maxGlobLength = 256
+  const maxWildcards = 8
   if (glob.length > maxGlobLength)
     throw new Error(`vinocss-build: workspace glob is too long: ${glob}`)
   let pattern = "^"

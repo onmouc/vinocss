@@ -27,7 +27,8 @@ since they greet human contributors.
 
 1. Add a shared rule as its own `docs/contributing/<name>.md`.
 2. Read each file on demand, and keep it to one topic.
-3. Keep meta rules out of files that always load, the entries and `index.md`.
+3. Keep meta rules out of files that always load, the entries and `index.md`;
+   put an always-on behavior in the `## Defaults` list of `AGENTS.md` instead.
 4. Route a new guide from `index.md` when a task can start with it;
    otherwise link it from the guide that reaches it, with its trigger condition.
 5. Keep `index.md` a short map, and let a guide link the narrower guides it needs.

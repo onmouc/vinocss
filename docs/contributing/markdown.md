@@ -26,7 +26,7 @@ A guide also follows [guidelines](./guidelines.md), which covers the guide syste
 
 ## Lists
 
-1. Prefer ordered lists.
-2. Use unordered only for a strictly unordered set, or for more than nine items.
-3. Keep three to nine items; fewer than three reads better as a paragraph.
-4. Keep each item to one line, and put extra detail in a paragraph below.
+1. Prefer an ordered list for a sequence of three or more items.
+2. Use an unordered list for fewer than three items, for a strictly unordered set,
+   or for a list that runs past nine items.
+3. Keep each item to one line, and put extra detail in a paragraph below.

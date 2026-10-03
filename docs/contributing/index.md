@@ -11,6 +11,6 @@ Read only the guide a task needs, and let a guide route you to a deeper one it n
 - [example](./example.md) - creating or editing an example app under packages/example-xxx.
 - [testing](./testing.md) - adding, changing, or running tests.
 - [review](./review.md) - code changed and the work is ready to check.
-- [commit](./commit.md) - a task is done and a message is due.
+- [commit](./commit.md) - before finishing any task, to write or update the message.
 - [merge](./merge.md) - a branch is ready to merge into the current branch.
 - [question](./question.md) - a request is unclear or improvable.

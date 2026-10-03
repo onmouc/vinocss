@@ -41,7 +41,11 @@ const dependencyFields = [
  * Read the `package.json` of a directory.
  *
  * 1. A missing manifest returns `undefined`, so a caller can test for a package.
- * 2. A present manifest is parsed as JSON, so a malformed file throws.
+ * 2. A present manifest is parsed as JSON.
+ *
+ * ## Throws
+ *
+ * - A manifest file with malformed JSON.
  */
 export function readManifest(dir: string): Manifest | undefined {
   const file = resolve(dir, "package.json")

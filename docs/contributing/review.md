@@ -19,7 +19,7 @@ Read when code changed and the work is ready to check.
 6. Once it passes, the change is ready to describe; write the message with [commit](./commit.md).
 
 A passing gate is the default signal that a change is safe to describe,
-and a message is due right after it passes.
+and a message is due before the task finishes, in every task.
 Until it passes, fix the tree instead of writing a message.
 
 ## Leftovers

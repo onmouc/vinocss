@@ -3,7 +3,8 @@
 Commit message rules.
 Contributors need the format; ai tools also follow the generation steps.
 Read when a change is ready to describe.
-A message is due by default once a review passes, so generate it without being asked.
+A message is due by default before a task finishes, in every turn, so generate or
+update it without being asked; only the user cancels it.
 
 ## Format
 
@@ -64,8 +65,12 @@ fix(vinocss): resolve alias on nested imports
 
 ## Generating (AI tools)
 
-1. Run the review in [review](./review.md), and continue once it passes.
-2. Generate the message, covering everything changed so far.
-3. Include your edits and the user's manual edits since the last task.
-4. Write to `.commit` at the workspace root, which git ignores.
-5. Do not commit; the user reviews the diff and message, then commits.
+1. Generate or update the message before finishing the task, in every task,
+   without being asked; only the user cancels this.
+2. Run the review in [review](./review.md) when source changed, so its result
+   confirms the tree the message describes.
+3. Generate the message, covering everything changed so far.
+4. Include your edits and the user's manual edits since the last task.
+5. Update the message on a later turn that changes more, so it matches the tree.
+6. Write to `.commit` at the workspace root, which git ignores.
+7. Do not commit; the user reviews the diff and message, then commits.

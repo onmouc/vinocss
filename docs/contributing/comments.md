@@ -15,10 +15,11 @@ Read when adding or editing a comment doc.
 
 1. Open with a single-line title that gives the brief intro.
 2. Follow it with paragraphs that carry the explanation.
-3. Use an ordered list when the detail is structural.
+3. Follow [markdown](./markdown.md) for the body, so a heading and a list
+   read the same here as in a guide.
 4. Use the language's comment-doc syntax, such as `/** */` in TypeScript.
 5. Keep the body as prose or a list, not a tag block.
-6. Break lines as a markdown file does, at clause boundaries.
+6. Give a section that must stand out, such as a thrown error, its own `##` heading.
 
 ## Audience
 
@@ -26,6 +27,17 @@ Read when adding or editing a comment doc.
 2. Include the principle behind it, so a user can apply it in different situations.
 3. A private comment doc speaks to developers who already read the source.
 4. Inline comments can also help developers inside a public API.
+
+## Errors
+
+1. Give a thrown error its own section, headed `## Throws`, so a caller meets
+   the contract before the body prose.
+2. List each throw as its own item, and name the input that triggers it.
+3. Give the boundary value, such as a maximum length or count,
+   so a caller can avoid the error without reading the source.
+4. Carry a limit the code enforces into the doc,
+   since a constant the code keeps private is invisible to a caller.
+5. State a miss too, such as an `undefined` return; a plain return stays in prose.
 
 Comment docs are a help, not a transcript.
 A reader and an AI tool both read the code,

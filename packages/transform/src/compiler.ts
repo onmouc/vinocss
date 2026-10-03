@@ -76,10 +76,13 @@ export interface CompileResult {
 /**
  * Compile VinoCSS calls across a tree of modules.
  *
- * One compiler keeps a parsed program per module and a resolved value per
- * const, so a diamond import parses and resolves each file once. A value is
- * only ever a static literal, a record, a `var$` tree, or a class name; any
- * expression that would need to run first throws as a compile-time error.
+ * One compiler parses each module once and resolves each value once,
+ * and a value must be a static literal, a record, a `var$` tree, or a class name.
+ *
+ * ## Throws
+ *
+ * - A `var$`, `class$`, or `style$` argument that would need to run first.
+ * - A name, selector, or import that is not a static value.
  */
 export class Compiler {
   private readonly resolver: Resolver

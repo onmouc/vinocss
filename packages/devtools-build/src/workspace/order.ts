@@ -36,7 +36,10 @@ export function workspaceDependencies(
  *
  * The result holds every dependency before the package that needs it,
  * and it leaves the package out.
- * A dependency cycle throws, since a build order cannot exist for it.
+ *
+ * ## Throws
+ *
+ * - A dependency cycle, since a build order cannot exist for it.
  */
 export function dependencyOrder(
   workspace: Workspace,
@@ -51,7 +54,10 @@ export function dependencyOrder(
  *
  * Each dependency comes before the package that needs it.
  * Independent packages follow the name order, so a build stays deterministic.
- * A dependency cycle throws, since a build order cannot exist for it.
+ *
+ * ## Throws
+ *
+ * - A dependency cycle, since a build order cannot exist for it.
  */
 export function buildOrder(workspace: Workspace): WorkspacePackage[] {
   const seeds = workspace.packages.toSorted((a, b) => a.name.localeCompare(b.name))
