@@ -28,8 +28,13 @@ catalogs:
   example-dev:
     "@babel/core": ^7.29.7
     "@rolldown/plugin-babel": ^0.2.4
+    "@rsbuild/core": ^2.2.11
     "@sveltejs/vite-plugin-svelte": ^7.3.1
     "@vitejs/plugin-react": ^6.1.1
     "@vitejs/plugin-vue": ^6.0.9
     babel-plugin-react-compiler: ^1.0.0
     vite-plugin-solid: ^2.11.14
+
+  example-react16:
+    react: ^16.14.0
+    react-dom: ^16.14.0

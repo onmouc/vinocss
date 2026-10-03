@@ -38,8 +38,9 @@ so a new tool can import a read instead of writing its own.
 
 ## Examples
 
-`@vinocss/example-*` (`packages/example-*`) are small private apps,
-one per framework and language: React, Solid, Svelte, and Vue, each in JavaScript and TypeScript.
+`@vinocss/example-*` (`packages/example-*`) are small private apps:
+React, Solid, Svelte, and Vue, each in JavaScript and TypeScript,
+plus a React 16 CommonJS app on Rsbuild for the legacy setup.
 They show how the `var$`, `class$`, and `style$` calls are written,
 and they are read for that shape rather than run, since the compiler is not built yet.
 

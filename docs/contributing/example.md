@@ -33,12 +33,13 @@ so a version a library or a devtool also uses stays in `dep` or `dev`.
 
 ## Scripts
 
-1. `dev` runs `vite`, and `preview` runs `vite preview`.
-2. Do not add a `build` script yet; the compiler it needs does not exist.
-3. Add a `typecheck` script only to a typed app.
-4. Use `tsc -b` for a plain TypeScript app.
-5. Use `vue-tsc -b` for a Vue app, and `svelte-check` on the app config for a Svelte app.
-6. Do not add a test script; an example shows an api, it does not test one.
+1. `dev` runs `vite` in a module example, and `rsbuild dev` in a CommonJS one.
+2. `preview` runs the matching preview command, `vite preview` or `rsbuild preview`.
+3. Do not add a `build` script yet; the compiler it needs does not exist.
+4. Add a `typecheck` script only to a typed app.
+5. Use `tsc -b` for a plain TypeScript app.
+6. Use `vue-tsc -b` for a Vue app, and `svelte-check` on the app config for a Svelte app.
+7. Do not add a test script; an example shows an api, it does not test one.
 
 A `build` script returns once the compiler lands.
 Until then it would run the placeholder api, which throws by design.
@@ -59,7 +60,7 @@ and it points `svelte-check` at `tsconfig.app.json`.
 
 ## Vite
 
-1. Every example uses Vite 8 for dev and preview.
+1. Every module example uses Vite 8 for dev and preview.
 2. Keep one `vite.config` with the plugin the framework needs.
 3. Use `@vitejs/plugin-react` for React, and enable the React compiler.
 4. Use `@vitejs/plugin-vue` for Vue, and keep the app in single-file components.
@@ -74,12 +75,26 @@ React enables the compiler through the Babel preset,
 so a React example also installs `@rolldown/plugin-babel`,
 `babel-plugin-react-compiler`, and `@babel/core`.
 
+## CommonJS
+
+A `*-commonjs` example targets a legacy app, so it pins an older framework,
+such as React 16, and swaps Vite for Rsbuild.
+
+1. Omit `"type": "module"`, so `.js` and `.jsx` files stay CommonJS.
+2. Use `require` and `module.exports` instead of `import` and `export`.
+3. Take the framework from a catalog group of its own, such as `example-react16`.
+4. Add `@rsbuild/core` from `example-dev`, and keep no Vite dependency.
+5. Set `source.entry` to `./src/main.jsx` and `source.tsconfigPath` to `jsconfig.json`.
+6. Set `html.template` to `./index.html`, so Rsbuild injects the entry it bundles.
+7. Write the build to `out` with `output.distPath.root`.
+8. Keep the VinoCSS plugin off, like every example for now.
+
 ## Entry
 
 1. Every example mounts its root into `document.body`.
 2. Let the framework mount call take `document.body` as its target.
 3. Keep the entry thin; let the app component carry the styles.
-4. Include an `index.html` that loads the entry as a module.
+4. Include an `index.html` for the entry, as a module under Vite or a template under Rsbuild.
 
 ## Styles
 
