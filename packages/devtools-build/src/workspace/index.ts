@@ -1,5 +1,5 @@
 export { detectWorkspace } from "@/workspace/detect"
-export { findWorkspaceRoot, readWorkspaceGlobs } from "@/workspace/config"
+export { findWorkspaceRoot, readWorkspaceGlobs, workspaceGlobs } from "@/workspace/config"
 export { globToRegExp, toPosix } from "@/workspace/glob"
 export {
   buildOrder,

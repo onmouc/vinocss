@@ -45,6 +45,17 @@ export function readWorkspaceGlobs(root: string): string[] {
   return globs
 }
 
+/**
+ * Read the `packages` globs of the pnpm workspace above a path.
+ *
+ * It finds the workspace root, then reads its globs,
+ * and it returns an empty list when no workspace file is found above the path.
+ */
+export function workspaceGlobs(from = process.cwd()): string[] {
+  const root = findWorkspaceRoot(from)
+  return root ? readWorkspaceGlobs(root) : []
+}
+
 function unquote(value: string): string {
   const quoted =
     (value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))
