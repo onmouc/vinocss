@@ -9,7 +9,7 @@ const prefix = "vinocss-license:"
 function main(): void {
   const program = new Command()
     .name("vinocss-license")
-    .description("sync the workspace root license into every child package")
+    .description("sync the workspace root license into every published child package")
     .option("--exclude <names>", "comma separated packages to skip, repeatable", collect, [])
     .action((options: Options) => run(options))
   program.parse()
@@ -31,7 +31,7 @@ function run(options: Options): void {
 }
 
 function describe(result: PackageResult): string {
-  const why = result.action === "excluded" ? "excluded" : "already current"
+  const why = result.action === "unchanged" ? "already current" : result.action
   return `skipped ${result.name} (${why})`
 }
 

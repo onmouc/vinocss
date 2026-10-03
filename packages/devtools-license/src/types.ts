@@ -3,9 +3,10 @@
  *
  * `written` means the license was copied from the workspace root,
  * `unchanged` means the package already matched it,
+ * `private` means the package is private and never published,
  * and `excluded` means a selector skipped the package.
  */
-export type PackageAction = "written" | "unchanged" | "excluded"
+export type PackageAction = "written" | "unchanged" | "private" | "excluded"
 
 /**
  * One child package the sync considered, with the action it took.

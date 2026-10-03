@@ -18,10 +18,11 @@ beforeEach(() => {
 
 afterEach(() => rmSync(dir, { recursive: true, force: true }))
 
-function addPackage(name: string, scope = "vinocss"): string {
+function addPackage(name: string, scope = "vinocss", isPrivate = false): string {
   const folder = join(dir, "packages", name)
   mkdirSync(folder, { recursive: true })
-  writeFileSync(join(folder, "package.json"), JSON.stringify({ name: `@${scope}/${name}` }))
+  const manifest = { name: `@${scope}/${name}`, private: isPrivate || undefined }
+  writeFileSync(join(folder, "package.json"), JSON.stringify(manifest))
   return folder
 }
 
@@ -76,5 +77,22 @@ describe("syncLicenses", () => {
     expect(warn).toHaveBeenCalledOnce()
     expect(result.root).toBeUndefined()
     rmSync(outside, { recursive: true, force: true })
+  })
+})
+
+describe("syncLicenses private packages", () => {
+  it("skips a private package and writes the rest", () => {
+    addPackage("example-x", "vinocss", true)
+    const result = syncLicenses({ cwd: dir })
+    expect(action(result, "@vinocss/example-x")).toBe("private")
+    expect(() => readFileSync(join(dir, "packages/example-x/LICENSE"))).toThrow()
+  })
+
+  it("leaves a license already sitting on a private package alone", () => {
+    const folder = addPackage("example-x", "vinocss", true)
+    writeFileSync(join(folder, "LICENSE"), "old\n")
+    const result = syncLicenses({ cwd: dir })
+    expect(action(result, "@vinocss/example-x")).toBe("private")
+    expect(readFileSync(join(folder, "LICENSE"), "utf8")).toBe("old\n")
   })
 })

@@ -8,11 +8,12 @@ import type { LicenseOptions, LicenseReporter, LicenseResult, PackageResult } fr
 const licenseFile = "LICENSE"
 
 /**
- * Sync the workspace root license into every child package.
+ * Sync the workspace root license into every published child package.
  *
  * It detects the pnpm workspace from `cwd`, reads `LICENSE` at its root,
- * and copies that text into each child package.
- * A package that already matches is left untouched,
+ * and copies that text into each non-private child package.
+ * A private package is skipped, since the root license already covers it,
+ * and a package that already matches is left untouched,
  * so a repeated run stays cheap and no file is rewritten.
  * An excluded package is skipped, and the result records which case applied.
  */
@@ -46,6 +47,11 @@ function syncPackage(
 ): PackageResult {
   if (isExcluded(pkg, root, exclude)) {
     const result: PackageResult = { name: pkg.name, dir: pkg.dir, action: "excluded" }
+    report.skip?.(result)
+    return result
+  }
+  if (pkg.manifest.private === true) {
+    const result: PackageResult = { name: pkg.name, dir: pkg.dir, action: "private" }
     report.skip?.(result)
     return result
   }
