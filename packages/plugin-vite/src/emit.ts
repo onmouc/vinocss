@@ -91,3 +91,17 @@ export function propertyKey(property: AstNode, evaluate: Evaluate): string {
   }
   return stringOf(evaluate(property.key as AstNode))
 }
+
+/**
+ * Read a `style$` selector key, which must be a literal.
+ *
+ * Unlike a style property key, a selector is never computed: a `style$` entry
+ * names a global selector such as `body` or `:root`, so a computed or dynamic
+ * key has no class name to fall back on and is a compile-time error.
+ */
+export function selectorKey(property: AstNode, moduleId: string): string {
+  if (property.computed) throw new Error(`vinocss: style$ needs a literal selector in ${moduleId}`)
+  const name = identifierName(property.key) ?? literalString(property.key)
+  if (name === undefined) throw new Error(`vinocss: style$ needs a literal selector in ${moduleId}`)
+  return name
+}

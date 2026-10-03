@@ -31,15 +31,15 @@ export interface Program {
   calls: AstNode[]
 }
 
-const runes = new Set(["var$", "class$"])
+const runes = new Set(["var$", "class$", "style$"])
 
 /**
  * Read the static surface of a module from its source.
  *
  * The whole program is walked once: a `const` binds its name to the init
- * expression, and every `var$` or `class$` call is collected wherever it sits,
- * including one inline in a template or a JSX attribute. The top level is then
- * read for imports and exports, which only ever sit there.
+ * expression, and every `var$`, `class$`, or `style$` call is collected
+ * wherever it sits, including one inline in a template or a JSX attribute.
+ * The top level is then read for imports and exports, which only ever sit there.
  */
 export function parseProgram(source: string, id: string): Program {
   const root = parseModule(source, id)

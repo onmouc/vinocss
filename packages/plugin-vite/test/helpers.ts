@@ -28,11 +28,11 @@ export function compile(files: Record<string, string>, id: string): CompileResul
 }
 
 /**
- * Join source lines into one fixture, so a long snippet stays readable here as
- * it would read as a file.
+ * Join source lines, so a long snippet stays readable here as it would read as
+ * a file.
  */
-export function fixture(...lines: string[]): string {
-  return lines.join("\n")
+export function lines(...parts: string[]): string {
+  return parts.join("\n")
 }
 
 function normalize(path: string): string {

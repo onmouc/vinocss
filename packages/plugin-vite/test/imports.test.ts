@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { compile, fixture } from "./helpers"
+import { compile, lines } from "./helpers"
 
 const varImport = 'import { var$ } from "vinocss"\n'
 
@@ -7,7 +7,7 @@ describe("imported consts", () => {
   it("reads a const from another file", () => {
     const files = {
       "src/theme.ts": varImport + "export const theme = var$({ ink: null })\n",
-      "src/app.ts": fixture(
+      "src/app.ts": lines(
         'import { class$ } from "vinocss"',
         'import { theme } from "./theme"',
         "export const card = class$({ color: theme.ink })",
@@ -24,7 +24,7 @@ describe("re-exports", () => {
     const files = {
       "src/theme.ts": varImport + 'export const ink = var$("ink")\n',
       "src/index.ts": 'export * from "./theme"\n',
-      "src/app.ts": fixture(
+      "src/app.ts": lines(
         'import { class$ } from "vinocss"',
         'import { ink } from "./index"',
         "export const card = class$({ color: ink })",
@@ -39,7 +39,7 @@ describe("re-exports", () => {
       "src/a.ts": 'export * from "./theme"\n',
       "src/b.ts": 'export * from "./theme"\n',
       "src/index.ts": 'export * from "./a"\nexport * from "./b"\n',
-      "src/app.ts": fixture(
+      "src/app.ts": lines(
         'import { class$ } from "vinocss"',
         'import { ink } from "./index"',
         "export const card = class$({ color: ink })",
@@ -51,7 +51,7 @@ describe("re-exports", () => {
   it("reads a default export", () => {
     const files = {
       "src/theme.ts": varImport + "export default var$({ ink: null })\n",
-      "src/app.ts": fixture(
+      "src/app.ts": lines(
         'import { class$ } from "vinocss"',
         'import theme from "./theme"',
         "export const card = class$({ color: theme.ink })",
@@ -64,12 +64,12 @@ describe("re-exports", () => {
 describe("static failures", () => {
   it("reports a cyclic constant instead of looping", () => {
     const files = {
-      "src/a.ts": fixture(
+      "src/a.ts": lines(
         'import { var$ } from "vinocss"',
         'import { b } from "./b"',
         "export const a = var$(b)",
       ),
-      "src/b.ts": fixture(
+      "src/b.ts": lines(
         'import { var$ } from "vinocss"',
         'import { a } from "./a"',
         "export const b = var$(a)",
@@ -79,7 +79,7 @@ describe("static failures", () => {
   })
 
   it("reports an unresolvable import", () => {
-    const app = fixture(
+    const app = lines(
       'import { class$ } from "vinocss"',
       'import { theme } from "missing"',
       "export const card = class$({ color: theme.ink })",

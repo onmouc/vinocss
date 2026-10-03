@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { Compiler } from "@/compiler"
-import { fixture, memoryHost } from "./helpers"
+import { lines, memoryHost } from "./helpers"
 
 describe("compiler cache", () => {
   it("recompiles a changed class with a fresh rule", () => {
@@ -22,7 +22,7 @@ describe("compiler cache", () => {
   it("re-reads a changed imported const", () => {
     const files: Record<string, string> = {
       "src/theme.ts": 'import { var$ } from "vinocss"\nexport const ink = var$("one")\n',
-      "src/app.ts": fixture(
+      "src/app.ts": lines(
         'import { class$ } from "vinocss"',
         'import { ink } from "./theme"',
         "export const c = class$({ color: ink })",

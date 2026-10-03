@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { vinocss } from "@/index"
-import { fixture } from "./helpers"
+import { lines } from "./helpers"
 
 type Transform = (code: string, id: string) => { code: string } | null
 type ResolveId = (id: string) => string | null
@@ -26,7 +26,7 @@ describe("virtual css module", () => {
   it("resolves and loads the generated css", () => {
     const plugin = vinocss()
     const transform = plugin.transform as unknown as Transform
-    const source = fixture(
+    const source = lines(
       'import { class$ } from "vinocss"',
       'export const card = class$({ color: "red" })',
     )

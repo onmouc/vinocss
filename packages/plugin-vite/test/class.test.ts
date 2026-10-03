@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest"
-import { compile, fixture } from "./helpers"
+import { compile, lines } from "./helpers"
 
 describe("class$ emission", () => {
   it("emits a rule and a hashed name", () => {
-    const source = fixture(
+    const source = lines(
       'import { class$ } from "vinocss"',
       "export const card = class$({",
       '  padding: "1.5rem",',
@@ -17,7 +17,7 @@ describe("class$ emission", () => {
   })
 
   it("keeps a fallback list, a nested selector, and an at-rule", () => {
-    const source = fixture(
+    const source = lines(
       'import { class$ } from "vinocss"',
       "export const card = class$({",
       '  background: ["#fff", "oklch(0.6 0.2 264)"],',
@@ -34,7 +34,7 @@ describe("class$ emission", () => {
   })
 
   it("rejects a dynamic value", () => {
-    const source = fixture(
+    const source = lines(
       'import { class$ } from "vinocss"',
       "let dynamic = 1",
       "export const card = class$({ color: dynamic })",
@@ -45,7 +45,7 @@ describe("class$ emission", () => {
 
 describe("class$ references", () => {
   it("substitutes a bare var$ name and leaves the wrap to the author", () => {
-    const source = fixture(
+    const source = lines(
       'import { class$, var$ } from "vinocss"',
       "const theme = var$({ ink: null })",
       "export const card = class$({ color: theme.ink })",
@@ -55,7 +55,7 @@ describe("class$ references", () => {
   })
 
   it("follows a nested member chain", () => {
-    const source = fixture(
+    const source = lines(
       'import { class$, var$ } from "vinocss"',
       "export const theme = var$({ group: { ink: null } })",
       "export const card = class$({ color: theme.group.ink })",
@@ -64,7 +64,7 @@ describe("class$ references", () => {
   })
 
   it("wraps a var$ name with the v() helper", () => {
-    const source = fixture(
+    const source = lines(
       'import { class$, var$ } from "vinocss"',
       'import { v } from "vinocss/utils"',
       "const theme = var$({ ink: null })",
@@ -75,7 +75,7 @@ describe("class$ references", () => {
   })
 
   it("applies the utils helpers", () => {
-    const source = fixture(
+    const source = lines(
       'import { class$ } from "vinocss"',
       'import { px, rem, v } from "vinocss/utils"',
       'const ink = v("--brand")',

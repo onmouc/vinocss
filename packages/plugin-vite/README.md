@@ -2,13 +2,14 @@
 
 The Vite plugin that compiles VinoCSS source.
 
-It reads every `var$` and `class$` call in a module,
+It reads every `var$`, `class$`, and `style$` call in a module,
 resolves the names and styles they describe at build time,
 and rewrites each call into the plain value it stands for.
 A `var$` call becomes the custom property names it declares,
 and a `class$` call becomes one hashed class name,
 with its rule emitted into a virtual css module the file then imports.
-The runtime sees no VinoCSS call, so the bundle carries only the css it uses.
+A `style$` call becomes nothing, with its global rules emitted into the same
+virtual css module. The runtime sees no VinoCSS call, so the bundle carries only the css it uses.
 
 ## Usage
 
@@ -50,8 +51,17 @@ so a diamond import parses and resolves each file once.
 5. A nested selector or at-rule nests under the generated class,
    with `&` standing for that class.
 
+## Global styles
+
+1. `style$` emits one rule per selector and returns nothing.
+2. Its selectors and rules join the same virtual css module as the file's classes.
+3. The selector key is a literal, such as `body` or `:root`; a computed key is an error.
+4. Each value is a style object with the same rules as the `class$` argument.
+5. A computed style property key, such as a `var$` leaf, still resolves inside the object.
+6. The transformed file keeps the virtual css import when either a class or a rule exists.
+
 ## Status
 
-1. `var$` and `class$` compile; `style$` is not handled yet.
+1. `var$`, `class$`, and `style$` compile.
 2. Styles are one class per call, with no atomic css or dedupe across files.
 3. A framework file is skipped, so only plain TypeScript and JavaScript transform.

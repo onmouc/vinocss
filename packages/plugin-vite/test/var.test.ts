@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { compile, fixture } from "./helpers"
+import { compile, lines } from "./helpers"
 
 const varImport = 'import { var$ } from "vinocss"\n'
 
@@ -29,7 +29,7 @@ describe("var$ minted names", () => {
 
 describe("var$ computed names", () => {
   it("joins a template literal", () => {
-    const source = fixture(
+    const source = lines(
       'import { var$ } from "vinocss"',
       'const brand = "brand"',
       "const accent = var$(`${brand}-accent`)",

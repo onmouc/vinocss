@@ -1,7 +1,7 @@
 import { type AstNode, identifierName, unwrap } from "@/ast"
 import { applyEdits, type Edit, mintVar, outermost, varTreeToJs } from "@/codegen"
 import { contentHash } from "@/css"
-import { emitObject } from "@/emit"
+import { emitObject, selectorKey } from "@/emit"
 import {
   type EvalExpr,
   evalBinary,
@@ -55,9 +55,9 @@ export const unitHelpers = new Set([
 /**
  * The result of compiling one module.
  *
- * `code` is the rewritten source, `css` is the rules its `class$` calls
- * produced, and `virtualId` is the module a caller should resolve to load
- * that css, or null when the module generated no class.
+ * `code` is the rewritten source, `css` is the rules its `class$` and `style$`
+ * calls produced, and `virtualId` is the module a caller should resolve to load
+ * that css, or null when the module generated no rule.
  */
 export interface CompileResult {
   code: string
@@ -86,9 +86,9 @@ export class Compiler {
   /**
    * Compile a module and return its rewritten code and generated css.
    *
-   * Every `var$` call becomes the names it resolved to and every `class$` call
-   * becomes its class name, with one css import added when the module
-   * generated any rule.
+   * Every `var$` call becomes the names it resolved to, every `class$` call
+   * becomes its class name, and every `style$` call is dropped, with one css
+   * import added when the module generated any rule.
    */
   compile(source: string, id: string): CompileResult {
     this.resolver.reset()
@@ -124,6 +124,7 @@ export class Compiler {
     const name = identifierName(call.callee)
     if (name === "var$") return varTreeToJs(this.evalVarCall(call, id))
     if (name === "class$") return JSON.stringify(this.evalClassCall(call, id))
+    if (name === "style$") return this.evalStyleCall(call, id)
     throw new Error(`vinocss: unsupported call ${name ?? "expression"} in ${id}`)
   }
 
@@ -227,10 +228,41 @@ export class Compiler {
     const className = `v${contentHash(body)}`
     const css = body.replaceAll("&", `.${className}`)
     this.classes.set(cacheKey, { className, css })
-    const rules = this.moduleRules.get(moduleId) ?? new Map<number, string>()
-    rules.set(call.start, css)
-    this.moduleRules.set(moduleId, rules)
+    this.addRule(moduleId, call.start, css)
     return className
+  }
+
+  private evalStyleCall(call: AstNode, moduleId: string): string {
+    const arg = call.arguments?.[0]
+    const object = arg ? unwrap(arg) : undefined
+    if (!object || object.type !== "ObjectExpression")
+      throw new Error(`vinocss: style$ needs a selector object in ${moduleId}`)
+    const rules: string[] = []
+    for (const property of object.properties ?? []) {
+      if (
+        property.type !== "Property" ||
+        property.method ||
+        (property.kind && property.kind !== "init")
+      ) {
+        throw new Error(`vinocss: style$ needs plain selectors in ${moduleId}`)
+      }
+      const selector = selectorKey(property, moduleId)
+      const value = unwrap(property.value as AstNode)
+      if (value.type !== "ObjectExpression")
+        throw new Error(`vinocss: style$ selector ${selector} needs a style object in ${moduleId}`)
+      const rule = emitObject(selector, value, moduleId, (expr) => this.evalExpr(expr, moduleId))
+      if (rule !== "") rules.push(rule)
+    }
+    const css = rules.join("")
+    if (css === "") throw new Error(`vinocss: style$ needs at least one rule in ${moduleId}`)
+    this.addRule(moduleId, call.start, css)
+    return "void 0"
+  }
+
+  private addRule(moduleId: string, start: number, css: string): void {
+    const rules = this.moduleRules.get(moduleId) ?? new Map<number, string>()
+    rules.set(start, css)
+    this.moduleRules.set(moduleId, rules)
   }
 
   private evalUnit(name: string, node: AstNode, moduleId: string): string {
