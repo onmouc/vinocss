@@ -17,6 +17,13 @@ Read when creating a package or changing its build.
 4. `src/index.ts` is the entry and the package's public surface.
 5. `README.md` opens with a short intro in the style of the root.
 
+## Devtools
+
+1. A `devtools-*` package is a tool another project may reuse,
+   so the root [README](../../README.md) gives it a brief intro too.
+2. When you add a devtool, add its line and link to that `## Devtools` list.
+3. When you remove or rename one, update or drop its line to match.
+
 ## Dependencies
 
 Depend on a sibling child package with the `workspace:*` range.
