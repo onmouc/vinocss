@@ -1,27 +1,40 @@
 import type { Plugin } from "vite"
+import { Compiler } from "@/compiler"
+import { createNodeHost } from "@/host"
 
-/**
- * Transform a VinoCSS source file.
- *
- * The placeholder returns the source unchanged, so a later compiler can take
- * this spot without moving the plugin entry.
- */
-export function transform(source: string): string {
-  return source
-}
+const virtualPrefix = "virtual:vinocss/"
+const nullByte = "\0"
+const target = /\.(?:[cm]?[jt]sx?)$/u
 
 /**
  * Create the VinoCSS Vite plugin.
  *
- * The plugin is a placeholder. It claims the transform of every module and
- * returns the source unchanged, so an app can wire it into a Vite config now
- * and the compiler can replace the transform later.
+ * The plugin resolves a `var$` call to the custom property names it declares
+ * and a `class$` call to a hashed class name, freeing css into one virtual
+ * module per source file. The source gains an import for that module, so the
+ * bundler owns the css while the module keeps no VinoCSS runtime.
+ *
+ * One compiler instance backs the plugin, so a module is parsed once and an
+ * imported const is resolved once across the whole build.
  */
 export function vinocss(): Plugin {
+  const compiler = new Compiler(createNodeHost())
   return {
     name: "@vinocss/plugin-vite",
-    transform(source) {
-      return { code: transform(source), map: null }
+    resolveId(id) {
+      if (id.startsWith(virtualPrefix) && id.endsWith(".css")) return `${nullByte}${id}`
+      return null
+    },
+    load(id) {
+      if (!id.startsWith(`${nullByte}${virtualPrefix}`)) return null
+      return compiler.readCss(id.slice(nullByte.length))
+    },
+    transform(source, id) {
+      const file = id.split("?")[0]
+      if (!target.test(file)) return null
+      const result = compiler.compile(source, file)
+      if (result.code === source) return null
+      return { code: result.code, map: null }
     },
   }
 }

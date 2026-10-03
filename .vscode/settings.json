@@ -27,6 +27,7 @@
   // Code spell checker (extensions).
   "cSpell.ignorePaths": ["pnpm-lock.yaml"],
   "cSpell.words": [
+    "codegen",
     "cqmax",
     "cqmin",
     "csstype",
@@ -34,6 +35,7 @@
     "oklch",
     "pathspec",
     "pathspecs",
+    "quasis",
     "subpaths",
     "sveltejs",
     "uncompiled",

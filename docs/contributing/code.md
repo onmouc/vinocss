@@ -22,6 +22,12 @@ One blank line is enough, since a second adds no meaning.
 2. Split a file when it grows large, or when a concern stands apart.
 3. Avoid a file that holds only one small function.
 
+## Names
+
+1. Name a variable, a parameter, and a constant in camelCase.
+2. Treat a module-level `const` the same; a static binding is still a variable.
+3. Do not use `SCREAMING_CASE`, since it marks nothing the type does not.
+
 ## Order
 
 1. Put the core point of a file as early as the code allows.

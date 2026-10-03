@@ -45,3 +45,5 @@ and the root project glob picks up the package as soon as its config appears.
 4. Cover the edge cases next to the happy path.
 5. Pass a test double for a reporter and assert its calls, per [log](./log.md).
 6. Keep the suite fast; a slow test tends to stop being run.
+7. Break a long fixture across lines, with `+` or a small joining helper,
+   one source line per string line, as a reader would meet the file.

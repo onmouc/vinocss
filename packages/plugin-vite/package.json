@@ -18,6 +18,9 @@
     "test": "vitest run",
     "typecheck": "tsc -b"
   },
+  "dependencies": {
+    "oxc-parser": "^0.152.0"
+  },
   "devDependencies": {
     "@vinocss/devtools-build": "workspace:*",
     "@vinocss/devtools-tsconfig": "workspace:*",
