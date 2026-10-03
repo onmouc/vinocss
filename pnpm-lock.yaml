@@ -423,10 +423,35 @@ importers:
 
   packages/plugin-vite:
     dependencies:
+      '@vinocss/transform':
+        specifier: workspace:*
+        version: link:../transform
+    devDependencies:
+      '@vinocss/devtools-build':
+        specifier: workspace:*
+        version: link:../devtools-build
+      '@vinocss/devtools-lines':
+        specifier: workspace:*
+        version: link:../devtools-lines
+      '@vinocss/devtools-tsconfig':
+        specifier: workspace:*
+        version: link:../devtools-tsconfig
+      vite:
+        specifier: catalog:dev
+        version: 8.3.1(@types/node@26.6.3)
+      vitest:
+        specifier: catalog:dev
+        version: 5.0.3(@types/node@26.6.3)(vite@8.3.1(@types/node@26.6.3))
+
+  packages/transform:
+    dependencies:
       oxc-parser:
         specifier: ^0.152.0
         version: 0.152.0
     devDependencies:
+      '@types/node':
+        specifier: catalog:dev
+        version: 26.6.3
       '@vinocss/devtools-build':
         specifier: workspace:*
         version: link:../devtools-build

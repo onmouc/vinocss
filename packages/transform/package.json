@@ -1,5 +1,5 @@
 {
-  "name": "@vinocss/plugin-vite",
+  "name": "@vinocss/transform",
   "version": "0.0.0",
   "files": [
     "out"
@@ -19,16 +19,14 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
-    "@vinocss/transform": "workspace:*"
+    "oxc-parser": "^0.152.0"
   },
   "devDependencies": {
+    "@types/node": "catalog:dev",
     "@vinocss/devtools-build": "workspace:*",
     "@vinocss/devtools-lines": "workspace:*",
     "@vinocss/devtools-tsconfig": "workspace:*",
     "vite": "catalog:dev",
     "vitest": "catalog:dev"
-  },
-  "peerDependencies": {
-    "vite": "^8"
   }
 }

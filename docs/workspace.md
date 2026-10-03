@@ -14,6 +14,14 @@ Before you build a helper, a read, or a config, check this list for one you can 
 The runes and the helpers ship from the one package,
 so an app installs `vinocss` once and imports each piece from it.
 
+## Plugins
+
+`@vinocss/transform` (`packages/transform`) is the compiler
+that rewrites a module and frees its css,
+and `@vinocss/plugin-vite` (`packages/plugin-vite`) wraps it as a Vite plugin.
+The compile logic lives in `@vinocss/transform`,
+so a second bundler plugin can wrap the same engine instead of copying it.
+
 ## Devtools
 
 1. `@vinocss/devtools-build` wraps the rolldown build behind the `vinocss-build` command,
