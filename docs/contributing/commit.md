@@ -20,7 +20,7 @@ A message is due by default once a review passes, so generate it without being a
 1. Name a child package with a short name, such as `vinocss` or `devtools/tsconfig`.
 2. That name also covers the readme and guides inside the package.
 3. Use `workspace` for the root README, the rest of `docs/`, and workspace config.
-4. Use `contributing` for `CONTRIBUTING.md`, `AGENTS.md`, and the `docs/contributing/` folder.
+4. Use `contributing` for `CONTRIBUTING.md`, `AGENTS.md`, and the `docs/contributing` page and folder.
 
 ## Keywords
 

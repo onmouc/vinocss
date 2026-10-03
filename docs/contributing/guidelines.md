@@ -5,18 +5,21 @@ Read only when adding or reshaping guides, not for ordinary tasks.
 
 ## Layout
 
-1. `AGENTS.md` and `CONTRIBUTING.md` are the entries, one per audience.
-2. `README.md` is for users rather than contributors.
-3. `docs/contributing/index.md` maps the guides a task can start from and their conditions.
-4. Guides live in `docs/contributing/`, one topic per file, named with one short word.
+1. `docs/` is the documentation set, and a future site renders only that folder.
+2. Files outside `docs/`, such as `README.md` and `CONTRIBUTING.md`, serve the source repo.
+3. `AGENTS.md` and `CONTRIBUTING.md` are the outer entries, one per audience.
+4. `docs/contributing.md` is the contributor entry inside the docs set, and it greets a reader.
+5. `docs/contributing/index.md` maps the guides a task can start from and their conditions.
+6. Guides live in `docs/contributing/`, one topic per file, named with one short word.
 
-`CONTRIBUTING.md` may read more warmly than the other files, since it greets human contributors.
+`CONTRIBUTING.md` and `docs/contributing.md` may read more warmly than the rest,
+since they greet human contributors.
 `AGENTS.md` stays a bootstrap only; subject rules, including conduct, live in the routed guides.
 
 ## Links
 
-1. An entry uses root-relative paths, such as `docs/contributing/commit.md`.
-2. Any other guide uses a markdown link, such as [commit](./commit.md).
+1. An outer entry uses a root-relative path, such as `docs/contributing.md`.
+2. A docs page uses a relative markdown link, such as [commit](./commit.md).
 3. `index.md` routes only the guides a task can start from.
 4. A deeper guide hangs off the guide that reaches it, with its trigger condition.
 
