@@ -23,8 +23,7 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
-    "@vinocss/runes": "workspace:*",
-    "@vinocss/utils": "workspace:*"
+    "csstype": "^3.2.3"
   },
   "devDependencies": {
     "@vinocss/devtools-build": "workspace:*",

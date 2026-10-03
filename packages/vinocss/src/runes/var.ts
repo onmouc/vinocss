@@ -1,4 +1,4 @@
-import { uncompiled } from "@/runtime"
+import { uncompiled } from "@/runes/runtime"
 
 /**
  * Declare or reference a css custom property.

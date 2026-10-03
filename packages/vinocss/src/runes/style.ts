@@ -1,5 +1,5 @@
-import type { Style } from "@/api/class"
-import { uncompiled } from "@/runtime"
+import type { Style } from "@/runes/class"
+import { uncompiled } from "@/runes/runtime"
 
 /**
  * Register global css rules.

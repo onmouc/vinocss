@@ -14,10 +14,10 @@
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "catalog:example-dev",
-    "@tsconfig/svelte": "catalog:example-dev",
+    "@tsconfig/svelte": "^5.0.8",
     "@types/node": "catalog:dev",
     "@vinocss/devtools-tsconfig": "workspace:*",
-    "svelte-check": "catalog:example-dev",
+    "svelte-check": "^4.7.6",
     "typescript": "catalog:dev",
     "vite": "catalog:dev"
   }

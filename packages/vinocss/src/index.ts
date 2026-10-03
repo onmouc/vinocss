@@ -1,1 +1,1 @@
-export * from "@vinocss/runes"
+export * from "@/runes"

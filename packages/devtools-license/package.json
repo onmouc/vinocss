@@ -23,14 +23,13 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
-    "@vinocss/devtools-workspace": "workspace:*",
+    "@vinocss/devtools-build": "workspace:*",
     "chalk": "catalog:dep",
     "commander": "catalog:dep"
   },
   "devDependencies": {
     "@oxc-node/core": "catalog:dev",
     "@types/node": "catalog:dev",
-    "@vinocss/devtools-build": "workspace:*",
     "@vinocss/devtools-tsconfig": "workspace:*",
     "vite": "catalog:dev",
     "vitest": "catalog:dev"

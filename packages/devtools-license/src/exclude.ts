@@ -1,6 +1,6 @@
 import { relative } from "node:path"
-import { toPosix } from "@vinocss/devtools-workspace"
-import type { WorkspacePackage } from "@vinocss/devtools-workspace"
+import { toPosix } from "@vinocss/devtools-build/workspace"
+import type { WorkspacePackage } from "@vinocss/devtools-build/workspace"
 
 /**
  * Tell whether any selector skips a package.

@@ -28,7 +28,10 @@ and reference it as `catalog:dep` for a dependency or `catalog:dev` for a dev de
 1. Prefer the latest version that stays compatible with the workspace.
 2. Raise a catalog entry when a newer compatible release lands.
 3. Reach for a lower version only for a real incompatibility, and say why in the change.
-4. Keep each external version in the catalog, so every package shares the one entry.
+4. Catalog a version only when two or more packages share it; a dependency one package
+   alone uses takes a literal version in that package instead.
+5. Move a literal into the catalog once a second package needs that version,
+   so both packages share the one entry.
 
 ## Build
 
@@ -61,9 +64,8 @@ so a fresh clone can run the root commands without a manual bootstrap.
 
 The devtools packages under `packages/` hold that shared tooling:
 [tsconfig](../../packages/devtools-tsconfig/README.md) for the shared compiler options,
-[build](../../packages/devtools-build/README.md) for the build command,
-[package](../../packages/devtools-package/README.md) for the node package read,
-and [workspace](../../packages/devtools-workspace/README.md) for the pnpm workspace read.
+and [build](../../packages/devtools-build/README.md) for the build command,
+which also exposes the node package and pnpm workspace reads as subpath exports.
 
 ## Scripts
 

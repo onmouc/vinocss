@@ -14,13 +14,11 @@ and the examples under `packages/example-xxx` show how each call is written.
 
 ## Packages
 
-VinoCSS is the entry an app imports, and it re-exports two small packages.
-`@vinocss/runes` holds `var$`, `class$`, and `style$`,
-and `vinocss` re-exports it as the root entry.
-`@vinocss/utils` holds the value helpers, and `vinocss/utils` re-exports it.
-The split keeps each piece free of the framework,
-so an analyzer or the compiler can depend on one without a dependency loop,
-while an app imports them through `vinocss` and `vinocss/utils`.
+VinoCSS is one package with two entries.
+The root entry holds `var$`, `class$`, and `style$`,
+and the `vinocss/utils` subpath holds the css value helpers.
+Both ship together, so an app installs `vinocss` once,
+and an analyzer or the compiler reads the same source without a separate dependency.
 
 ## Usage
 
@@ -126,7 +124,7 @@ style$({
 
 ## Utils
 
-The `vinocss/utils` subpath re-exports `@vinocss/utils`,
+The `vinocss/utils` subpath holds the value helpers,
 so a value helper reads from the same package as the rest of the api.
 
 A unit helper appends its unit to a number, so `px(12)` is `"12px"` and `rem(2)` is `"2rem"`.

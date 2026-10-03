@@ -1,8 +1,8 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs"
 import { join, resolve } from "node:path"
-import { detectWorkspace } from "@vinocss/devtools-workspace"
+import { detectWorkspace } from "@vinocss/devtools-build/workspace"
 import { isExcluded } from "@/exclude"
-import type { WorkspacePackage } from "@vinocss/devtools-workspace"
+import type { WorkspacePackage } from "@vinocss/devtools-build/workspace"
 import type { LicenseOptions, LicenseReporter, LicenseResult, PackageResult } from "@/types"
 
 const licenseFile = "LICENSE"

@@ -7,25 +7,24 @@ Before you build a helper, a read, or a config, check this list for one you can 
 
 ## Framework
 
-1. `vinocss` (`packages/vinocss`) is the entry an app imports, and it re-exports the two below.
-2. `@vinocss/runes` (`packages/runes`) holds the `var$`, `class$`, and `style$` placeholders.
-3. `@vinocss/utils` (`packages/utils`) holds the css value helpers such as `px` and `v`.
+1. `vinocss` (`packages/vinocss`) is the entry an app imports.
+2. Its root entry holds the `var$`, `class$`, and `style$` placeholders.
+3. Its `vinocss/utils` subpath holds the css value helpers such as `px` and `v`.
 
-The runes and utils ship on their own, so an analyzer or the compiler can depend on
-one piece without pulling the whole framework, and `vinocss` re-exports both for an app.
+The runes and the helpers ship from the one package,
+so an app installs `vinocss` once and imports each piece from it.
 
 ## Devtools
 
-1. `@vinocss/devtools-build` wraps the rolldown build behind the `vinocss-build` command.
+1. `@vinocss/devtools-build` wraps the rolldown build behind the `vinocss-build` command,
+   and exposes the node package and pnpm workspace reads as subpath exports.
 2. `@vinocss/devtools-tsconfig` holds the shared TypeScript config variants.
-3. `@vinocss/devtools-package` exposes the node package read, such as `readPackage`.
-4. `@vinocss/devtools-workspace` exposes the pnpm workspace read, such as `detectWorkspace`.
-5. `@vinocss/devtools-line-width` reports any tracked line over the width limit.
-6. `@vinocss/devtools-license` syncs the root `LICENSE` into every child package.
+3. `@vinocss/devtools-line-width` reports any tracked line over the width limit.
+4. `@vinocss/devtools-license` syncs the root `LICENSE` into every child package.
 
 A tool takes a `devtools-*` name and lives under `packages/`.
-The three read packages expose code the build already owns,
-so a new tool can reuse a read instead of writing its own.
+The build exposes the package and workspace reads,
+so a new tool can import a read instead of writing its own.
 
 ## Examples
 

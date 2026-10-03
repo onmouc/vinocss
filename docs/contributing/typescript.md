@@ -9,7 +9,7 @@ The shared rules in [code](./code.md) still apply alongside these.
 1. A child package resolves its own modules through the `@/*` alias, such as `@/types`.
 2. Prefer the alias over a relative path, so a moved file keeps its imports intact.
 3. The alias covers a value import, a `import type`, and a re-export, so one form fits all.
-4. Keep an external module as its package name, such as `csstype` or `@vinocss/runes`.
+4. Keep an external module as its package name, such as `csstype` or `@vinocss/devtools-build`.
 
 ## Types
 

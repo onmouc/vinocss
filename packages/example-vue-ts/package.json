@@ -18,6 +18,6 @@
     "@vitejs/plugin-vue": "catalog:example-dev",
     "typescript": "catalog:dev",
     "vite": "catalog:dev",
-    "vue-tsc": "catalog:example-dev"
+    "vue-tsc": "^3.3.11"
   }
 }

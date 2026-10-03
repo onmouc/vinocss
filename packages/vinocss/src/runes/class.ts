@@ -1,5 +1,5 @@
 import type * as CSS from "csstype"
-import { uncompiled } from "@/runtime"
+import { uncompiled } from "@/runes/runtime"
 
 /**
  * Compile a style object into a css class.

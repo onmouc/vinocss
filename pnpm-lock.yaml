@@ -12,9 +12,6 @@ catalogs:
     commander:
       specifier: ^15.0.0
       version: 15.0.0
-    csstype:
-      specifier: ^3.2.3
-      version: 3.2.3
     rolldown:
       specifier: ^1.2.11
       version: 1.2.11
@@ -31,12 +28,6 @@ catalogs:
     '@types/node':
       specifier: ^26.6.3
       version: 26.6.3
-    oxfmt:
-      specifier: ^0.71.0
-      version: 0.71.0
-    oxlint:
-      specifier: ^1.86.0
-      version: 1.86.0
     rolldown:
       specifier: ^1.2.11
       version: 1.2.11
@@ -78,15 +69,6 @@ catalogs:
     '@sveltejs/vite-plugin-svelte':
       specifier: ^7.3.1
       version: 7.3.1
-    '@tsconfig/svelte':
-      specifier: ^5.0.8
-      version: 5.0.8
-    '@types/react':
-      specifier: ^19.3.0
-      version: 19.3.0
-    '@types/react-dom':
-      specifier: ^19.3.0
-      version: 19.3.0
     '@vitejs/plugin-react':
       specifier: ^6.1.1
       version: 6.1.1
@@ -96,15 +78,9 @@ catalogs:
     babel-plugin-react-compiler:
       specifier: ^1.0.0
       version: 1.0.0
-    svelte-check:
-      specifier: ^4.7.6
-      version: 4.7.6
     vite-plugin-solid:
       specifier: ^2.11.14
       version: 2.11.14
-    vue-tsc:
-      specifier: ^3.3.11
-      version: 3.3.11
 
 importers:
 
@@ -120,10 +96,10 @@ importers:
         specifier: workspace:*
         version: link:packages/devtools-line-width
       oxfmt:
-        specifier: catalog:dev
+        specifier: ^0.71.0
         version: 0.71.0(svelte@5.57.1)
       oxlint:
-        specifier: catalog:dev
+        specifier: ^1.86.0
         version: 1.86.0
       rolldown:
         specifier: catalog:dev
@@ -177,9 +153,9 @@ importers:
 
   packages/devtools-license:
     dependencies:
-      '@vinocss/devtools-workspace':
+      '@vinocss/devtools-build':
         specifier: workspace:*
-        version: link:../devtools-workspace
+        version: link:../devtools-build
       chalk:
         specifier: catalog:dep
         version: 6.0.1
@@ -193,9 +169,6 @@ importers:
       '@types/node':
         specifier: catalog:dev
         version: 26.6.3
-      '@vinocss/devtools-build':
-        specifier: workspace:*
-        version: link:../devtools-build
       '@vinocss/devtools-tsconfig':
         specifier: workspace:*
         version: link:../devtools-tsconfig
@@ -234,27 +207,7 @@ importers:
         specifier: catalog:dev
         version: 5.0.3(@types/node@26.6.3)(vite@8.3.1(@types/node@26.6.3))
 
-  packages/devtools-package:
-    dependencies:
-      '@vinocss/devtools-build':
-        specifier: workspace:*
-        version: link:../devtools-build
-    devDependencies:
-      '@vinocss/devtools-tsconfig':
-        specifier: workspace:*
-        version: link:../devtools-tsconfig
-
   packages/devtools-tsconfig: {}
-
-  packages/devtools-workspace:
-    dependencies:
-      '@vinocss/devtools-build':
-        specifier: workspace:*
-        version: link:../devtools-build
-    devDependencies:
-      '@vinocss/devtools-tsconfig':
-        specifier: workspace:*
-        version: link:../devtools-tsconfig
 
   packages/example-react-js:
     dependencies:
@@ -306,10 +259,10 @@ importers:
         specifier: catalog:dev
         version: 26.6.3
       '@types/react':
-        specifier: catalog:example-dev
+        specifier: ^19.3.0
         version: 19.3.0
       '@types/react-dom':
-        specifier: catalog:example-dev
+        specifier: ^19.3.0
         version: 19.3.0(@types/react@19.3.0)
       '@vinocss/devtools-tsconfig':
         specifier: workspace:*
@@ -397,7 +350,7 @@ importers:
         specifier: catalog:example-dev
         version: 7.3.1(svelte@5.57.1)(vite@8.3.1(@types/node@26.6.3))
       '@tsconfig/svelte':
-        specifier: catalog:example-dev
+        specifier: ^5.0.8
         version: 5.0.8
       '@types/node':
         specifier: catalog:dev
@@ -406,7 +359,7 @@ importers:
         specifier: workspace:*
         version: link:../devtools-tsconfig
       svelte-check:
-        specifier: catalog:example-dev
+        specifier: ^4.7.6
         version: 4.7.6(picomatch@4.0.7)(svelte@5.57.1)(typescript@6.0.3)
       typescript:
         specifier: catalog:dev
@@ -456,39 +409,14 @@ importers:
         specifier: catalog:dev
         version: 8.3.1(@types/node@26.6.3)
       vue-tsc:
-        specifier: catalog:example-dev
+        specifier: ^3.3.11
         version: 3.3.11(typescript@6.0.3)
-
-  packages/runes:
-    dependencies:
-      csstype:
-        specifier: catalog:dep
-        version: 3.2.3
-    devDependencies:
-      '@vinocss/devtools-build':
-        specifier: workspace:*
-        version: link:../devtools-build
-      '@vinocss/devtools-tsconfig':
-        specifier: workspace:*
-        version: link:../devtools-tsconfig
-
-  packages/utils:
-    devDependencies:
-      '@vinocss/devtools-build':
-        specifier: workspace:*
-        version: link:../devtools-build
-      '@vinocss/devtools-tsconfig':
-        specifier: workspace:*
-        version: link:../devtools-tsconfig
 
   packages/vinocss:
     dependencies:
-      '@vinocss/runes':
-        specifier: workspace:*
-        version: link:../runes
-      '@vinocss/utils':
-        specifier: workspace:*
-        version: link:../utils
+      csstype:
+        specifier: ^3.2.3
+        version: 3.2.3
     devDependencies:
       '@vinocss/devtools-build':
         specifier: workspace:*

@@ -59,10 +59,8 @@ so an import such as `@/util` resolves during the build without an extra plugin.
 ## Exports
 
 1. The root export is `build`, the ordered build, plus `buildSelf` and `buildWorkspace`.
-2. The node package read is re-exported by
-   [@vinocss/devtools-package](../devtools-package/README.md).
-3. The pnpm workspace read is re-exported by
-   [@vinocss/devtools-workspace](../devtools-workspace/README.md).
+2. The `./package` subpath exports the node package read, such as `readPackage`.
+3. The `./workspace` subpath exports the pnpm workspace read, such as `detectWorkspace`.
 
 ## Usage
 
