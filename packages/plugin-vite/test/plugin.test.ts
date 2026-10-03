@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
+import { lines } from "@vinocss/devtools-lines"
 import { vinocss } from "@/index"
-import { lines } from "./helpers"
 
 type Transform = (code: string, id: string) => { code: string } | null
 type ResolveId = (id: string) => string | null

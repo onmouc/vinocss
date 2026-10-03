@@ -97,5 +97,5 @@ rather than run for its output; the code still has to format, lint, and type-che
 
 1. Run `pnpm fmt` and `pnpm lint` after a change.
 2. Run `pnpm -r typecheck` when the example is typed.
-3. Keep every line within the workspace width, as `pnpm line-width` checks.
+3. Keep every line within the workspace width, as `pnpm max-len` checks.
 4. Run `pnpm review` from the root before the change is described.

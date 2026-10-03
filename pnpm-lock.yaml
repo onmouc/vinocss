@@ -92,9 +92,9 @@ importers:
       '@vinocss/devtools-license':
         specifier: workspace:*
         version: link:packages/devtools-license
-      '@vinocss/devtools-line-width':
+      '@vinocss/devtools-max-len':
         specifier: workspace:*
-        version: link:packages/devtools-line-width
+        version: link:packages/devtools-max-len
       oxfmt:
         specifier: ^0.71.0
         version: 0.71.0(svelte@5.57.1)
@@ -179,7 +179,16 @@ importers:
         specifier: catalog:dev
         version: 5.0.3(@types/node@26.6.3)(vite@8.3.1(@types/node@26.6.3))
 
-  packages/devtools-line-width:
+  packages/devtools-lines:
+    devDependencies:
+      '@vinocss/devtools-build':
+        specifier: workspace:*
+        version: link:../devtools-build
+      '@vinocss/devtools-tsconfig':
+        specifier: workspace:*
+        version: link:../devtools-tsconfig
+
+  packages/devtools-max-len:
     dependencies:
       chalk:
         specifier: catalog:dep
@@ -421,6 +430,9 @@ importers:
       '@vinocss/devtools-build':
         specifier: workspace:*
         version: link:../devtools-build
+      '@vinocss/devtools-lines':
+        specifier: workspace:*
+        version: link:../devtools-lines
       '@vinocss/devtools-tsconfig':
         specifier: workspace:*
         version: link:../devtools-tsconfig

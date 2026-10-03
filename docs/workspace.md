@@ -19,8 +19,9 @@ so an app installs `vinocss` once and imports each piece from it.
 1. `@vinocss/devtools-build` wraps the rolldown build behind the `vinocss-build` command,
    and exposes the node package and pnpm workspace reads as subpath exports.
 2. `@vinocss/devtools-tsconfig` holds the shared TypeScript config variants.
-3. `@vinocss/devtools-line-width` reports any tracked line over the width limit.
+3. `@vinocss/devtools-max-len` reports any tracked line over the width limit.
 4. `@vinocss/devtools-license` syncs the root `LICENSE` into every child package.
+5. `@vinocss/devtools-lines` joins source parts into one string, one part per line.
 
 A tool takes a `devtools-*` name and lives under `packages/`.
 The build exposes the package and workspace reads,

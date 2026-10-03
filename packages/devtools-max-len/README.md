@@ -1,9 +1,9 @@
-# @vinocss/devtools-line-width
+# @vinocss/devtools-max-len
 
 This package reports any tracked line that runs past a maximum width.
 A long line is hard to read in a terminal, a diff, and a review,
 so the workspace keeps every line within the limit and checks that before a commit.
-It ships as the `vinocss-line-width` command, and it is published so any project can reuse it.
+It ships as the `vinocss-max-len` command, and it is published so any project can reuse it.
 
 ## Files
 
@@ -36,11 +36,11 @@ It ships as the `vinocss-line-width` command, and it is published so any project
 
 ## Usage
 
-1. Install it as a dev dependency, for example `pnpm add -D @vinocss/devtools-line-width`.
-2. Run `vinocss-line-width` to check every tracked file, or pass a pathspec to narrow it.
+1. Install it as a dev dependency, for example `pnpm add -D @vinocss/devtools-max-len`.
+2. Run `vinocss-max-len` to check every tracked file, or pass a pathspec to narrow it.
 3. Pass `--max 80` to tighten the limit for a project with a narrower style.
 
 ```text
-vinocss-line-width src --max 80
+vinocss-max-len src --max 80
 src/example.ts:12:81 line is 96, over 80
 ```

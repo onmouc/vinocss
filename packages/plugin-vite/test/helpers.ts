@@ -27,14 +27,6 @@ export function compile(files: Record<string, string>, id: string): CompileResul
   return new Compiler(memoryHost(files)).compile(files[id], id)
 }
 
-/**
- * Join source lines, so a long snippet stays readable here as it would read as
- * a file.
- */
-export function lines(...parts: string[]): string {
-  return parts.join("\n")
-}
-
 function normalize(path: string): string {
   const out: string[] = []
   for (const part of path.split("/")) {

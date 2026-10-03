@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest"
+import { lines } from "@vinocss/devtools-lines"
 import { Compiler } from "@/compiler"
-import { lines, memoryHost } from "./helpers"
+import { memoryHost } from "./helpers"
 
 describe("compiler cache", () => {
   it("recompiles a changed class with a fresh rule", () => {

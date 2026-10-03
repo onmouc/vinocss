@@ -1,8 +1,8 @@
 {
-  "name": "@vinocss/devtools-line-width",
+  "name": "@vinocss/devtools-max-len",
   "version": "0.0.0",
   "bin": {
-    "vinocss-line-width": "./bin/vinocss-line-width.js"
+    "vinocss-max-len": "./bin/vinocss-max-len.js"
   },
   "files": [
     "bin",

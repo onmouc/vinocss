@@ -1,5 +1,5 @@
 {
-  "name": "@vinocss/plugin-vite",
+  "name": "@vinocss/devtools-lines",
   "version": "0.0.0",
   "files": [
     "out"
@@ -15,20 +15,10 @@
   "scripts": {
     "build": "vinocss-build",
     "build:self": "vinocss-build --self",
-    "test": "vitest run",
     "typecheck": "tsc -b"
-  },
-  "dependencies": {
-    "oxc-parser": "^0.152.0"
   },
   "devDependencies": {
     "@vinocss/devtools-build": "workspace:*",
-    "@vinocss/devtools-lines": "workspace:*",
-    "@vinocss/devtools-tsconfig": "workspace:*",
-    "vite": "catalog:dev",
-    "vitest": "catalog:dev"
-  },
-  "peerDependencies": {
-    "vite": "^8"
+    "@vinocss/devtools-tsconfig": "workspace:*"
   }
 }

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest"
-import { compile, lines } from "./helpers"
+import { lines } from "@vinocss/devtools-lines"
+import { compile } from "./helpers"
 
 describe("style$ emission", () => {
   it("emits global rules and removes the call", () => {

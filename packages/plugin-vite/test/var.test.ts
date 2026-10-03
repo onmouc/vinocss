@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest"
-import { compile, lines } from "./helpers"
+import { lines } from "@vinocss/devtools-lines"
+import { compile } from "./helpers"
 
 const varImport = 'import { var$ } from "vinocss"\n'
 

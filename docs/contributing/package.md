@@ -50,7 +50,7 @@ Root `prepare` runs after `pnpm i`, and it builds the whole workspace.
 It first builds `@vinocss/devtools-build` from its source,
 since `vinocss-build` cannot run before that output exists,
 then `vinocss-build --workspace` builds every package in dependency order.
-The devtools build and line-width commands are then ready after install,
+The devtools build and max-len commands are then ready after install,
 so a fresh clone can run the root commands without a manual bootstrap.
 
 ## Tsconfig

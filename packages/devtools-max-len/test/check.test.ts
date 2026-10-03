@@ -8,7 +8,7 @@ import { checkLineWidth } from "@/index"
 let dir = ""
 
 beforeEach(() => {
-  dir = mkdtempSync(join(tmpdir(), "line-width-"))
+  dir = mkdtempSync(join(tmpdir(), "max-len-"))
   execFileSync("git", ["init"], { cwd: dir })
 })
 
