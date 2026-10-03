@@ -1,0 +1,30 @@
+{
+  "name": "@vinocss/plugin-vite",
+  "version": "0.0.0",
+  "files": [
+    "out"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./out/index.d.ts",
+      "import": "./out/index.js",
+      "require": "./out/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "vinocss-build",
+    "build:self": "vinocss-build --self",
+    "test": "vitest run",
+    "typecheck": "tsc -b"
+  },
+  "devDependencies": {
+    "@vinocss/devtools-build": "workspace:*",
+    "@vinocss/devtools-tsconfig": "workspace:*",
+    "vite": "catalog:dev",
+    "vitest": "catalog:dev"
+  },
+  "peerDependencies": {
+    "vite": "^8"
+  }
+}
