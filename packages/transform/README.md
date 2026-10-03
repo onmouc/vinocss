@@ -20,7 +20,8 @@ The package holds the compiler and no bundler, so a plugin package wraps it for 
    and the `virtualId` a caller resolves to load that css, or null when no rule exists.
 2. `createNodeHost()` returns a `Host` that reads modules and follows imports on the filesystem.
 3. `unitHelpers` is the set of `vinocss/utils` unit names the compiler reads.
-4. `CompileResult` and `Host` describe the compile result and the file read a compiler needs.
+4. `virtualCssPrefix` is the prefix of the virtual id, so a plugin recognizes the import.
+5. `CompileResult` and `Host` describe the compile result and the file read a compiler needs.
 
 A `Host` reads a module source and resolves a specifier to a file,
 so a caller without a filesystem can supply its own.
@@ -29,7 +30,8 @@ so a caller without a filesystem can supply its own.
 
 1. Install it, for example `pnpm add @vinocss/transform`.
 2. Create one `Compiler` for a build, and call `compile` for each module.
-3. Read [plugin-vite](../plugin-vite/README.md) for a Vite wrapper around this surface.
+3. Read [plugin-vite](../plugin-vite/README.md) and [plugin-rsbuild](../plugin-rsbuild/README.md)
+   for the bundler wrappers around this surface.
 
 ```ts
 import { Compiler, createNodeHost } from "@vinocss/transform"

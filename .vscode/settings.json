@@ -36,6 +36,7 @@
     "pathspec",
     "pathspecs",
     "quasis",
+    "rsbuild",
     "subpaths",
     "sveltejs",
     "uncompiled",

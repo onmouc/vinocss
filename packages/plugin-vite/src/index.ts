@@ -1,7 +1,6 @@
 import type { Plugin } from "vite"
-import { Compiler, createNodeHost } from "@vinocss/transform"
+import { Compiler, createNodeHost, virtualCssPrefix } from "@vinocss/transform"
 
-const virtualPrefix = "virtual:vinocss/"
 const nullByte = "\0"
 const target = /\.(?:[cm]?[jt]sx?)$/u
 
@@ -18,11 +17,11 @@ export function vinocss(): Plugin {
   return {
     name: "@vinocss/plugin-vite",
     resolveId(id) {
-      if (id.startsWith(virtualPrefix) && id.endsWith(".css")) return `${nullByte}${id}`
+      if (id.startsWith(virtualCssPrefix) && id.endsWith(".css")) return `${nullByte}${id}`
       return null
     },
     load(id) {
-      if (!id.startsWith(`${nullByte}${virtualPrefix}`)) return null
+      if (!id.startsWith(`${nullByte}${virtualCssPrefix}`)) return null
       return compiler.readCss(id.slice(nullByte.length))
     },
     transform(source, id) {

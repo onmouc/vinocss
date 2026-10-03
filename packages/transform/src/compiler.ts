@@ -53,6 +53,14 @@ export const unitHelpers = new Set([
 ])
 
 /**
+ * The specifier prefix of the css module a compile frees.
+ *
+ * A bundler plugin reads it to recognize the virtual import, then resolves
+ * the id to the css a compile stored for it.
+ */
+export const virtualCssPrefix = "virtual:vinocss/"
+
+/**
  * The result of compiling one module.
  *
  * `code` is the rewritten source, `css` is the rules its `class$` and `style$`
@@ -103,7 +111,7 @@ export class Compiler {
     }))
     let code = applyEdits(source, outermost(edits))
     const css = this.cssFor(id)
-    const virtualId = `virtual:vinocss/${contentHash(id)}.css`
+    const virtualId = `${virtualCssPrefix}${contentHash(id)}.css`
     if (css === "") {
       this.cssFiles.delete(virtualId)
       return { code, css, virtualId: null }

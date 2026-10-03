@@ -18,9 +18,10 @@ so an app installs `vinocss` once and imports each piece from it.
 
 `@vinocss/transform` (`packages/transform`) is the compiler
 that rewrites a module and frees its css,
-and `@vinocss/plugin-vite` (`packages/plugin-vite`) wraps it as a Vite plugin.
+`@vinocss/plugin-vite` (`packages/plugin-vite`) wraps it as a Vite plugin,
+and `@vinocss/plugin-rsbuild` (`packages/plugin-rsbuild`) wraps it as an Rsbuild plugin.
 The compile logic lives in `@vinocss/transform`,
-so a second bundler plugin can wrap the same engine instead of copying it.
+so a bundler plugin can wrap the same engine instead of copying it.
 
 ## Devtools
 
