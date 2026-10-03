@@ -2,7 +2,7 @@ import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSyn
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { createRsbuild } from "@rsbuild/core"
-import { afterEach, describe, expect, it } from "vitest"
+import { afterEach, describe, expect, it } from "@rstest/core"
 import { lines } from "@vinocss/devtools-lines"
 import { vinocss } from "@/index"
 

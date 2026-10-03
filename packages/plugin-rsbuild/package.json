@@ -13,9 +13,9 @@
     }
   },
   "scripts": {
-    "build": "vinocss-build",
-    "build:self": "vinocss-build --self",
-    "test": "vitest run",
+    "build": "rslib build",
+    "build:self": "rslib build",
+    "test": "rstest run",
     "typecheck": "tsc -b"
   },
   "dependencies": {
@@ -23,11 +23,10 @@
   },
   "devDependencies": {
     "@rsbuild/core": "^2.2.11",
-    "@vinocss/devtools-build": "workspace:*",
+    "@rslib/core": "^1.0.3",
+    "@rstest/core": "catalog:dev",
     "@vinocss/devtools-lines": "workspace:*",
-    "@vinocss/devtools-tsconfig": "workspace:*",
-    "vite": "catalog:dev",
-    "vitest": "catalog:dev"
+    "@vinocss/devtools-tsconfig": "workspace:*"
   },
   "peerDependencies": {
     "@rsbuild/core": "^2"

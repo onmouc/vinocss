@@ -10,7 +10,10 @@
   "rules": {
     "jsdoc/require-param": "off",
     "jsdoc/require-returns": "off",
-    "no-console": "error"
+    "no-console": "error",
+
+    // Allow an empty marker comment that holds a chosen line break.
+    "no-inline-comments": ["warn", { "ignorePattern": "^\\s*$" }]
   },
   "overrides": [
     {

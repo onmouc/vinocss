@@ -13,10 +13,11 @@
     "max-len": "vinocss-max-len",
     "prepare": "pnpm --filter @vinocss/devtools-build build && pnpm build",
     "review": "pnpm run check && pnpm build && pnpm max-len && pnpm test",
-    "test": "vitest run",
+    "test": "vitest run && rstest run",
     "typecheck": "pnpm -r typecheck"
   },
   "devDependencies": {
+    "@rstest/core": "catalog:dev",
     "@vinocss/devtools-build": "workspace:*",
     "@vinocss/devtools-license": "workspace:*",
     "@vinocss/devtools-max-len": "workspace:*",

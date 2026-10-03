@@ -22,11 +22,18 @@ Read when adding, changing, or running tests.
 2. Do not repeat the alias in the vitest config; the tsconfig stays the one source.
 3. Keep the config small; the defaults already cover a node environment.
 4. The default include already finds a `*.test.ts` file under the package, so leave it out.
-5. Install `vitest` and `vite` in every package that has tests.
+5. Install the runner and its build tool in every test package: `vitest` and `vite`, or `rstest`.
 6. Run `pnpm test` from the root; it runs every project.
 
 A package adds vitest only once it has tests, so a package without tests stays lean,
 and the root project glob picks up the package as soon as its config appears.
+
+## Rstest
+
+1. An Rsbuild-based package tests with Rstest instead of Vitest.
+2. Add `rstest.config.ts` and set `source.tsconfigPath` to the app tsconfig.
+3. List the package in the root `rstest.config.ts`, and omit it from `vitest.config.ts`.
+4. Run `rstest run` from the package; the root `rstest run` covers it too.
 
 ## Choice
 

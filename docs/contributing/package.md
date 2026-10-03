@@ -52,6 +52,7 @@ and reference it as `catalog:dep` for a dependency or `catalog:dev` for a dev de
 8. The build detects the pnpm workspace and builds a package's workspace dependencies first.
 9. It skips a package whose source and output checksum is unchanged,
    so a repeated build stays cheap.
+10. An Rsbuild-based package builds with Rslib: run `rslib build` from its `rslib.config.ts`.
 
 Root `prepare` runs after `pnpm i`, and it builds the whole workspace.
 It first builds `@vinocss/devtools-build` from its source,
