@@ -5,9 +5,9 @@ Read when adding, changing, or running tests.
 
 ## Layout
 
-1. The root `vitest.config.ts` lists the package root as projects:
-   `packages/*`.
-2. Vitest treats each matched folder as a project, and reads its `vitest.config.ts` when one exists.
+1. The root `vitest.config.ts` asks the workspace for its child packages,
+   and lists every package that holds a `vitest.config.ts` as a project.
+2. Adding the config is the only step; the root list picks the package up on its own.
 3. Give a package a `vitest.config.ts` only when it has tests.
 4. Put a unit test beside its source, in `src/`, named `<source>.test.ts`.
 5. Add a `test/` file only when needed; a behavior test covers a case the source cannot,
@@ -26,13 +26,14 @@ Read when adding, changing, or running tests.
 6. Run `pnpm test` from the root; it runs every project.
 
 A package adds vitest only once it has tests, so a package without tests stays lean,
-and the root project glob picks up the package as soon as its config appears.
+and the root project list picks the package up as soon as its config appears.
 
 ## Rstest
 
 1. An Rsbuild-based package tests with Rstest instead of Vitest.
 2. Add `rstest.config.ts` and set `source.tsconfigPath` to the app tsconfig.
-3. List the package in the root `rstest.config.ts`, and omit it from `vitest.config.ts`.
+3. The root `rstest.config.ts` finds the package from its config,
+   and Vitest skips it while it has no `vitest.config.ts`.
 4. Run `rstest run` from the package; the root `rstest run` covers it too.
 
 ## Choice

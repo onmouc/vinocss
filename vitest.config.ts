@@ -1,12 +1,17 @@
-import { workspaceGlobs } from "@vinocss/devtools-build/workspace"
+import { existsSync } from "node:fs"
+import { join, relative } from "node:path"
+import { detectWorkspace, toPosix } from "@vinocss/devtools-build/workspace"
 import { defineConfig } from "vitest/config"
 
 export default defineConfig({
   test: {
-    projects: [
-      ...workspaceGlobs(), //
-      "!packages/plugin-rsbuild",
-      "!examples/rsbuild/react-commonjs",
-    ],
+    projects: (() => {
+      const workspace = detectWorkspace()
+      if (!workspace) return []
+      return workspace.packages
+        .filter((pkg) => existsSync(join(pkg.dir, "vitest.config.ts")))
+        .map((pkg) => toPosix(relative(workspace.root, pkg.dir)))
+        .toSorted()
+    })(),
   },
 })
