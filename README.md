@@ -22,11 +22,13 @@ and read a package readme for the contract it plans to honor.
 
 ## Utils
 
-The workspace ships shared naming helpers as `@vinocss/utils-*` packages,
-so a caller splits a name once and reaches any case from the same words.
+The workspace ships small shared helpers as `@vinocss/utils-*` packages,
+so a caller reaches one rule instead of writing its own.
 
 1. [`@vinocss/utils-case`](./packages/utils-case/README.md) splits a name into words
    and rebuilds it as camel, kebab, pascal, snake, or another common case.
+2. [`@vinocss/utils-decorate`](./packages/utils-decorate/README.md) wraps a text in
+   ansi escape sequences for a terminal style, color, or both.
 
 ## Devtools
 

@@ -740,6 +740,21 @@ importers:
         specifier: catalog:dev
         version: 5.0.3(@types/node@26.6.3)(vite@8.3.1(@types/node@26.6.3))
 
+  packages/utils-decorate:
+    devDependencies:
+      '@vinocss/devtools-build':
+        specifier: workspace:*
+        version: link:../devtools-build
+      '@vinocss/devtools-tsconfig':
+        specifier: workspace:*
+        version: link:../devtools-tsconfig
+      vite:
+        specifier: catalog:dev
+        version: 8.3.1(@types/node@26.6.3)
+      vitest:
+        specifier: catalog:dev
+        version: 5.0.3(@types/node@26.6.3)(vite@8.3.1(@types/node@26.6.3))
+
   packages/vinocss:
     dependencies:
       csstype:

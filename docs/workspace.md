@@ -27,6 +27,8 @@ so a bundler plugin can wrap the same engine instead of copying it.
 
 `@vinocss/utils-case` (`packages/utils-case`) splits a name into words
 and rebuilds it in a common case such as camel, kebab, pascal, or snake.
+`@vinocss/utils-decorate` (`packages/utils-decorate`) wraps a text in ansi sgr
+escape sequences for a terminal style or color.
 
 A shared helper that is not a tool takes a `utils-*` name and lives under `packages/`,
 so the framework and the plugins import one rule instead of writing their own.
