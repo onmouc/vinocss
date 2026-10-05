@@ -29,12 +29,6 @@ function read(root: string, extension: string): string {
   return match.map((file) => readFileSync(join(root, file), "utf8")).join("\n")
 }
 
-describe("vinocss plugin", () => {
-  it("names the plugin after the package", () => {
-    expect(vinocss().name).toBe("@vinocss/plugin-rsbuild")
-  })
-})
-
 describe("rsbuild build", () => {
   it("compiles the runes and extracts the css", async () => {
     const dir = fixture({

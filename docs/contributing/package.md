@@ -64,7 +64,8 @@ so a fresh clone can run the root commands without a manual bootstrap.
 ## Tsconfig
 
 1. `tsconfig.json` is a solution file with `files: []` and references.
-2. `tsconfig.app.json` covers `src` and `test`, and holds the `@/*` path alias.
+2. `tsconfig.app.json` covers `src`, plus `test` when the package has that folder,
+   and holds the `@/*` path alias.
 3. `tsconfig.node.json` covers config files such as `vitest.config.ts`.
 4. The build reads `tsconfig.app.json` and reuses the alias, so no alias plugin is needed.
 5. Send `tsBuildInfoFile` into `node_modules/.tmp`, since `tsc -b` writes build info.
@@ -81,7 +82,8 @@ which also exposes the node package and pnpm workspace reads as subpath exports.
 2. `build` runs `vinocss-build`, which builds the workspace dependencies then the package.
 3. `build:self` runs `vinocss-build --self`, which builds only the package.
 4. Typecheck runs `tsc -b`, so the solution tsconfig covers both projects.
-5. Add a `test` script that runs `vitest run` when the package has tests.
+5. Add a `test` script that runs the package runner when it has tests,
+   `vitest run`, or `rstest run` in an Rsbuild package.
 6. Run `pnpm review` from the root; it covers every package.
 
 The root keeps the tooling that builds the workspace itself,

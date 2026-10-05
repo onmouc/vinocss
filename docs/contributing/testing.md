@@ -10,11 +10,14 @@ Read when adding, changing, or running tests.
 2. Adding the config is the only step; the root list picks the package up on its own.
 3. Give a package a `vitest.config.ts` only when it has tests.
 4. Put a unit test beside its source, in `src/`, named `<source>.test.ts`.
-5. Add a `test/` file only when needed; a behavior test covers a case the source cannot,
-   such as several files, git, the filesystem, or a process.
+   It covers one function or one source file, even when it builds a fixture on disk.
+5. Put a behavior test in `test/` when it must cover more than one source file,
+   or a whole tool at once, such as a bundler build or a git run.
 6. A behavior test usually holds several scenarios,
    so the folder may keep more than one file, each for one concern.
 7. Include `test` in `tsconfig.app.json` only when the package has a `test` folder.
+8. When a build emits a declaration per source file, exclude `src/**/*.test.ts` in its
+   build tsconfig, so a unit test never reaches the published `out`.
 
 ## Config
 
@@ -47,7 +50,8 @@ and the root project list picks the package up as soon as its config appears.
 
 ## Rules
 
-1. Import the helpers from `vitest`; do not rely on globals.
+1. Import the helpers from the runner; do not rely on globals.
+   A Vitest package reads `vitest`, and an Rstest one reads `@rstest/core`.
 2. Build a fixture in a temp directory, and remove it after the test.
 3. Prefer a behavior test over a test bound to the current implementation.
 4. Cover the edge cases next to the happy path.
