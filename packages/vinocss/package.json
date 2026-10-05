@@ -1,6 +1,7 @@
 {
   "name": "vinocss",
   "version": "0.0.0",
+  "description": "A variable integrated nano CSS framework.",
   "files": [
     "out"
   ],

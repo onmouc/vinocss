@@ -1,6 +1,7 @@
 {
   "name": "@vinocss/devtools-max-len",
   "version": "0.0.0",
+  "description": "Reports any tracked line over the width limit.",
   "bin": {
     "vinocss-max-len": "./bin/vinocss-max-len.js"
   },

@@ -1,11 +1,11 @@
 # @vinocss/plugin-rsbuild
 
-The Rsbuild plugin that compiles VinoCSS source.
+The Rsbuild plugin that compiles style calls and extracts their css.
 
 It is the Rsbuild side of [`@vinocss/transform`](../transform/README.md).
 The plugin transforms each matching module with the shared compiler,
 turns the css a transform freed into a data module Rsbuild reads as a stylesheet,
-and leaves the rest to Rsbuild. The runtime sees no VinoCSS call,
+and leaves the rest to Rsbuild. The runtime sees none of these calls,
 so the bundle carries only the css it uses.
 
 ## Usage

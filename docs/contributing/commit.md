@@ -14,7 +14,12 @@ update it without being asked; only the user cancels it.
 4. Add an ordered list for separate changes; three to nine items, each shaped like the title.
 5. Keep the title and items within about 60 characters.
 6. Write items terse; drop filler words such as add or the.
-7. Write each paragraph on a single line; a commit message is not wrapped like a markdown file.
+
+## Lines
+
+1. Write each paragraph as one line, and never wrap it.
+2. A commit message is plain text, so the [markdown](./markdown.md) line breaks do not apply.
+3. A wrapped paragraph shows an artificial break, since a message is diffed, not rendered.
 
 ## Scopes
 
@@ -69,8 +74,10 @@ fix(vinocss): resolve alias on nested imports
    without being asked; only the user cancels this.
 2. Run the review in [review](./review.md) when source changed, so its result
    confirms the tree the message describes.
-3. Generate the message, covering everything changed so far.
-4. Include your edits and the user's manual edits since the last task.
-5. Update the message on a later turn that changes more, so it matches the tree.
-6. Write to `.commit` at the workspace root, which git ignores.
-7. Do not commit; the user reviews the diff and message, then commits.
+3. Read the previous five messages in full, such as with `git log -n 5 --no-merges`,
+   and match their style; learn from the whole message, not only the title line.
+4. Generate the message, covering everything changed so far.
+5. Include your edits and the user's manual edits since the last task.
+6. Update the message on a later turn that changes more, so it matches the tree.
+7. Write to `.commit` at the workspace root, which git ignores.
+8. Do not commit; the user reviews the diff and message, then commits.

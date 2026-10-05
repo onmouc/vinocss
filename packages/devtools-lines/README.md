@@ -20,5 +20,5 @@ It is published for anyone to use, so any project can build such a snippet the s
 ```ts
 import { lines } from "@vinocss/devtools-lines"
 
-const source = lines('import { style$ } from "vinocss"', 'style$({ body: "red" })')
+const source = lines("const a = 1", "const b = 2")
 ```

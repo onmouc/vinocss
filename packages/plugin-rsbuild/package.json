@@ -1,6 +1,7 @@
 {
   "name": "@vinocss/plugin-rsbuild",
   "version": "0.0.0",
+  "description": "An Rsbuild plugin that compiles style calls and extracts their css.",
   "files": [
     "out"
   ],

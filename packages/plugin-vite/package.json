@@ -1,6 +1,7 @@
 {
   "name": "@vinocss/plugin-vite",
   "version": "0.0.0",
+  "description": "A Vite plugin that compiles style calls and extracts their css.",
   "files": [
     "out"
   ],

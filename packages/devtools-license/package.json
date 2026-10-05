@@ -1,6 +1,7 @@
 {
   "name": "@vinocss/devtools-license",
   "version": "0.0.0",
+  "description": "Syncs the root LICENSE into every published package.",
   "bin": {
     "vinocss-license": "./bin/vinocss-license.js"
   },

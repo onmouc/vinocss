@@ -1,6 +1,7 @@
 {
   "name": "@vinocss/devtools-tsconfig",
   "version": "0.0.0",
+  "description": "Shared TypeScript config variants to extend from.",
   "files": [
     "src"
   ],

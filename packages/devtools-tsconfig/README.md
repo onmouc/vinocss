@@ -1,6 +1,6 @@
 # @vinocss/devtools-tsconfig
 
-This package keeps the shared TypeScript settings for VinoCSS projects in one place.
+This package keeps shared TypeScript settings in one place.
 It is published for anyone to use, so any project can follow the same recipe.
 
 When a package extends a config from here, it inherits the compiler options we all agree on.

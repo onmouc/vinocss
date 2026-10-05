@@ -1,6 +1,6 @@
 # @vinocss/devtools-build
 
-This package wraps the rolldown build for VinoCSS packages behind one command.
+This package wraps the rolldown build for packages behind one command.
 Instead of repeating a `rolldown.config.ts` in every package,
 each package runs `vinocss-build` and lets this tool supply the config.
 It is published for anyone to use, so any project can follow the same recipe.

@@ -2,7 +2,7 @@
 
 This package reports any tracked line that runs past a maximum width.
 A long line is hard to read in a terminal, a diff, and a review,
-so the workspace keeps every line within the limit and checks that before a commit.
+so a project keeps every line within the limit and checks that before a commit.
 It ships as the `vinocss-max-len` command, and it is published so any project can reuse it.
 
 ## Files

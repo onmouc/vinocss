@@ -1,6 +1,7 @@
 {
   "name": "@vinocss/utils-case",
   "version": "0.0.0",
+  "description": "Splits a name into words and rebuilds it in a common case.",
   "files": [
     "out"
   ],

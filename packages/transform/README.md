@@ -1,6 +1,6 @@
 # @vinocss/transform
 
-The VinoCSS compiler that turns a source module into plain JavaScript and css.
+The build-time compiler that turns a source module into plain JavaScript and css.
 
 It reads every `var$`, `class$`, and `style$` call in a module,
 resolves the names and styles they describe at build time,
@@ -9,7 +9,7 @@ A `var$` call becomes the custom property names it declares,
 and a `class$` call becomes one hashed class name,
 with its rule collected into the css the module frees.
 A `style$` call becomes nothing, with its global rules collected into the same css.
-The transformed module keeps no VinoCSS runtime, so a bundle carries only the css it uses.
+The transformed module keeps no framework runtime, so a bundle carries only the css it uses.
 
 The package holds the compiler and no bundler, so a plugin package wraps it for one tool.
 
