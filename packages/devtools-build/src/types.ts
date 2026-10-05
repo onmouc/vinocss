@@ -13,6 +13,8 @@ export type BuildOptions = {
 export type WorkspaceOptions = {
   cwd?: string
   dir?: string
+  outDir?: string
+  script?: string
   force?: boolean
   report?: Reporter
 }

@@ -8,7 +8,7 @@ import { isAbsolute, join, posix, relative, resolve, sep } from "node:path"
  *
  * A tool change that alters the fingerprint bumps it, so every stale record misses at once.
  */
-export const cacheVersion = 2
+export const cacheVersion = 3
 
 /**
  * The hashed fingerprint of a package, ready to store in a checksum record.
@@ -19,10 +19,13 @@ export type Fingerprint = {
 }
 
 const sourceDirs = ["src", "bin"]
-const sourceFiles = ["package.json"]
+const sourceFiles = ["package.json", "jsconfig.json", "index.html"]
 const tsconfigPattern = /^tsconfig.*\.json$/u
+const configPattern = /\.config\.[cm]?[jt]s$/u
+const testConfigPattern = /^(vitest|rstest|jest|mocha)\.config\.[cm]?[jt]s$/u
 const testDirPattern = /(^|\/)(test|tests|__tests__)(\/|$)/u
 const testFilePattern = /\.(test|spec)\.[^/]+$/u
+const outputDirs = new Set(["node_modules", "out", "dist", ".tmp", ".git"])
 
 /**
  * Compute the source and output fingerprint of a package.
@@ -38,16 +41,42 @@ export function computeChecksum(dir: string, outDir?: string): Fingerprint {
 /**
  * Collect the source files of a package.
  *
- * It reads the `src` folder, the `bin` folder, `package.json`, and any root `tsconfig*.json`,
- * and it skips test files, since a test change cannot change the build.
+ * It reads the `src` folder, the `bin` folder,
+ * `package.json`, `jsconfig.json`, `index.html`, any root `tsconfig*.json`,
+ * and any root `<tool>.config.*` file such as `vite.config.ts` or `rslib.config.ts`.
+ * The config and template files belong to the key, since any build tool may read them,
+ * and it skips test files and test-runner configs, since a test change cannot change the build.
  */
 export function readSources(dir: string): Record<string, number> {
   const files: Record<string, number> = {}
   for (const name of sourceFiles) addFile(dir, name, files)
-  for (const name of readdirSync(dir)) if (tsconfigPattern.test(name)) addFile(dir, name, files)
+  for (const name of readdirSync(dir)) {
+    if (testConfigPattern.test(name)) continue
+    if (tsconfigPattern.test(name) || configPattern.test(name)) addFile(dir, name, files)
+  }
   for (const name of sourceDirs) {
     const base = resolve(dir, name)
     if (existsSync(base)) collectTree(base, name, files, true)
+  }
+  return files
+}
+
+/**
+ * Collect the local files a package script command names.
+ *
+ * It splits the command on whitespace and keeps each token that resolves to a file in the package,
+ * so a script such as `node build.mjs` folds `build.mjs` into the fingerprint.
+ * A token under an output or dependency folder is dropped, since it is a product, not a source,
+ * and a token that is not a file, such as a program name or a flag, draws no action.
+ */
+export function readScriptSources(dir: string, command: string): Record<string, number> {
+  const files: Record<string, number> = {}
+  for (const raw of command.split(/\s+/u)) {
+    const token = raw.replaceAll(/^['"]|['"]$/gu, "")
+    if (token === "" || token.startsWith("-")) continue
+    const rel = toPosix(relative(dir, resolve(dir, token)))
+    if (rel.startsWith("..") || rel.split("/").some((part) => outputDirs.has(part))) continue
+    addFile(dir, rel, files)
   }
   return files
 }

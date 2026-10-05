@@ -42,8 +42,9 @@ and reference it as `catalog:dep` for a dependency or `catalog:dev` for a dev de
 
 ## Build
 
-1. `@vinocss/devtools-build` drives the build, so a package runs `vinocss-build`.
-2. It builds `src/index.ts` as a library entry and `src/main.ts` as a binary entry.
+1. `@vinocss/devtools-build` drives the workspace build through the package `build:self` script,
+   which may run the builtin builder or another tool such as `vite build` or `rslib build`.
+2. The builtin builder builds `src/index.ts` as a library entry and `src/main.ts` as a binary entry.
 3. A missing entry is skipped, so a package ships only the entries it has.
 4. Add `--lib` or `--bin` with a comma list to name extra entries.
 5. Libraries emit esm, cjs, and bundled declarations; binaries emit esm only.
@@ -51,8 +52,7 @@ and reference it as `catalog:dep` for a dependency or `catalog:dev` for a dev de
 7. Point the package `exports` and `bin` at the `out` files.
 8. The build detects the pnpm workspace and builds a package's workspace dependencies first.
 9. It skips a package whose source and output checksum is unchanged,
-   so a repeated build stays cheap.
-10. An Rsbuild-based package builds with Rslib: run `rslib build` from its `rslib.config.ts`.
+   whatever the `build:self` script runs, so a repeated build stays cheap.
 
 Root `prepare` runs after `pnpm i`, and it builds the whole workspace.
 It first builds `@vinocss/devtools-build` from its source,
@@ -78,13 +78,17 @@ which also exposes the node package and pnpm workspace reads as subpath exports.
 
 ## Scripts
 
-1. Add `build`, `build:self`, and `typecheck` scripts that call the root tooling.
-2. `build` runs `vinocss-build`, which builds the workspace dependencies then the package.
-3. `build:self` runs `vinocss-build --self`, which builds only the package.
+1. Add `build`, `build:self`, and `typecheck` scripts.
+2. `build:self` builds only the package, and it runs the tool of choice,
+   such as `vinocss-build --self`, or `rslib build` in an Rsbuild package.
+3. `build` builds the workspace dependencies then the package;
+   it runs `vinocss-build`, or the same external tool as `build:self`.
 4. Typecheck runs `tsc -b`, so the solution tsconfig covers both projects.
 5. Add a `test` script that runs the package runner when it has tests,
    `vitest run`, or `rstest run` in an Rsbuild package.
 6. Run `pnpm review` from the root; it covers every package.
+7. The workspace build runs `build:self` by default,
+   and `vinocss-build --workspace --script <name>` names another script to run.
 
 The root keeps the tooling that builds the workspace itself,
 and the workspace leaves node and pnpm versions to the environment,

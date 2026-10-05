@@ -67,14 +67,18 @@ export function buildOrder(workspace: Workspace): WorkspacePackage[] {
 /**
  * Pick the script that builds a package on its own.
  *
- * It prefers `build:self`, the script that skips the workspace dependencies,
+ * It prefers the configured name, `build:self` by default,
+ * the script that skips the workspace dependencies,
  * since the caller already ordered and built those.
- * It falls back to `build`, and it returns `undefined` when the package declares neither.
+ * Under the default name it falls back to `build`, so an app that only has one script still builds.
+ * It returns `undefined` when the package declares neither,
+ * and a configured name never falls back, since a missing choice should skip rather than guess.
+ * The script is only a command name, so the package may run any build tool behind it.
  */
-export function buildScript(pkg: WorkspacePackage): string | undefined {
+export function buildScript(pkg: WorkspacePackage, script = "build:self"): string | undefined {
   const scripts = pkg.manifest.scripts ?? {}
-  if (scripts["build:self"]) return "build:self"
-  if (scripts.build) return "build"
+  if (scripts[script]) return script
+  if (script === "build:self" && scripts.build) return "build"
   return undefined
 }
 

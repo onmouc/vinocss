@@ -21,12 +21,18 @@ Both are minified, and a package points its `exports` and `bin` at the output fi
 
 1. Before a build it reads every source file and output file,
    and hashes their paths and modified times.
-2. The sources are `src`, `bin`, `package.json`, and any root `tsconfig*.json`.
+2. The sources are `src`, `bin`, `package.json`, `jsconfig.json`, `index.html`,
+   any root `tsconfig*.json`, any root `<tool>.config.*` such as `vite.config.ts`,
+   and any local file the package script names, such as `build.mjs`.
 3. The output files are everything already in the output directory.
-4. Test files are skipped in the source, since a test cannot change a build.
+4. Test files and test-runner configs are skipped in the source,
+   since a test cannot change a build.
 5. It writes the checksum to `node_modules/vinocss-build-checksum` after a build lands.
 6. The next build skips when the checksum matches and the output directory exists.
 7. `--force` ignores a fresh checksum, and a forced workspace build clears each record.
+
+A workspace build records the checksum around the package `build:self` script,
+so a package that runs another build tool, such as `vite` or `rslib`, still skips when it is fresh.
 
 The checksum keys on the file set, so an added or removed file counts as a change.
 Because the output files are in the key,
@@ -65,9 +71,15 @@ so an import such as `@/util` resolves during the build without an extra plugin.
 ## Usage
 
 1. Install it as a dev dependency, for example `pnpm add -D @vinocss/devtools-build`.
-2. Point the package `build` script at `vinocss-build`, and add a `build:self` script with `--self`.
+2. Add a `build:self` script that builds the package with the tool of your choice,
+   and point `build` at `vinocss-build` when you want the builtin rolldown build.
 3. Pass `--lib`, `--bin`, or `--out` to change the defaults.
 4. Run `pnpm build` from the package, or let the workspace recursive build call it.
+
+The workspace build runs each package `build:self` script by default,
+so the script may call the builtin builder or another tool such as `vite build` or `rslib build`.
+The `-s, --script` option names another script to run, and the `build` script is the fallback
+when `build:self` is absent.
 
 ```json
 {

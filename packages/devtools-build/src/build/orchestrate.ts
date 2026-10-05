@@ -1,6 +1,6 @@
 import { resolve } from "node:path"
 import { clearChecksum, isCached, saveChecksum } from "@/cache"
-import { readSources } from "@/cache/fingerprint"
+import { readScriptSources, readSources } from "@/cache/fingerprint"
 import { buildBin, buildLib, clean } from "@/build/engine"
 import { collect, createExternal } from "@/build/resolve"
 import { runScript, sequence } from "@/build/run"
@@ -82,7 +82,7 @@ export async function build(options: BuildOptions = {}): Promise<void> {
   }
   const report = options.report ?? silent
   await sequence(dependencyOrder(workspace, self), (dep) =>
-    buildDependency(dep, options.force, report),
+    buildDependency(dep, { force: options.force, report }),
   )
   if (!options.force && isCached(self.dir)) {
     report.skip?.(`skipped ${self.name} (unchanged)`)
@@ -96,7 +96,11 @@ export async function build(options: BuildOptions = {}): Promise<void> {
  * Build every package in a pnpm workspace in dependency order.
  *
  * Each package builds after the workspace packages it needs.
- * A package without a build script is skipped, so shared config packages pass through.
+ * It runs the package `build:self` script by default, so a package may use any build tool
+ * behind that script, and the `script` option names another script to run.
+ * A package without the script is skipped, so shared config packages pass through.
+ * The build records the source and output checksum of every package it builds,
+ * whatever tool the script runs, so a repeated build stays cheap.
  * A fresh package is skipped too, unless `force` asks for a rebuild.
  *
  * The `dir` option points at the workspace, and `cwd` defaults to the process directory.
@@ -110,37 +114,53 @@ export async function buildWorkspace(options: WorkspaceOptions = {}): Promise<vo
     report.warn?.("no pnpm workspace found")
     return
   }
-  const steps = buildOrder(workspace).map((pkg) => ({ pkg, script: buildScript(pkg) }))
+  const steps = buildOrder(workspace).map((pkg) => ({
+    pkg,
+    script: buildScript(pkg, options.script),
+  }))
   await sequence(steps, async ({ pkg, script }) => {
     if (!script) {
       report.skip?.(`skipped ${pkg.name} (no build script)`)
       return
     }
-    if (!options.force && isCached(pkg.dir)) {
-      report.skip?.(`skipped ${pkg.name} (unchanged)`)
-      return
-    }
-    report.step?.(`building ${pkg.name}`)
-    if (options.force) clearChecksum(pkg.dir)
-    await runScript(pkg.dir, script)
+    await buildPackage(pkg, script, options)
   })
 }
 
-async function buildDependency(
+/**
+ * Build one workspace package through its own script, and cache the result.
+ *
+ * The output directory defaults to `out`, and the `outDir` option points at another one.
+ * A fresh checksum and a present output directory skip the script.
+ * A forced build clears the record first, so the script runs even when it is fresh.
+ * The checksum is read once, before the script runs, and written after it lands,
+ * so the record covers the sources, the local files the script names, and the files it produced.
+ */
+async function buildPackage(
   pkg: WorkspacePackage,
-  force: boolean | undefined,
-  report: Reporter,
+  script: string,
+  options: WorkspaceOptions,
 ): Promise<void> {
-  const script = buildScript(pkg)
-  if (!script) {
-    report.skip?.(`skipped ${pkg.name} (no build script)`)
-    return
-  }
-  if (!force && isCached(pkg.dir)) {
+  const report = options.report ?? silent
+  const outDir = resolve(pkg.dir, options.outDir ?? "out")
+  const command = pkg.manifest.scripts?.[script] ?? ""
+  const sources = { ...readSources(pkg.dir), ...readScriptSources(pkg.dir, command) }
+  if (!options.force && isCached(pkg.dir, outDir, sources)) {
     report.skip?.(`skipped ${pkg.name} (unchanged)`)
     return
   }
   report.step?.(`building ${pkg.name}`)
-  if (force) clearChecksum(pkg.dir)
+  if (options.force) clearChecksum(pkg.dir)
   await runScript(pkg.dir, script)
+  saveChecksum(pkg.dir, outDir, sources)
+}
+
+async function buildDependency(pkg: WorkspacePackage, options: WorkspaceOptions): Promise<void> {
+  const report = options.report ?? silent
+  const script = buildScript(pkg, options.script)
+  if (!script) {
+    report.skip?.(`skipped ${pkg.name} (no build script)`)
+    return
+  }
+  await buildPackage(pkg, script, options)
 }

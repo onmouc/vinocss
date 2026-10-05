@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
-import { build, buildSelf } from "@/index"
+import { build, buildSelf, buildWorkspace } from "@/index"
 
 function fixture(): string {
   const cwd = mkdtempSync(join(tmpdir(), "vinocss-build-"))
@@ -89,5 +89,48 @@ describe("build cache", () => {
     await expect(buildSelf({ cwd })).rejects.toThrow()
 
     expect(existsSync(join(cwd, "node_modules", "vinocss-build-checksum"))).toBe(false)
+  })
+})
+
+describe("workspace build cache", () => {
+  let root: string
+
+  beforeEach(() => {
+    root = mkdtempSync(join(tmpdir(), "vinocss-workspace-"))
+    writeFileSync(join(root, "package.json"), JSON.stringify({ name: "root", private: true }))
+    writeFileSync(join(root, "pnpm-workspace.yaml"), "packages:\n  - packages/*\n")
+  })
+
+  afterEach(() => {
+    rmSync(root, { recursive: true, force: true })
+  })
+
+  it("records a package built by its own script, so a second run skips it", async () => {
+    const dir = join(root, "packages", "app")
+    mkdirSync(join(dir, "src"), { recursive: true })
+    writeFileSync(
+      join(dir, "package.json"),
+      JSON.stringify({ name: "app", type: "module", scripts: { "build:self": "node build.mjs" } }),
+    )
+    writeFileSync(join(dir, "src", "index.ts"), "export const a = 1\n")
+    writeFileSync(
+      join(dir, "build.mjs"),
+      [
+        "import { mkdirSync, writeFileSync } from 'node:fs'",
+        "mkdirSync('out', { recursive: true })",
+        "writeFileSync('out/index.js', 'export const a = 1\\n')",
+        "",
+      ].join("\n"),
+    )
+
+    const first = { step: vi.fn(), skip: vi.fn() }
+    await buildWorkspace({ cwd: root, dir: root, report: first })
+    expect(first.step).toHaveBeenCalledWith("building app")
+    expect(existsSync(join(dir, "out", "index.js"))).toBe(true)
+
+    const second = { step: vi.fn(), skip: vi.fn() }
+    await buildWorkspace({ cwd: root, dir: root, report: second })
+    expect(second.step).not.toHaveBeenCalled()
+    expect(second.skip).toHaveBeenCalledWith("skipped app (unchanged)")
   })
 })

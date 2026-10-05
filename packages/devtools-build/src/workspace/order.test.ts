@@ -3,7 +3,7 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { afterEach, beforeEach, describe, expect, it } from "vitest"
 import { detectWorkspace } from "@/workspace/detect"
-import { buildOrder, dependencyOrder } from "@/workspace/order"
+import { buildOrder, buildScript, dependencyOrder } from "@/workspace/order"
 import type { Workspace, WorkspacePackage } from "@/workspace/detect"
 
 function writeWorkspace(root: string, text: string): void {
@@ -70,5 +70,38 @@ describe("build order", () => {
     writePackage(root, "packages/a", { name: "a", dependencies: { b: "workspace:*" } })
     writePackage(root, "packages/b", { name: "b", dependencies: { a: "workspace:*" } })
     expect(() => buildOrder(detected(root))).toThrow(/dependency cycle/u)
+  })
+})
+
+describe("build script", () => {
+  let root: string
+
+  beforeEach(() => {
+    root = mkdtempSync(join(tmpdir(), "vinocss-script-"))
+    writeWorkspace(root, "packages:\n  - packages/*\n")
+  })
+
+  afterEach(() => {
+    rmSync(root, { recursive: true, force: true })
+  })
+
+  it("prefers build:self, then build, and honors a configured name", () => {
+    writePackage(root, "packages/a", { name: "a", scripts: { build: "vite build" } })
+    writePackage(root, "packages/b", {
+      name: "b",
+      scripts: { build: "vinocss-build", "build:self": "vinocss-build --self" },
+    })
+    writePackage(root, "packages/c", { name: "c", scripts: { compile: "tsc" } })
+    const workspace = detected(root)
+    expect(buildScript(named(workspace, "a"))).toBe("build")
+    expect(buildScript(named(workspace, "b"))).toBe("build:self")
+    expect(buildScript(named(workspace, "c"))).toBeUndefined()
+    expect(buildScript(named(workspace, "c"), "compile")).toBe("compile")
+  })
+
+  it("skips a configured name instead of falling back to build", () => {
+    writePackage(root, "packages/a", { name: "a", scripts: { build: "vite build" } })
+    const workspace = detected(root)
+    expect(buildScript(named(workspace, "a"), "compile")).toBeUndefined()
   })
 })

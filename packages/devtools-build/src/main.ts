@@ -21,6 +21,7 @@ async function main(): Promise<void> {
     .option("-l, --lib <names>", "extra library entries, comma separated", collect, [])
     .option("-b, --bin <names>", "extra binary entries, comma separated", collect, [])
     .option("--out <dir>", "output directory", "out")
+    .option("-s, --script <name>", "package script the workspace build runs", "build:self")
     .option("--self", "build only this package, not its workspace dependencies")
     .option("--workspace [dir]", "build every package in the workspace in dependency order")
     .option("--force", "rebuild even when the cached checksum is fresh")
@@ -42,6 +43,8 @@ async function main(): Promise<void> {
         await buildWorkspace({
           cwd: common.cwd,
           dir: typeof options.workspace === "string" ? options.workspace : undefined,
+          outDir: options.out,
+          script: options.script,
           force: options.force,
           report,
         })
@@ -56,6 +59,7 @@ type Options = {
   lib: string[]
   bin: string[]
   out: string
+  script: string
   self?: boolean
   workspace?: string | boolean
   force?: boolean
