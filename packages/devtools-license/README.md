@@ -37,7 +37,7 @@ It ships as the `vinocss-license` command, and it is published so any project ca
 
 ```text
 vinocss-license --exclude devtools-example
-vinocss-license: synced @vinocss/devtools-build
-vinocss-license: skipped @vinocss/devtools-example (excluded)
-vinocss-license: synced 1 of 2 package(s)
+vinocss-license [v] synced @vinocss/devtools-build
+vinocss-license [>] skipped @vinocss/devtools-example (excluded)
+vinocss-license [v] synced 1 of 2 package(s)
 ```

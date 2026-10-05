@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { isExcluded } from "@/index"
-import type { WorkspacePackage } from "@vinocss/devtools-build/workspace"
+import type { WorkspacePackage } from "@vinocss/devtools-workspace"
 
 const root = "/workspace"
 

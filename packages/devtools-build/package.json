@@ -25,16 +25,25 @@
       "types": "./out/workspace.d.ts",
       "import": "./out/workspace.js",
       "require": "./out/workspace.cjs"
+    },
+    "./log": {
+      "types": "./out/log.d.ts",
+      "import": "./out/log.js",
+      "require": "./out/log.cjs"
+    },
+    "./terminal": {
+      "types": "./out/terminal.d.ts",
+      "import": "./out/terminal.js",
+      "require": "./out/terminal.cjs"
     }
   },
   "scripts": {
-    "build": "node --import @oxc-node/core/register src/main.ts -l package,workspace",
-    "build:self": "node --import @oxc-node/core/register src/main.ts --self -l package,workspace",
+    "build": "node build.mjs",
+    "build:self": "node build.mjs --self",
     "test": "vitest run",
     "typecheck": "tsc -b"
   },
   "dependencies": {
-    "chalk": "catalog:dep",
     "commander": "catalog:dep",
     "rolldown": "catalog:dep",
     "rolldown-plugin-dts": "catalog:dep",

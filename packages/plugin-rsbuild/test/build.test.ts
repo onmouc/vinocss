@@ -3,7 +3,7 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { createRsbuild } from "@rsbuild/core"
 import { afterEach, describe, expect, it } from "@rstest/core"
-import { lines } from "@vinocss/devtools-lines"
+import { lines } from "@vinocss/utils-lines"
 import { vinocss } from "@/index"
 
 const dirs: string[] = []

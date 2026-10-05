@@ -1,7 +1,7 @@
 {
-  "name": "@vinocss/utils-decorate",
+  "name": "@vinocss/devtools-workspace",
   "version": "0.0.0",
-  "description": "Wraps a text in ansi sgr escape sequences to decorate terminal output.",
+  "description": "Detects a pnpm workspace and orders its packages for a build.",
   "files": [
     "out"
   ],
@@ -16,13 +16,10 @@
   "scripts": {
     "build": "vinocss-build",
     "build:self": "vinocss-build --self",
-    "test": "vitest run",
     "typecheck": "tsc -b"
   },
   "devDependencies": {
     "@vinocss/devtools-build": "workspace:*",
-    "@vinocss/devtools-tsconfig": "workspace:*",
-    "vite": "catalog:dev",
-    "vitest": "catalog:dev"
+    "@vinocss/devtools-tsconfig": "workspace:*"
   }
 }

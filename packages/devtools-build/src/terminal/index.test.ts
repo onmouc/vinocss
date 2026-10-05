@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { decorate } from "@/index"
+import { decorate } from "@/terminal"
 
 describe("decorate", () => {
   it("wraps a text with one sgr sequence and one reset", () => {

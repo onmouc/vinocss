@@ -42,5 +42,5 @@ It ships as the `vinocss-max-len` command, and it is published so any project ca
 
 ```text
 vinocss-max-len src --max 80
-src/example.ts:12:81 line is 96, over 80
+vinocss-max-len [x] src/example.ts:12:81 line is 96, over 80
 ```

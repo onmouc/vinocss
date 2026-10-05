@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { lines } from "@vinocss/devtools-lines"
+import { lines } from "@vinocss/utils-lines"
 import { vinocss } from "@/index"
 
 type Transform = (code: string, id: string) => { code: string } | null

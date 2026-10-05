@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import * as utils from "vinocss/utils"
-import { lines } from "@vinocss/devtools-lines"
+import { lines } from "@vinocss/utils-lines"
 import { compile } from "./helpers"
 
 const helpers = utils as unknown as Record<string, (value: string) => string>

@@ -53,8 +53,8 @@ since the build leaves dependencies external and the dependent output does not m
 2. `step` and `skip` cover a built and a skipped package, so the log shows both and the reason.
 3. `log` carries rolldown's own messages, which the build reads through its `onLog` option.
 4. `warn` carries a problem the build found, such as a missing entry or workspace.
-5. The `vinocss-build` command supplies a chalk reporter,
-   so the log is colored and lives in the bin.
+5. The `vinocss-build` command supplies a reporter backed by the logger,
+   so the log carries a level and a color and lives in the bin.
 6. Pass a reporter to capture the messages, or leave it out for a silent build.
 
 ## Alias
@@ -65,8 +65,26 @@ so an import such as `@/util` resolves during the build without an extra plugin.
 ## Exports
 
 1. The root export is `build`, the ordered build, plus `buildSelf` and `buildWorkspace`.
-2. The `./package` subpath exports the node package read, such as `readPackage`.
-3. The `./workspace` subpath exports the pnpm workspace read, such as `detectWorkspace`.
+2. The `./package`, `./workspace`, `./log`, and `./terminal` subpaths back the re-export
+   packages below, so a caller reaches a read through one small name.
+
+## Re-exports
+
+Several packages ship a read that lives here.
+The build tool starts from its own source before any workspace package has built output,
+so a workspace dependency of this package would have no output to resolve on a fresh clone.
+Each package below takes this package as a dev dependency and lets the build bundle one
+subpath, which keeps the build engine off its runtime graph.
+The [re-export guide](../../docs/contributing/reexport.md) states the rule:
+
+1. [`@vinocss/devtools-package`](../devtools-package/README.md) ships `./package`.
+2. [`@vinocss/devtools-workspace`](../devtools-workspace/README.md) ships `./workspace`.
+3. [`@vinocss/utils-log`](../utils-log/README.md) ships `./log`.
+4. [`@vinocss/utils-terminal`](../utils-terminal/README.md) ships `./terminal`.
+
+This package keeps the build engine and the `vinocss-build` command.
+The logger colors its own output through `./terminal`,
+so the color source sits here too and a first build never waits on a workspace output.
 
 ## Usage
 

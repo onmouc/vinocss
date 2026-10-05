@@ -1,8 +1,10 @@
 #!/usr/bin/env node
-import chalk from "chalk"
 import { Command } from "commander"
+import { Logger } from "@vinocss/utils-log"
 import { checkLineWidth, defaultMax } from "@/index"
 import type { Violation } from "@/index"
+
+const log = new Logger({ name: "vinocss-max-len" })
 
 function main(): void {
   const program = new Command()
@@ -18,24 +20,24 @@ function main(): void {
 function run(patterns: string[], options: Options): void {
   const max = Number(options.max)
   if (!Number.isInteger(max) || max < 1) {
-    console.warn(chalk.yellow("vinocss-max-len:"), `invalid --max ${options.max}`)
+    log.warn(`invalid --max ${options.max}`)
     process.exitCode = 1
     return
   }
-  const report = { violation: (violation: Violation) => console.log(format(violation, max)) }
+  const report = { violation: (violation: Violation) => log.error(format(violation, max)) }
   const selected = { patterns, ignore: options.ignore, max, report }
   const violations = checkLineWidth(selected)
   if (violations.length > 0) {
-    console.warn(chalk.yellow("vinocss-max-len:"), `${violations.length} line(s) over ${max}`)
+    log.warn(`${violations.length} line(s) over ${max}`)
     process.exitCode = 1
     return
   }
-  console.log(chalk.green("vinocss-max-len:"), `every line fits ${max} characters`)
+  log.done(`every line fits ${max} characters`)
 }
 
 function format(violation: Violation, max: number): string {
   const place = `${violation.file}:${violation.line}:${violation.column}`
-  return `${chalk.cyan(place)} line is ${violation.length}, over ${max}`
+  return `${place} line is ${violation.length}, over ${max}`
 }
 
 type Options = {

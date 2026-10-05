@@ -24,8 +24,8 @@
   },
   "devDependencies": {
     "@vinocss/devtools-build": "workspace:*",
-    "@vinocss/devtools-lines": "workspace:*",
     "@vinocss/devtools-tsconfig": "workspace:*",
+    "@vinocss/utils-lines": "workspace:*",
     "vite": "catalog:dev",
     "vitest": "catalog:dev"
   },

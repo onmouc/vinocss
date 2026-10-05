@@ -10,7 +10,8 @@ Read when writing a bin entry or wiring the log it prints.
 3. Give the bin one reporter, and let a caller invoke the callback it needs,
    such as `step`, `skip`, or `warn`.
 4. Keep the reporter a plain object, so a caller can swap in a test double and assert the calls.
-5. Add `chalk` as a package dependency when the log needs color, and import it in the bin only.
+5. Reach for `@vinocss/utils-log` when the log needs a level or a color,
+   and keep the print in the bin only.
 6. Color the prefix, not the whole line, so the message stays readable in a plain terminal.
 7. Forward a dependency's own log through the reporter, such as a bundler's `onLog`,
    rather than let it print.

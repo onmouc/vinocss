@@ -9,8 +9,8 @@ import {
   fg256Sgr,
   fgRgbSgr,
   fgSgr,
-} from "@/colors"
-import { styleSgr } from "@/style"
+} from "@/terminal/colors"
+import { styleSgr } from "@/terminal/style"
 
 const esc = "\u001B"
 const resetSequence = `${esc}[0m`

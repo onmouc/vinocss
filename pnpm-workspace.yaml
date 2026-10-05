@@ -7,7 +7,6 @@ allowBuilds:
 
 catalogs:
   dep:
-    chalk: ^6.0.1
     commander: ^15.0.0
     rolldown: ^1.2.11
     rolldown-plugin-dts: ^0.28.6
@@ -17,8 +16,6 @@ catalogs:
     "@oxc-node/core": ^0.1.3
     "@rstest/core": ^0.12.3
     "@types/node": ^26.6.3
-    rolldown: ^1.2.11
-    rolldown-plugin-dts: ^0.28.6
     typescript: ^6.0.3
     vite: ^8.3.1
     vitest: ^5.0.3

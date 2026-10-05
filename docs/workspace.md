@@ -27,23 +27,28 @@ so a bundler plugin can wrap the same engine instead of copying it.
 
 `@vinocss/utils-case` (`packages/utils-case`) splits a name into words
 and rebuilds it in a common case such as camel, kebab, pascal, or snake.
-`@vinocss/utils-decorate` (`packages/utils-decorate`) wraps a text in ansi sgr
+`@vinocss/utils-terminal` (`packages/utils-terminal`) wraps a text in ansi sgr
 escape sequences for a terminal style or color.
+`@vinocss/utils-lines` (`packages/utils-lines`)
+joins source parts into one string, one part per line.
+`@vinocss/utils-log` (`packages/utils-log`) formats a console line with a level,
+a time, and the cost since the previous line.
 
 A shared helper that is not a tool takes a `utils-*` name and lives under `packages/`,
 so the framework and the plugins import one rule instead of writing their own.
 
 ## Devtools
 
-1. `@vinocss/devtools-build` wraps the rolldown build behind the `vinocss-build` command,
-   and exposes the node package and pnpm workspace reads as subpath exports.
+1. `@vinocss/devtools-build` wraps the rolldown build behind the `vinocss-build` command.
 2. `@vinocss/devtools-tsconfig` holds the shared TypeScript config variants.
 3. `@vinocss/devtools-max-len` reports any tracked line over the width limit.
 4. `@vinocss/devtools-license` syncs the root `LICENSE` into every child package.
-5. `@vinocss/devtools-lines` joins source parts into one string, one part per line.
+5. `@vinocss/devtools-package` reads a node package and its manifest.
+6. `@vinocss/devtools-workspace` reads a pnpm workspace and orders its packages.
 
 A tool takes a `devtools-*` name and lives under `packages/`.
-The build exposes the package and workspace reads,
+The build carries the package, workspace, log, and terminal reads as subpaths,
+and a small package re-exports each one,
 so a new tool can import a read instead of writing its own.
 
 ## Examples

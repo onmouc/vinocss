@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-import chalk from "chalk"
 import { Command } from "commander"
+import { Logger } from "@vinocss/utils-log"
 import { syncLicenses } from "@/index"
 import type { LicenseReporter, PackageResult } from "@/index"
 
-const prefix = "vinocss-license:"
+const log = new Logger({ name: "vinocss-license" })
 
 function main(): void {
   const program = new Command()
@@ -17,9 +17,9 @@ function main(): void {
 
 function run(options: Options): void {
   const report: LicenseReporter = {
-    write: (result: PackageResult) => console.log(chalk.cyan(prefix), `synced ${result.name}`),
-    skip: (result: PackageResult) => console.log(chalk.gray(prefix), chalk.gray(describe(result))),
-    warn: (message: string) => console.warn(chalk.yellow(prefix), message),
+    write: (result: PackageResult) => log.done(`synced ${result.name}`),
+    skip: (result: PackageResult) => log.debug(describe(result)),
+    warn: (message: string) => log.warn(message),
   }
   const result = syncLicenses({ exclude: options.exclude, report })
   if (!result.source) {
@@ -27,7 +27,7 @@ function run(options: Options): void {
     return
   }
   const written = result.packages.filter((pkg) => pkg.action === "written").length
-  console.log(chalk.green(prefix), `synced ${written} of ${result.packages.length} package(s)`)
+  log.done(`synced ${written} of ${result.packages.length} package(s)`)
 }
 
 function describe(result: PackageResult): string {

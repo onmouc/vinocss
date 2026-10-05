@@ -21,12 +21,10 @@
     "@vinocss/devtools-build": "workspace:*",
     "@vinocss/devtools-license": "workspace:*",
     "@vinocss/devtools-max-len": "workspace:*",
+    "@vinocss/devtools-workspace": "workspace:*",
     "oxfmt": "^0.71.0",
     "oxlint": "^1.86.0",
-    "rolldown": "catalog:dev",
-    "rolldown-plugin-dts": "catalog:dev",
     "typescript": "catalog:dev",
-    "vite": "catalog:dev",
     "vitest": "catalog:dev"
   }
 }

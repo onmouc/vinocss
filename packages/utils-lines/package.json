@@ -1,5 +1,5 @@
 {
-  "name": "@vinocss/devtools-lines",
+  "name": "@vinocss/utils-lines",
   "version": "0.0.0",
   "description": "Joins source parts into one string, one part per line.",
   "files": [

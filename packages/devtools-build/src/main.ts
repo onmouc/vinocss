@@ -1,19 +1,22 @@
 #!/usr/bin/env node
-import chalk from "chalk"
 import { Command } from "commander"
 import { build, buildSelf, buildWorkspace } from "@/index"
+import { Logger } from "@/log"
 import type { Reporter } from "@/index"
+
+const log = new Logger({ name: "vinocss-build" })
+const rolldown = new Logger({ name: "rolldown" })
 
 async function main(): Promise<void> {
   const report: Reporter = {
-    step: (message) => console.log(chalk.cyan("vinocss-build:"), message),
-    skip: (message) => console.log(chalk.gray("vinocss-build:"), chalk.gray(message)),
+    step: (message) => log.info(message),
+    skip: (message) => log.debug(message),
     log: (level, message) => {
-      const paint = level === "warn" ? chalk.yellow : level === "debug" ? chalk.gray : chalk.blue
-      if (level === "warn") console.warn(paint("rolldown:"), message)
-      else console.log(paint("rolldown:"), message)
+      if (level === "warn") rolldown.warn(message)
+      else if (level === "debug") rolldown.debug(message)
+      else rolldown.info(message)
     },
-    warn: (message) => console.warn(chalk.yellow("vinocss-build:"), message),
+    warn: (message) => log.warn(message),
   }
   const program = new Command()
     .name("vinocss-build")
@@ -22,7 +25,7 @@ async function main(): Promise<void> {
     .option("-b, --bin <names>", "extra binary entries, comma separated", collect, [])
     .option("--out <dir>", "output directory", "out")
     .option("-s, --script <name>", "package script the workspace build runs", "build:self")
-    .option("--self", "build only this package, not its workspace dependencies")
+    .option("-S, --self", "build only this package, not its workspace dependencies")
     .option("--workspace [dir]", "build every package in the workspace in dependency order")
     .option("--force", "rebuild even when the cached checksum is fresh")
     .action(async (options: Options) => {

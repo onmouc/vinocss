@@ -1,0 +1,25 @@
+{
+  "name": "@vinocss/utils-terminal",
+  "version": "0.0.0",
+  "description": "Wraps a text in ansi sgr escape sequences to decorate terminal output.",
+  "files": [
+    "out"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./out/index.d.ts",
+      "import": "./out/index.js",
+      "require": "./out/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "vinocss-build",
+    "build:self": "vinocss-build --self",
+    "typecheck": "tsc -b"
+  },
+  "devDependencies": {
+    "@vinocss/devtools-build": "workspace:*",
+    "@vinocss/devtools-tsconfig": "workspace:*"
+  }
+}

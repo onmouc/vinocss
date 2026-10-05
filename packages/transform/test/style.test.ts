@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { lines } from "@vinocss/devtools-lines"
+import { lines } from "@vinocss/utils-lines"
 import { compile } from "./helpers"
 
 describe("style$ emission", () => {

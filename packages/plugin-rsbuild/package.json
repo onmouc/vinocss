@@ -26,8 +26,8 @@
     "@rsbuild/core": "^2.2.11",
     "@rslib/core": "^1.0.3",
     "@rstest/core": "catalog:dev",
-    "@vinocss/devtools-lines": "workspace:*",
-    "@vinocss/devtools-tsconfig": "workspace:*"
+    "@vinocss/devtools-tsconfig": "workspace:*",
+    "@vinocss/utils-lines": "workspace:*"
   },
   "peerDependencies": {
     "@rsbuild/core": "^2"

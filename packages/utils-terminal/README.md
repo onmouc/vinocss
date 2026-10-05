@@ -1,4 +1,4 @@
-# @vinocss/utils-decorate
+# @vinocss/utils-terminal
 
 This package wraps a text in ansi sgr escape sequences to decorate terminal output.
 A log line often needs a color or a style, and the raw codes are easy to mistype,
@@ -40,12 +40,17 @@ It is published for anyone to use, so a project can color a line the same way.
 
 ## Usage
 
-1. Install it as a dependency, for example `pnpm add @vinocss/utils-decorate`.
+1. Install it as a dependency, for example `pnpm add @vinocss/utils-terminal`.
 2. Call `decorate(text)`, chain a style or a color, and render the result.
 
 ```ts
-import { decorate } from "@vinocss/utils-decorate"
+import { decorate } from "@vinocss/utils-terminal"
 
 const label = decorate("ready").bold().green()
 console.log(String(label)) // a bold green "ready"
 ```
+
+The decorator source lives in [`@vinocss/devtools-build`](../devtools-build/README.md),
+and this package builds it in, so a caller reaches the decorator from one small name
+without the build engine on the runtime graph; the
+[re-export guide](../../docs/contributing/reexport.md) states the rule.

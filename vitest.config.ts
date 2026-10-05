@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs"
 import { join, relative } from "node:path"
-import { detectWorkspace, toPosix } from "@vinocss/devtools-build/workspace"
+import { detectWorkspace, toPosix } from "@vinocss/devtools-workspace"
 import { defineConfig } from "vitest/config"
 
 export default defineConfig({
