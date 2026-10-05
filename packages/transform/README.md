@@ -19,7 +19,8 @@ The package holds the compiler and no bundler, so a plugin package wraps it for 
    `compile(source, id)` returns the rewritten `code`, the `css` it freed,
    and the `virtualId` a caller resolves to load that css, or null when no rule exists.
 2. `createNodeHost()` returns a `Host` that reads modules and follows imports on the filesystem.
-3. `unitHelpers` is the set of `vinocss/utils` unit names the compiler reads.
+3. A `vinocss/utils` helper call applies the exported function at compile time,
+   so `px(4)` becomes `4px` and `v("--ink")` becomes `var(--ink)`.
 4. `virtualCssPrefix` is the prefix of the virtual id, so a plugin recognizes the import.
 5. `CompileResult` and `Host` describe the compile result and the file read a compiler needs.
 

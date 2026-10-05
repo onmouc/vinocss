@@ -19,7 +19,8 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
-    "oxc-parser": "^0.152.0"
+    "oxc-parser": "^0.152.0",
+    "vinocss": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:dev",

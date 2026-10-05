@@ -699,6 +699,9 @@ importers:
       oxc-parser:
         specifier: ^0.152.0
         version: 0.152.0
+      vinocss:
+        specifier: workspace:*
+        version: link:../vinocss
     devDependencies:
       '@types/node':
         specifier: catalog:dev

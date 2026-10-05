@@ -1,3 +1,4 @@
+import * as vinocss from "vinocss"
 import { type AstNode, identifierName, literalString, parseModule, walk } from "@/ast"
 
 /**
@@ -31,7 +32,13 @@ export interface Program {
   calls: AstNode[]
 }
 
-const runes = new Set(["var$", "class$", "style$"])
+/**
+ * The rune names, read from the `vinocss` exports.
+ *
+ * The set is derived rather than listed, so a rune added to `vinocss`
+ * is collected as a call instead of passing through the compiler untouched.
+ */
+const runes = new Set(Object.keys(vinocss))
 
 /**
  * Read the static surface of a module from its source.

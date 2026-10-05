@@ -1,3 +1,4 @@
+import * as utils from "vinocss/utils"
 import { type AstNode, identifierName, unwrap } from "@/ast"
 import { applyEdits, type Edit, mintVar, outermost, varTreeToJs } from "@/codegen"
 import { contentHash } from "@/css"
@@ -14,43 +15,17 @@ import {
   evalTemplate,
   evalUnary,
 } from "@/eval"
-import { type Program, parseProgram } from "@/program"
+import { parseProgram } from "@/program"
 import { Resolver } from "@/resolver"
 import { type Host, stringOf, type Value, type VarTree } from "@/value"
 
 /**
- * The unit helper names, shared with the `vinocss/utils` exports by a test.
+ * The `vinocss/utils` helpers, keyed by name.
+ *
+ * A helper is a pure function from a static value to its css text, so the
+ * compiler applies whatever the package exports and reads no fixed list.
  */
-export const unitHelpers = new Set([
-  "px",
-  "cm",
-  "mm",
-  "q",
-  "pt",
-  "pc",
-  "em",
-  "rem",
-  "ex",
-  "ch",
-  "lh",
-  "rlh",
-  "vw",
-  "vh",
-  "vmin",
-  "vmax",
-  "svw",
-  "svh",
-  "lvw",
-  "lvh",
-  "dvw",
-  "dvh",
-  "cqw",
-  "cqh",
-  "cqi",
-  "cqb",
-  "cqmin",
-  "cqmax",
-])
+const helpers = utils as unknown as Record<string, ((value: string) => string) | undefined>
 
 /**
  * The specifier prefix of the css module a compile frees.
@@ -190,16 +165,36 @@ export class Compiler {
     const name = identifierName(node.callee)
     if (name === "var$") return { t: "var", tree: this.evalVarCall(node, moduleId) }
     if (name === "class$") return { t: "lit", v: this.evalClassCall(node, moduleId) }
-    const program = this.resolver.getProgram(moduleId)
-    const helper =
-      name !== undefined && !program.symbols.has(name) && isVinocssHelper(name, program)
-    if (name === "v" && helper) {
-      return { t: "lit", v: `var(${stringOf(this.expectArg(node, moduleId))})` }
-    }
-    if (name !== undefined && helper && unitHelpers.has(name)) {
-      return { t: "lit", v: this.evalUnit(name, node, moduleId) }
-    }
+    const helper = name === undefined ? undefined : this.helperImport(name, moduleId)
+    if (helper !== undefined) return { t: "lit", v: this.evalHelper(helper, node, moduleId) }
     throw new Error(`vinocss: unsupported call ${name ?? "expression"} in ${moduleId}`)
+  }
+
+  /**
+   * The `vinocss` export a local name binds to, or undefined when it is not one.
+   *
+   * A local const shadows an import, so the name only counts when the module
+   * declares no binding for it. Matching the imported name rather than the
+   * local one also resolves an alias such as `px as space`.
+   */
+  private helperImport(name: string, moduleId: string): string | undefined {
+    const program = this.resolver.getProgram(moduleId)
+    if (program.symbols.has(name)) return undefined
+    const binding = program.imports.get(name)
+    if (binding?.module !== "vinocss/utils" && binding?.module !== "vinocss") return undefined
+    return binding.imported
+  }
+
+  /**
+   * Apply a `vinocss/utils` helper to its static argument.
+   *
+   * The exported helper builds the value, so `px(4)` becomes `4px` and
+   * `v("--ink")` becomes `var(--ink)` without the compiler naming either.
+   */
+  private evalHelper(name: string, node: AstNode, moduleId: string): string {
+    const helper = helpers[name]
+    if (helper === undefined) throw new Error(`vinocss: ${name} is not a helper in ${moduleId}`)
+    return helper(stringOf(this.expectArg(node, moduleId)))
   }
 
   private evalVarCall(call: AstNode, moduleId: string): VarTree {
@@ -276,14 +271,6 @@ export class Compiler {
     this.moduleRules.set(moduleId, rules)
   }
 
-  private evalUnit(name: string, node: AstNode, moduleId: string): string {
-    const value = this.expectArg(node, moduleId)
-    if (value.t !== "lit" || typeof value.v !== "number") {
-      throw new Error(`vinocss: ${name}() needs a number in ${moduleId}`)
-    }
-    return `${value.v}${name}`
-  }
-
   private expectArg(node: AstNode, moduleId: string): Value {
     const arg = node.arguments?.[0]
     if (!arg)
@@ -292,9 +279,4 @@ export class Compiler {
       )
     return this.evalExpr(arg, moduleId)
   }
-}
-
-function isVinocssHelper(name: string, program: Program): boolean {
-  const module = program.imports.get(name)?.module
-  return module === "vinocss/utils" || module === "vinocss"
 }
