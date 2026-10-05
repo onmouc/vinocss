@@ -20,6 +20,14 @@ and read a package readme for the contract it plans to honor.
 2. Start with [`vinocss`](./packages/vinocss/README.md) for the api an app imports.
 3. Reach for a `@vinocss/devtools-*` package for the shared workspace tooling.
 
+## Utils
+
+The workspace ships shared naming helpers as `@vinocss/utils-*` packages,
+so a caller splits a name once and reaches any case from the same words.
+
+1. [`@vinocss/utils-case`](./packages/utils-case/README.md) splits a name into words
+   and rebuilds it as camel, kebab, pascal, snake, or another common case.
+
 ## Devtools
 
 Next to the framework, the workspace ships a family of `@vinocss/devtools-*` packages.

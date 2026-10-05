@@ -1,3 +1,5 @@
+import { cased } from "@vinocss/utils-case"
+
 /**
  * A stable short hash of a css body, used for a minted name or a class name.
  *
@@ -17,10 +19,12 @@ export function contentHash(text: string): string {
  * Turn a style key into a css property name.
  *
  * A custom property already starts with `--` and is kept as written. A camel
- * cased key loses its capitals, and a leading vendor prefix gains its dash,
- * so `borderRadius` reads as `border-radius` and `msFlex` as `-ms-flex`.
+ * cased key is split into its words and rejoined in kebab case, and a leading
+ * vendor prefix gains its dash, so `borderRadius` reads as `border-radius`
+ * and `msFlex` as `-ms-flex`.
  */
 export function kebabCase(property: string): string {
   if (property.startsWith("--")) return property
-  return property.replaceAll(/[A-Z]/gu, (c) => `-${c.toLowerCase()}`).replace(/^ms-/u, "-ms-")
+  const kebab = cased(property).kebab()
+  return /^[A-Z]/u.test(property) ? `-${kebab}` : kebab.replace(/^ms-/u, "-ms-")
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@vinocss/transform",
+  "name": "@vinocss/utils-case",
   "version": "0.0.0",
   "files": [
     "out"
@@ -18,15 +18,8 @@
     "test": "vitest run",
     "typecheck": "tsc -b"
   },
-  "dependencies": {
-    "@vinocss/utils-case": "workspace:*",
-    "oxc-parser": "^0.152.0",
-    "vinocss": "workspace:*"
-  },
   "devDependencies": {
-    "@types/node": "catalog:dev",
     "@vinocss/devtools-build": "workspace:*",
-    "@vinocss/devtools-lines": "workspace:*",
     "@vinocss/devtools-tsconfig": "workspace:*",
     "vite": "catalog:dev",
     "vitest": "catalog:dev"

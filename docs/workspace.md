@@ -23,6 +23,14 @@ and `@vinocss/plugin-rsbuild` (`packages/plugin-rsbuild`) wraps it as an Rsbuild
 The compile logic lives in `@vinocss/transform`,
 so a bundler plugin can wrap the same engine instead of copying it.
 
+## Utils
+
+`@vinocss/utils-case` (`packages/utils-case`) splits a name into words
+and rebuilds it in a common case such as camel, kebab, pascal, or snake.
+
+A shared helper that is not a tool takes a `utils-*` name and lives under `packages/`,
+so the framework and the plugins import one rule instead of writing their own.
+
 ## Devtools
 
 1. `@vinocss/devtools-build` wraps the rolldown build behind the `vinocss-build` command,

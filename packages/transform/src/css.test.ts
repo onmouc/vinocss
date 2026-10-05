@@ -23,4 +23,8 @@ describe("kebabCase", () => {
   it("gives a leading vendor prefix its dash", () => {
     expect(kebabCase("msFlex")).toBe("-ms-flex")
   })
+
+  it("gives an upper case vendor prefix its dash", () => {
+    expect(kebabCase("WebkitTransform")).toBe("-webkit-transform")
+  })
 })

@@ -696,6 +696,9 @@ importers:
 
   packages/transform:
     dependencies:
+      '@vinocss/utils-case':
+        specifier: workspace:*
+        version: link:../utils-case
       oxc-parser:
         specifier: ^0.152.0
         version: 0.152.0
@@ -712,6 +715,21 @@ importers:
       '@vinocss/devtools-lines':
         specifier: workspace:*
         version: link:../devtools-lines
+      '@vinocss/devtools-tsconfig':
+        specifier: workspace:*
+        version: link:../devtools-tsconfig
+      vite:
+        specifier: catalog:dev
+        version: 8.3.1(@types/node@26.6.3)
+      vitest:
+        specifier: catalog:dev
+        version: 5.0.3(@types/node@26.6.3)(vite@8.3.1(@types/node@26.6.3))
+
+  packages/utils-case:
+    devDependencies:
+      '@vinocss/devtools-build':
+        specifier: workspace:*
+        version: link:../devtools-build
       '@vinocss/devtools-tsconfig':
         specifier: workspace:*
         version: link:../devtools-tsconfig
