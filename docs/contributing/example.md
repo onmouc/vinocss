@@ -49,16 +49,17 @@ so a version a library or a devtool also uses stays in `dep` or `dev`.
 
 ## Scripts
 
-1. `dev` runs `vite` in a Vite example, and `rsbuild dev` in an Rsbuild one.
-2. `preview` runs the matching preview command, `vite preview` or `rsbuild preview`.
-3. Do not add a `build` script yet; the compiler it needs does not exist.
+1. `build` runs `vite build` in a Vite example, and `rsbuild build` in an Rsbuild one.
+2. `dev` runs `vite` in a Vite example, and `rsbuild dev` in an Rsbuild one.
+3. `preview` runs the matching preview command, `vite preview` or `rsbuild preview`.
 4. Add a `typecheck` script only to a typed app.
 5. Use `tsc -b` for a plain TypeScript app.
 6. Use `vue-tsc -b` for a Vue app, and `svelte-check` on the app config for a Svelte app.
 7. Do not add a test script; an example shows an api, it does not test one.
 
-A `build` script returns once the compiler lands.
-Until then it would run the placeholder api, which throws by design.
+A `build` script bundles the app, so it stays a compile-time check.
+The placeholder api only throws when the app runs, so the build passes
+while the compiler that would replace those calls is still absent.
 
 ## Tsconfig
 
