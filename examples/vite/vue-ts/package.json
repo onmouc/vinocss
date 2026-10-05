@@ -1,0 +1,23 @@
+{
+  "name": "@vinocss/example-vite-vue-ts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc -b"
+  },
+  "dependencies": {
+    "vinocss": "workspace:*",
+    "vue": "catalog:example"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:dev",
+    "@vinocss/devtools-tsconfig": "workspace:*",
+    "@vitejs/plugin-vue": "catalog:example-dev",
+    "typescript": "catalog:dev",
+    "vite": "catalog:dev",
+    "vue-tsc": "^3.3.11"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@vinocss/example-rsbuild-svelte-ts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "rsbuild dev",
+    "preview": "rsbuild preview",
+    "typecheck": "svelte-check --tsconfig ./tsconfig.app.json"
+  },
+  "dependencies": {
+    "svelte": "catalog:example",
+    "vinocss": "workspace:*"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "catalog:example-dev",
+    "@rsbuild/plugin-svelte": "catalog:example-dev",
+    "@tsconfig/svelte": "^5.0.8",
+    "@types/node": "catalog:dev",
+    "@vinocss/devtools-tsconfig": "workspace:*",
+    "svelte-check": "^4.7.6",
+    "typescript": "catalog:dev"
+  }
+}

@@ -1,20 +1,36 @@
 # Example
 
-How to add or change an example app under `packages/example-xxx`.
+How to add or change an example app under `examples/`.
 Read when creating an example, or editing an existing one.
 
 ## Layout
 
-1. An example lives at `packages/example-<name>`, one folder per framework and language.
-2. Its `package.json` sets the name `@vinocss/example-<name>` and `"private": true`.
-3. It starts at version `0.0.0` and sets `"type": "module"`, like a child package.
-4. The name uses dashes, such as `react-ts` or `svelte-js`.
-5. `README.md` opens with a short intro in the style of the root.
-6. `root` ends at the repository root, and the app itself lives in `src/`.
+1. An example lives at `examples/<bundler>/<framework>-<language>`,
+   one folder per bundler, framework, and language.
+2. The bundler names the folder, such as `vite` or `rsbuild` today,
+   as in `examples/vite/vue-ts`.
+3. The language is `js` or `ts`, and the framework is `react`, `vue`, `solid`, or `svelte`.
+4. A CommonJS app adds its format to the framework, such as `react-commonjs`.
+5. Its `package.json` sets the name `@vinocss/example-<bundler>-<framework>-<language>`
+   and `"private": true`.
+6. It starts at version `0.0.0`, like a child package.
+7. A module example sets `"type": "module"`; a CommonJS one omits it.
+8. `README.md` opens with a short intro in the style of the root.
+9. `root` ends at the repository root, and the app itself lives in `src/`.
 
 An example is a real app rather than a library, so it does not follow the
 build and tsconfig rules for a library package.
 It still follows the code, markdown, and TypeScript guides.
+Vite and Rsbuild are the bundlers today, and the layout admits another one
+as a folder beside them without a change to the name shape.
+
+## Groups
+
+1. `examples/vite/*` covers React, Solid, Svelte, and Vue, each in JavaScript and TypeScript.
+2. Every Vite example is a module: its source and its output are esm.
+3. `examples/rsbuild/*` covers the same set, so each Vite example has an Rsbuild twin.
+4. Rsbuild adds a React 16 CommonJS example at `examples/rsbuild/react-commonjs`.
+5. That example is the only CommonJS one, and it is the only one that pins React 16.
 
 ## Dependencies
 
@@ -23,17 +39,17 @@ It still follows the code, markdown, and TypeScript guides.
    as `catalog:example` or `catalog:example-dev`.
 3. Keep a runtime framework in the catalog `example` group, such as `react` or `solid-js`.
 4. Keep a build plugin, a type package, and a checker in the catalog `example-dev` group.
-5. Use the latest release that stays compatible with Vite 8 and the other examples.
+5. Use the latest release that stays compatible with the other examples.
 6. Add a new external version to the catalog first, then reference it from the example.
 
-The workspace glob in `pnpm-workspace.yaml` already covers `packages/*`,
+The workspace glob in `pnpm-workspace.yaml` covers `examples/*/*`,
 so a new folder joins the workspace as soon as it holds a `package.json`.
 The `example` and `example-dev` groups hold a version only an example needs,
 so a version a library or a devtool also uses stays in `dep` or `dev`.
 
 ## Scripts
 
-1. `dev` runs `vite` in a module example, and `rsbuild dev` in a CommonJS one.
+1. `dev` runs `vite` in a Vite example, and `rsbuild dev` in an Rsbuild one.
 2. `preview` runs the matching preview command, `vite preview` or `rsbuild preview`.
 3. Do not add a `build` script yet; the compiler it needs does not exist.
 4. Add a `typecheck` script only to a typed app.
@@ -49,7 +65,7 @@ Until then it would run the placeholder api, which throws by design.
 1. A typed example follows the child package tsconfig layout.
 2. `tsconfig.json` is a solution file with `files: []` and references.
 3. `tsconfig.app.json` covers `src`, and holds the `@/*` path alias.
-4. `tsconfig.node.json` covers `vite.config`, and takes the node types.
+4. `tsconfig.node.json` covers the bundler config, and takes the node types.
 5. Extend `@vinocss/devtools-tsconfig` for the shared compiler options.
 6. Send `tsBuildInfoFile` into `node_modules/.tmp`, since `tsc -b` writes build info.
 7. A JavaScript example keeps one `jsconfig.json` for the alias,
@@ -60,7 +76,7 @@ and it points `svelte-check` at `tsconfig.app.json`.
 
 ## Vite
 
-1. Every module example uses Vite 8 for dev and preview.
+1. Every Vite example uses Vite 8 for dev and preview.
 2. Keep one `vite.config` with the plugin the framework needs.
 3. Use `@vitejs/plugin-react` for React, and enable the React compiler.
 4. Use `@vitejs/plugin-vue` for Vue, and keep the app in single-file components.
@@ -72,13 +88,26 @@ and it points `svelte-check` at `tsconfig.app.json`.
 9. Set `build.outDir` to `out`, so an example writes where a child package does.
 
 React enables the compiler through the Babel preset,
-so a React example also installs `@rolldown/plugin-babel`,
+so a React Vite example also installs `@rolldown/plugin-babel`,
 `babel-plugin-react-compiler`, and `@babel/core`.
+
+## Rsbuild
+
+1. Every Rsbuild example uses `@rsbuild/core` for dev and preview.
+2. Keep one `rsbuild.config` with the plugin the framework needs.
+3. Use `@rsbuild/plugin-react` for React, `@rsbuild/plugin-vue` for Vue,
+   `@rsbuild/plugin-svelte` for Svelte, and `@rsbuild/plugin-solid` for Solid.
+4. Set `source.entry` to the app entry, such as `./src/main.tsx`.
+5. Set `source.tsconfigPath` to `tsconfig.app.json`, or `jsconfig.json` in a JavaScript app.
+6. Set `html.template` to `./index.html`, so Rsbuild injects the entry it bundles.
+7. Write the build to `out` with `output.distPath.root`.
+8. Leave the entry script out of `index.html`, since Rsbuild injects it.
+9. Keep the VinoCSS plugin off, like every example for now.
 
 ## CommonJS
 
 A `*-commonjs` example targets a legacy app, so it pins an older framework,
-such as React 16, and swaps Vite for Rsbuild.
+such as React 16, and swaps the module output for CommonJS.
 
 1. Omit `"type": "module"`, so `.js` and `.jsx` files stay CommonJS.
 2. Use `require` and `module.exports` instead of `import` and `export`.
@@ -87,7 +116,6 @@ such as React 16, and swaps Vite for Rsbuild.
 5. Set `source.entry` to `./src/main.jsx` and `source.tsconfigPath` to `jsconfig.json`.
 6. Set `html.template` to `./index.html`, so Rsbuild injects the entry it bundles.
 7. Write the build to `out` with `output.distPath.root`.
-8. Keep the VinoCSS plugin off, like every example for now.
 
 ## Entry
 

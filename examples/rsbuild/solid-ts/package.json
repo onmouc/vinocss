@@ -1,0 +1,22 @@
+{
+  "name": "@vinocss/example-rsbuild-solid-ts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "rsbuild dev",
+    "preview": "rsbuild preview",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "solid-js": "catalog:example",
+    "vinocss": "workspace:*"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "catalog:example-dev",
+    "@rsbuild/plugin-solid": "catalog:example-dev",
+    "@types/node": "catalog:dev",
+    "@vinocss/devtools-tsconfig": "workspace:*",
+    "typescript": "catalog:dev"
+  }
+}

@@ -1,0 +1,13 @@
+# @vinocss/example-rsbuild-vue-ts
+
+A typed Vue 3 app that styles itself with VinoCSS.
+It runs on Rsbuild with single-file components, and mounts into `document.body`.
+
+## Run
+
+1. `pnpm dev` starts the dev server.
+2. `pnpm preview` serves a build once the example has a `build` script.
+3. `pnpm typecheck` checks the app with `vue-tsc`.
+
+VinoCSS is not compiled yet, so a `var$`, `class$`, or `style$` call throws
+until the compiler lands.

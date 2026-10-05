@@ -1,0 +1,18 @@
+{
+  "name": "@vinocss/example-rsbuild-vue-js",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "rsbuild dev",
+    "preview": "rsbuild preview"
+  },
+  "dependencies": {
+    "vinocss": "workspace:*",
+    "vue": "catalog:example"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "catalog:example-dev",
+    "@rsbuild/plugin-vue": "catalog:example-dev"
+  }
+}

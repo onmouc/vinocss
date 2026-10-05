@@ -1,0 +1,23 @@
+{
+  "name": "@vinocss/example-rsbuild-vue-ts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "rsbuild dev",
+    "preview": "rsbuild preview",
+    "typecheck": "vue-tsc -b"
+  },
+  "dependencies": {
+    "vinocss": "workspace:*",
+    "vue": "catalog:example"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "catalog:example-dev",
+    "@rsbuild/plugin-vue": "catalog:example-dev",
+    "@types/node": "catalog:dev",
+    "@vinocss/devtools-tsconfig": "workspace:*",
+    "typescript": "catalog:dev",
+    "vue-tsc": "^3.3.11"
+  }
+}

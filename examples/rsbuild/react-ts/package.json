@@ -1,0 +1,25 @@
+{
+  "name": "@vinocss/example-rsbuild-react-ts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "rsbuild dev",
+    "preview": "rsbuild preview",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "react": "catalog:example",
+    "react-dom": "catalog:example",
+    "vinocss": "workspace:*"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "catalog:example-dev",
+    "@rsbuild/plugin-react": "catalog:example-dev",
+    "@types/node": "catalog:dev",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vinocss/devtools-tsconfig": "workspace:*",
+    "typescript": "catalog:dev"
+  }
+}

@@ -6,7 +6,7 @@ export default defineConfig({
     projects: [
       ...workspaceGlobs(), //
       "!packages/plugin-rsbuild",
-      "!packages/example-react-commonjs",
+      "!examples/rsbuild/react-commonjs",
     ],
   },
 })

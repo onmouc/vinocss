@@ -1,0 +1,18 @@
+{
+  "name": "@vinocss/example-vite-svelte-js",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "svelte": "catalog:example",
+    "vinocss": "workspace:*"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "catalog:example-dev",
+    "vite": "catalog:dev"
+  }
+}

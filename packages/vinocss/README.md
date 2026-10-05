@@ -10,7 +10,7 @@ so the shipped bundle carries no runtime and only the css it needs.
 
 Today the compiler is not implemented, so every call throws.
 The api below is the contract the compiler will honor,
-and the examples under `packages/example-xxx` show how each call is written.
+and the examples under `examples/` show how each call is written.
 
 ## Packages
 

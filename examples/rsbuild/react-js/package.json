@@ -1,0 +1,19 @@
+{
+  "name": "@vinocss/example-rsbuild-react-js",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "rsbuild dev",
+    "preview": "rsbuild preview"
+  },
+  "dependencies": {
+    "react": "catalog:example",
+    "react-dom": "catalog:example",
+    "vinocss": "workspace:*"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "catalog:example-dev",
+    "@rsbuild/plugin-react": "catalog:example-dev"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "@vinocss/example-rsbuild-svelte-js",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "rsbuild dev",
+    "preview": "rsbuild preview"
+  },
+  "dependencies": {
+    "svelte": "catalog:example",
+    "vinocss": "workspace:*"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "catalog:example-dev",
+    "@rsbuild/plugin-svelte": "catalog:example-dev"
+  }
+}
